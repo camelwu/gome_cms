@@ -1,0 +1,64 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2016-08-03 16:30:09
+ * @version $Id$
+ */
+*{
+ 	margin:0;
+ 	padding:0;
+ }
+ html{
+ 	font-size:20px;
+ 	width:100%;
+ 	height:100%;
+ }
+ body{
+ 	width:100%;
+ 	height:100%;
+ 	background-color:#f1f1f1;
+ }
+.content{
+	width: 100%;
+	position: absolute;
+	padding: 0 0.16rem;
+	box-sizing: border-box;
+	background: #fff;
+}
+
+.greet{
+	margin-top:0.11rem;
+}
+ p,.greet{
+ 	font-family: .PingFangSC-Regular;
+	font-size: 0.14rem;
+	color: #333333;
+	line-height: 0.23rem;
+ }
+.section{
+	text-indent: 0.14rem;
+	font-weight: bold;
+}
+.list{
+	margin-top: 0.1rem;
+}
+.section3{
+	margin-bottom:0.02rem;
+}
+.list .Title-level-one{
+	font-family: PingFangSC-Medium;
+	font-weight: bold;
+	font-size: 0.14rem;
+	color: #000000;
+	line-height: 0.2rem;
+}
+.list .two-title-warpper{
+	font-family: .PingFangSC-Regular;
+	font-size: 0.14rem;
+	color: #333333;
+	line-height: 23px;
+}
+.overstriking{
+	font-weight: bold;
+}
