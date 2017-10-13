@@ -6,13 +6,10 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "debug": "pm2 start main.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
   "dependencies": {
-    "ejs": "^1.0.0",
-    "express": "^4.16.2",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0"
   },
@@ -61,16 +58,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "main": "main.js",
-  "repository": {
-    "type": "git",
-    "url": "http://code.ds.gome.com.cn/gitlab/mengdehua/gome_cms.git"
-  },
-  "keywords": [
-    "am",
-    "gome",
-    "aeromind"
-  ],
-  "license": "MIT"
+  ]
 }
