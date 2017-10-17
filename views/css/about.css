@@ -20,8 +20,12 @@ ul{
     float: right;
     line-height: 80px;
 }
-.clearfix{
-    clear:both;
+.clearfix:after {
+    content: "020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 .hide{
     display: none !important;
@@ -298,3 +302,86 @@ body{
 /*.menu a:hover{
     background: #efefef;
 }*/
+.footer{
+    width: 100%;
+    height:263px;
+    background-color: #050F31;
+}
+.footer-top{
+    height: 197px;
+    width: 1213px;
+    margin: 0 auto;
+    border-bottom: 1px solid #222738;
+}
+.footer-img{
+    display: inline-block;
+    width: 140px;
+    height: 95px;
+    background: url(../css/img/website/fotter.png) no-repeat;
+    background-size: contain;
+    margin-top: 30px;
+    float: left;
+    margin-right: 123px;
+    /*cursor: pointer;*/
+}
+.footer-box{
+    float: left;
+    height: 140px;
+    width:125px;
+    margin-top: 40px;
+}
+.footer-p{
+    font-size: 14px;
+    color: #8C8F99;
+    margin-bottom: 10px;
+    cursor: default;
+}
+.footer-a{
+    display: block;
+    font-size: 12px;
+    color:  #50576F;
+    line-height: 25px;
+}
+.footer-a:hover{
+    color: #8C8F99;
+}
+.last{
+    width: 230px;
+}
+.last .footer-a{
+    cursor: text;
+}
+.last .footer-a:hover{
+    color: #50576F;
+}
+.footer-mar{
+    margin-left: 100px;
+}
+.footer-bottom{
+    width: 1213px;
+    margin: 0 auto;
+    font-size: 12px;
+    color: #50576F;
+    line-height: 25px;
+    padding-top: 20px;
+    text-align: center;
+}
+.create-company-btn:hover{
+    border-color: #257AED;
+    color: #257AED;
+}
+.header .header-btn:hover{
+    background-color:#257AED;
+    color: #fff;
+}
+.header .login-btn:hover{
+    background: #257AED;
+}
+.footer-mail{
+    color:  #50576F;
+}
+.footer-mail:hover{
+    color: #8C8F99;
+    cursor: pointer;
+    text-decoration: underline;
+}

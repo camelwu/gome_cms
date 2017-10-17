@@ -59,7 +59,6 @@ http://host/admin/getMainPage
                 "pic": "/img/T1SRKTBQAv1RCvBVdK.png",
                 "title": "支持万人企业通讯录",
                 "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-                "detail": {}
             }
             ...
         ],
@@ -242,7 +241,7 @@ http://host/admin/getVersionDetail
 ### 5.  创建版本： method: post
 
 ```javascript
-http://host/admin/createVersion
+http://host/admin/super/createVersion
 ```
 
 |参数名 |字段|类型|是否必填|备注|
@@ -262,10 +261,109 @@ http://host/admin/createVersion
 ### 6. 获取所有创建的版本:  method: get
 
 ```javascript
-http://host/admin/getCreateVersion
+http://host/admin/super/getCreateVersion
 ```
-
 
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
-|无|||||
+||||||
+
+```javascripts
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+### 7. 删除版本:  method: post
+
+```javascript
+http://host/admin/super/deleteVersion
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|版本号|version|String|true||
+
+```javascripts
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+### 8. 发布版本:  method: post
+
+```javascript
+http://host/admin/super/releaseVersion  //超级管理员才有权限
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|版本号|version|String|true||
+
+```javascripts
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+### 9. 提交版本:  method: post
+
+```javascript
+http://host/admin/super/releaseVersion 
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|版本号|version|String|true||
+
+```javascripts
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+
+### 10. 登录:  method: post
+
+```javascript
+http://host/admin/super/login 
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|用户名|username|String|true||
+|密码|password|String|true||
+
+```javascripts
+{
+    "code": 0,
+    "msg": "OK",
+    "token":"asdsafasdfsdfsfadf"
+}
+```
+### 11. 主页信息入库:  method: post
+
+```javascript
+http://host/admin/super/setMain 
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|横幅|banner|Object|true||
+|透明logo|  opacityLogo|String|true||
+|logo|  logo|String|true||
+|大背景图|	backgroundPic|String|true||
+|文字图片|	sPic|String|true||
+|介绍|introduction|Array|true||
+|图片|	pic|String|true||
+|title|	title|String|true||
+|简介|	summary|String|true||
+|功能介绍|feature|Object|true||
+|title|	title|String|true||
+|子标题|subTitle|String|true||
+|功能列表|	list|Array|true||
+|功能列表|	list|Array|true||
