@@ -99,7 +99,7 @@ http://host/admin/getDownloadPage?platform=Windows
 ```
 
 |参数名 |字段|类型|是否必填|备注|
-|-|-|-|-|
+|-|-|-|-|-|
 |平台类型|platform|String|false| Window,Mac,Android,iOS, 没有参数返回所有 |
 
 #### 成功返回样例
@@ -164,7 +164,7 @@ http://host/admin/getVersionList?platform=Windows
 ```
 
 |参数名 |字段|类型|是否必填|备注|
-|-|-|-|-|
+|-|-|-|-|-|
 |平台类型|platform|String|false| Window,Mac,Android,iOS, 无参数将返回所有 |
 
 #### 成功返回样例
@@ -212,7 +212,7 @@ http://host/admin/getVersionDetail
 ```
 
 |参数名 |字段|类型|是否必填|备注|
-|-|-|-|-|
+|-|-|-|-|-|
 |平台类型|platform|String|true| |
 |版本号|version|String|true| |
 
@@ -246,7 +246,7 @@ http://host/admin/createVersion
 ```
 
 |参数名 |字段|类型|是否必填|备注|
-|-|-|-|-|
+|-|-|-|-|-|
 |版本号|version|String|true|不能重复|
 
 
@@ -264,3 +264,8 @@ http://host/admin/createVersion
 ```javascript
 http://host/admin/getCreateVersion
 ```
+
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|无|||||
