@@ -74,7 +74,7 @@ http://host/admin/getMainPage
 				...
 			]
 		},
-		"platform": {
+		"download": {
 			"title": "",
 			"subTitle": "",
 			"list": [
@@ -167,7 +167,6 @@ http://host/admin/getVersionList?platform=Windows
 |平台类型|platform|String|false| Window,Mac,Android,iOS, 无参数将返回所有 |
 
 #### 成功返回样例
-
 ```javascript
 
 {
@@ -215,6 +214,7 @@ http://host/admin/getVersionDetail
 |平台类型|platform|String|true| |
 |版本号|version|String|true| |
 
+#### 成功返回样例
 ```javascripts
 
 {
@@ -248,7 +248,7 @@ http://host/admin/super/createVersion
 |-|-|-|-|-|
 |版本号|version|String|true|不能重复|
 
-
+#### 成功返回样例
 ```javascripts
 
 {
@@ -268,6 +268,7 @@ http://host/admin/super/getCreateVersion
 |-|-|-|-|-|
 ||||||
 
+#### 成功返回样例
 ```javascripts
 {
     "code": 0,
@@ -285,6 +286,7 @@ http://host/admin/super/deleteVersion
 |-|-|-|-|-|
 |版本号|version|String|true||
 
+#### 成功返回样例
 ```javascripts
 {
     "code": 0,
@@ -302,6 +304,7 @@ http://host/admin/super/releaseVersion  //超级管理员才有权限
 |-|-|-|-|-|
 |版本号|version|String|true||
 
+#### 成功返回样例
 ```javascripts
 {
     "code": 0,
@@ -319,6 +322,7 @@ http://host/admin/super/releaseVersion
 |-|-|-|-|-|
 |版本号|version|String|true||
 
+#### 成功返回样例
 ```javascripts
 {
     "code": 0,
@@ -338,6 +342,7 @@ http://host/admin/super/login
 |用户名|username|String|true||
 |密码|password|String|true||
 
+#### 成功返回样例
 ```javascripts
 {
     "code": 0,
@@ -354,16 +359,28 @@ http://host/admin/super/setMain
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
 |横幅|banner|Object|true||
-|透明logo|  opacityLogo|String|true||
-|logo|  logo|String|true||
-|大背景图|	backgroundPic|String|true||
-|文字图片|	sPic|String|true||
+|透明logo| &nbsp; &nbsp;opacityLogo|String|true||
+|logo| &nbsp; &nbsp;logo|String|true||
+|大背景图| &nbsp; &nbsp;backgroundPic|String|true||
+|文字图片| &nbsp; &nbsp;sPic|String|true||
 |介绍|introduction|Array|true||
-|图片|	pic|String|true||
-|title|	title|String|true||
-|简介|	summary|String|true||
+|图片| &nbsp; &nbsp;pic|String|true||
+|title| &nbsp; &nbsp;title|String|true||
+|简介| &nbsp; &nbsp;summary|String|true||
 |功能介绍|feature|Object|true||
-|title|	title|String|true||
-|子标题|subTitle|String|true||
-|功能列表|	list|Array|true||
-|功能列表|	list|Array|true||
+|title| &nbsp; &nbsp;title|String|true||
+|子标题| &nbsp; &nbsp;subTitle|String|true||
+|功能列表| &nbsp; &nbsp;list|Array|true||
+|图片| &nbsp; &nbsp; &nbsp; &nbsp;pic|String|true||
+|title| &nbsp; &nbsp; &nbsp; &nbsp;title|String|true||
+|简介| &nbsp; &nbsp; &nbsp; &nbsp;summary|String|true||
+|下载入口|download|Object|String|true|
+|title| &nbsp; &nbsp;title|String|true||
+|子标题| &nbsp; &nbsp;subTitle|String|true||
+|入口列表| &nbsp; &nbsp;list|Array|true||
+|图片1| &nbsp; &nbsp; &nbsp; &nbsp;pic1|String|true||
+|图片2| &nbsp; &nbsp; &nbsp; &nbsp;pic2|String|true||
+|下载地址| &nbsp; &nbsp; &nbsp; &nbsp;url|String|false||
+
+
+#### 成功返回样例
