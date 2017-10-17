@@ -42,7 +42,6 @@ http://host/admin/getMainPage
 #### 成功返回样例
 
 ```javascript
-
 {
     "code": 0,
     "msg": "OK",
@@ -88,7 +87,6 @@ http://host/admin/getMainPage
 		}
     }
 }
-
 ```
 
 ### 2. 下载页 数据读取： method: GET
@@ -104,7 +102,6 @@ http://host/admin/getDownloadPage?platform=Windows
 #### 成功返回样例
 
 ```javascript
-
 {
     "code": 0,
     "msg": "OK",
@@ -153,7 +150,6 @@ http://host/admin/getDownloadPage?platform=Windows
     	]
     }
 }
-
 ```
 
 ### 3. 版本列表： method: GET
@@ -168,7 +164,6 @@ http://host/admin/getVersionList?platform=Windows
 
 #### 成功返回样例
 ```javascript
-
 {
     "code": 0,
     "msg": "OK",
@@ -200,7 +195,6 @@ http://host/admin/getVersionList?platform=Windows
     	]
     }
 }
-
 ```
 
 ### 4. 版本详情： method: GET
@@ -215,8 +209,7 @@ http://host/admin/getVersionDetail
 |版本号|version|String|true| |
 
 #### 成功返回样例
-```javascripts
-
+```javascript
 {
     "code": 0,
     "msg": "OK",
@@ -235,7 +228,6 @@ http://host/admin/getVersionDetail
     	]
     }
 }
-
 ```
 
 ### 5.  创建版本： method: post
@@ -249,13 +241,11 @@ http://host/admin/super/createVersion
 |版本号|version|String|true|不能重复|
 
 #### 成功返回样例
-```javascripts
-
+```javascript
 {
     "code": 0,
     "msg": "OK"
 }
-
 ```
 
 ### 6. 获取所有创建的版本:  method: get
@@ -269,7 +259,7 @@ http://host/admin/super/getCreateVersion
 ||||||
 
 #### 成功返回样例
-```javascripts
+```javascript
 {
     "code": 0,
     "msg": "OK"
@@ -287,7 +277,7 @@ http://host/admin/super/deleteVersion
 |版本号|version|String|true||
 
 #### 成功返回样例
-```javascripts
+```javascript
 {
     "code": 0,
     "msg": "OK"
@@ -305,7 +295,7 @@ http://host/admin/super/releaseVersion  //超级管理员才有权限
 |版本号|version|String|true||
 
 #### 成功返回样例
-```javascripts
+```javascript
 {
     "code": 0,
     "msg": "OK"
@@ -323,7 +313,59 @@ http://host/admin/super/releaseVersion
 |版本号|version|String|true||
 
 #### 成功返回样例
-```javascripts
+
+```javascript
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+### 7. 删除版本:  method: post
+
+```javascript
+http://host/admin/super/deleteVersion
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|版本号|version|String|true||
+
+```javascript
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+### 8. 发布版本:  method: post
+
+```javascript
+http://host/admin/super/releaseVersion  //超级管理员才有权限
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|版本号|version|String|true||
+
+```javascript
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+### 9. 提交版本:  method: post
+
+```javascript
+http://host/admin/super/releaseVersion 
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|版本号|version|String|true||
+
+```javascript
 {
     "code": 0,
     "msg": "OK"
@@ -342,14 +384,17 @@ http://host/admin/super/login
 |用户名|username|String|true||
 |密码|password|String|true||
 
+
 #### 成功返回样例
-```javascripts
+```javascript
 {
     "code": 0,
     "msg": "OK",
     "token":"asdsafasdfsdfsfadf"
 }
 ```
+
+
 ### 11. 主页信息入库:  method: post
 
 ```javascript
@@ -381,6 +426,3 @@ http://host/admin/super/setMain
 |图片1| &nbsp; &nbsp; &nbsp; &nbsp;pic1|String|true||
 |图片2| &nbsp; &nbsp; &nbsp; &nbsp;pic2|String|true||
 |下载地址| &nbsp; &nbsp; &nbsp; &nbsp;url|String|false||
-
-
-#### 成功返回样例
