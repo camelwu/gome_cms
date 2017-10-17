@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const ejs = require('ejs')
+const fs = require('fs')
 const app = express()
 const domain = 'https://work.gomeplus.com/'
 
@@ -48,8 +49,14 @@ app.get("/privacy", function(req, res) {
     res.render("page/version", {title : "隐私政策", domain : domain})
 })
 // 日志
-app.get("/updates/(/.*$/)?-v(/.*)?", function(req, res) {
-    res.render("index", {title : "", domain : domain})
+app.get("/updates/:ver", function(req, res) {
+    if (true) {
+        res.render('page/version', {title : "隐私政策", domain : domain, 'ver': req.params.ver})
+    } else {
+        res.redirect('/')
+    }
+    
+    // res.render("index", {title : "", domain : domain})
 })
 var server = app.listen(3000, function () {
   var host = server.address().address
