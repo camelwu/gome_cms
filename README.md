@@ -291,7 +291,7 @@ http://host/admin/super/deleteVersion
 ### 8. 发布版本:  method: post
 
 ```javascript
-http://host/admin/super/releaseVersion  //超级管理员才有权限
+http://host/admin/super/v-releaseVersion  //超级管理员才有权限
 ```
 
 |参数名 |字段|类型|是否必填|备注|
@@ -317,57 +317,6 @@ http://host/admin/super/releaseVersion
 |自定义版本|V|String|true||
 
 #### 成功返回样例
-
-```javascript
-{
-    "code": 0,
-    "msg": "OK"
-}
-```
-
-### 7. 删除版本:  method: post
-
-```javascript
-http://host/admin/super/deleteVersion
-```
-
-|参数名 |字段|类型|是否必填|备注|
-|-|-|-|-|-|
-|自定义版本|V|String|true||
-
-```javascript
-{
-    "code": 0,
-    "msg": "OK"
-}
-```
-
-### 8. 发布版本:  method: post
-
-```javascript
-http://host/admin/super/releaseVersion  //超级管理员才有权限
-```
-
-|参数名 |字段|类型|是否必填|备注|
-|-|-|-|-|-|
-|自定义版本|V|String|true||
-
-```javascript
-{
-    "code": 0,
-    "msg": "OK"
-}
-```
-
-### 9. 提交版本:  method: post
-
-```javascript
-http://host/admin/super/releaseVersion 
-```
-
-|参数名 |字段|类型|是否必填|备注|
-|-|-|-|-|-|
-|自定义版本|V|String|true||
 
 ```javascript
 {
@@ -513,3 +462,14 @@ http://host/admin/super/setDetail
 ```javascript
 http://host/admin/super/uploadImg
 ```
+
+
+### 15. 获取要上线的版本:  method: get
+
+```javascript
+http://host/admin/super/getCreateVersion
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+||||||

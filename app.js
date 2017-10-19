@@ -5,6 +5,7 @@ const session = require("express-session")
 mongoose.promise = require('bluebird')
 const UserModel = require('./db/model/user')
 const VersionModel = require('./db/model/version')
+const OnlineModel = require('./db/model/online')
 const path = require('path')
 const port = 3005
 const app = express()
@@ -294,6 +295,18 @@ const aeromind = function(req, res, next){
 	if(!req.session.user){
 		return res.send({code: "10401", msg: "请登录"})
 	}
+	if(req.session.user.username == "aeromind"){
+		return res.send({code: "10401", msg: "请更换账号登录"})
+	}
+	next()
+}
+const superman = function(req, res, next){
+	if(!req.session.user){
+		return res.send({code: "10401", msg: "请登录"})
+	}
+	if(req.session.user.username !== "aeromind-admin"){
+		return res.send({code: "10401", msg: "请更换 aeromind-admin 账号登录"})
+	}
 	next()
 }
 //登录
@@ -309,57 +322,297 @@ router.post('/super/login',(req, res)=>{
 			req.session.user = ''
 			return res.send({code:'10403',msg:"密码错误"})
 		}
-
 		req.session.user = user
-		res.send({code:0, msg:'ok'})
+		if(user.isSuper){
+			return res.send({code:0, msg:'ok',isSuper: true})
+		}
+		res.send({code:0, msg:'ok',isSuper: false})
 	}).catch((err)=>{
 		res.send({code:'10500', msg:"system err"})
 	})
 })
 //创建版本
 router.post('/super/createVersion',aeromind,(req, res)=>{
-	const title = req.body.title
-	console.log(title)
-	return res.send({title:title})
-	VersionModel.findOne({active:2}).then((version)=>{
+	let title = req.body.title.trim()
+	if(!title){
+		return res.send({code:'10403', msg:'title 为空'})
+	}
 
-		if(version){
-			new VersionModel({
-				"title": String,
-				"active": 1,
-			    "cover": version.cover,
-			    "introduction": version.introduction,
-			    "feature":version.feature,
-			    "downloadEnter": version.downloadEnter,
-			    "winoows": version.windows,
-			    "ios": version.ios,
-			    "mac": version.mac,
-			    "adroid": version.adroid
-			}).then((version)=>{
-				res.send({code:"10500",msg:"system err"})
-			}).catch((err)=>{
-				res.send({code:"10500",msg:"system err"})
-			})
-		}else{
-
+	VersionModel.findOne({title:title},(err, version)=>{
+		if(err){
+			return res.send({code:"10500",msg:"system err"})
 		}
-	}).catch((err)=>{
-		console.log(err)
-	})
-
-	res.send({code:0,msg:'ok',data:{title:title,active:1}})
+		if(version){
+			return res.send({code:"10405",msg:"title 重复"})
+		}
+		VersionModel.findOne({active:2}).then((version)=>{
+			if(version){
+				new VersionModel({
+					"title": title,
+					"active": 1,
+				    "cover": version.cover,
+				    "introduction": version.introduction,
+				    "feature":version.feature,
+				    "downloadEnter": version.downloadEnter,
+				    "winoows": version.windows,
+				    "ios": version.ios,
+				    "mac": version.mac,
+				    "adroid": version.adroid
+				}).save((err, version)=>{
+					if(err){
+						return res.send({code:"10500",msg:"system err"})
+					}
+					res.send({code:"0",msg:"ok",data:{title: title, active: 1}})
+				})
+			}else{
+				new VersionModel({
+					"title": title,
+					"active": 1,
+				    "cover": {
+				    	"opacityLogo": "",
+			            "logo": "",
+						"backgroundPic": "",
+						"sPic": ""
+				    },
+				    "introduction": [
+				    	{
+							"pic" : "",
+							"title": "",
+			                "summary": ""
+						},{
+							"pic" : "",
+							"title": "",
+			                "summary": ""
+						},{
+							"pic" : "",
+							"title": "",
+			                "summary": ""
+						}
+				    ],
+				    "feature": {
+				    	"title": "",
+						"subTitle": "",
+						"list": [
+							{
+								"pic" : "",
+								"title": "",
+				                "summary": ""
+							},
+							{
+								"pic" : "",
+								"title": "",
+				                "summary": ""
+							},
+							{
+								"pic" : "",
+								"title": "",
+				                "summary": ""
+							},{
+								"pic" : "",
+								"title": "",
+				                "summary": ""
+							},{
+								"pic" : "",
+								"title": "",
+				                "summary": ""
+							},{
+								"pic" : "",
+								"title": "",
+				                "summary": ""
+							},{
+								"pic" : "",
+								"title": "",
+				                "summary": ""
+							},{
+								"pic" : "",
+								"title": "",
+				                "summary": ""
+							}
+						]
+				    },
+				    "downloadEnter": {
+				    	"title": "",
+						"subTitle": "",
+						"list": [
+							{
+								"pic1": "",
+								"pic2": "",
+								"url" : ""
+							},{
+								"pic1": "",
+								"pic2": "",
+								"url" : ""
+							},{
+								"pic1": "",
+								"pic2": "",
+								"url" : ""
+							},{
+								"pic1": "",
+								"pic2": "",
+								"url" : ""
+							}
+						]
+				    },
+				    "windows":{
+						"title": "",
+				        "summary": "",
+				        "size": "",
+				        "version": "",
+				        "system": "",
+						"time": 0,
+						"url": '',
+						"backgroundPic": "",
+						"detail":[]
+					},
+				    "ios": {
+						"title": "",
+				        "summary": "",
+				        "size": "",
+				        "version": "",
+				        "system": "",
+						"time": 0,
+						"url": '',
+						"backgroundPic": "",
+						"detail":[]
+					},
+				    "mac": {
+				    	"title": "",
+			            "summary": "",
+			            "size": "",
+			            "version": "",
+			            "system": "",
+						"time": 0,
+						"backgroundPic": "",
+						"detail":[]
+				    },
+				    "adroid": {
+				    	"title": "",
+			            "summary": "",
+			            "size": "",
+			            "version": "",
+			            "system": "",
+						"time": 0,
+						"backgroundPic": "",
+						"detail":[]
+				    }
+				}).save((err, version)=>{
+					if(err){
+						return res.send({code:"10500",msg:"system err"})
+					}
+					res.send({code:"0",msg:"ok",data:{title: title, active: 1}})
+				})
+			}
+		}).catch((err)=>{
+			console.log(err)
+		})
+	})	
 })
 //获取版本
-router.post('/super/getCreateVersion', aeromind, (req, res)=>{
+router.get('/super/getCreateVersion',aeromind, (req, res)=>{
 	VersionModel.find().then((versions)=>{
-		versions.map((item)=>{
+		let versionArr = versions.map((item)=>{
 			return {title:item.title,active:item.active}
 		})
-		res.send({code:0, versions:versions})
+		res.send({code:0, versions:versionArr})
 	}).catch((err)=>{
 		res.send({code:"10500",msg:"system err"})
 	})
 })
+//删除版本
+router.post('/super/deleteVersion',aeromind, (req,res)=>{
+	const title = req.body.title
+
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({code:10403,msg:"删除的条目不存在"})
+		}
+		if(version.active == 2){
+			return res.send({code:10403,msg:"当前为线上版本，不能删除"})
+		}
+		version.active = 0
+		version.save().then((updatedVersion)=>{
+			res.send({code:0,msg:'ok'})
+		}).catch((err)=>{
+			res.send({code:"10500", msg:"system err"})
+		})
+	}).catch((err)=>{
+		res.send({code:"10500", msg:"system err"})
+	})
+})
+//提交版本
+router.post('/super/releaseVersion',aeromind, (req, res)=>{
+	const title = req.body.title
+	VersionModel.findOne({active:3}).then((version)=>{
+		if(version){
+			if(version.title === title){
+				return res.send({code:10403, msg:'不能重复提交同一个版本'})
+			}
+			version.active = 1
+			version.save().then((version)=>{
+
+				VersionModel.findOne({title:title}).then((version)=>{
+					if(!version){
+						return res.send({code:10403, msg:'提交的版本不存在'})
+					}
+					if(version.active == 2 || version.active == 3){
+						return res.send({code:10403, msg:'不能重复提交同一个版本'})
+					}
+					version.active = 3
+					version.save().then((version)=>{
+						res.send({code:0, msg:'ok'})
+					}).catch((err)=>{
+						res.send({code:"10500", msg:"system err"})
+					})
+				})
+			}).catch((err)=>{
+				res.send({code:"10500", msg:"system err"})
+			})
+		}
+	}).catch((err)=>{
+		res.send({code:"10500", msg:"system err"})
+	})	
+})
+//超级管理员获取 要上线的版本
+//获取版本
+router.get('/super/v-getCreateVersion',superman, (req, res)=>{
+	VersionModel.findOne({active:3}).then((version)=>{
+		if(!version){
+			return res.send({code:10404, msg:'没有版本要上线'})
+		}
+		res.send({code:0, msg:'ok',version:{title:version.title, active:version.active}})
+	}).catch((err)=>{
+		res.send({code:"10500",msg:"system err"})
+	})
+})
+//上线版本
+router.post('/super/v-releaseVersion',superman, (req, res)=>{
+	const title = req.body.title
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({code: 10403, msg:"要上线的项目不存在"})
+		}
+		if(version.active == 0){
+			return res.send({code: 10403, msg:"此版本已被删除"})
+		}
+		if(version.active == 1){
+			return res.send({code: 10403, msg:"此版本没有提交不能上线"})
+		}
+		if(version.active == 2){
+			return res.send({code: 10403, msg:"此版本已上线"})
+		}
+		if(version.active == 3){
+			version.active = 2
+			version.save().then((version)=>{
+				res.send({code: 0, msg:"此版本上线成功"})
+			}).catch((err)=>{
+				res.send({code:"10500", msg:"system err"})
+			})
+		}
+	}).catch((err)=>{
+		res.send({code:"10500", msg:"system err"})
+	})
+})
+
 
 //router.use	
 /*new UserModel({
