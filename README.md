@@ -37,7 +37,7 @@ http://host/admin/getMainPage
 
 |参数名 |字段|类型|是否必填|
 |-|-|-|-|
-|版本号|version|String|true|
+|无||||
 
 #### 成功返回样例
 
@@ -107,47 +107,44 @@ http://host/admin/getDownloadPage?platform=Windows
     "msg": "OK",
     "data": {
     	"version":'V2.0.0',
-    	"platform": [
-			 {
-			 	platform: "Windows",
-	        	"title": "Aeromind Android版",
-	            "summary": "便捷、高效、迅速",
-	            "size": "30.2 M",
-	            "version": "V2.0.0",
-	            "system": "Android4.0及以上",
-				"time": "2017-10-10",
-				"url": 'http://.....',
-				"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
-	        },{
-			 	platform: "Mac",
-	        	"title": "Aeromind Android版",
-	            "summary": "便捷、高效、迅速",
-	            "size": "30.2 M",
-	            "version": "V2.0.0",
-	            "system": "Android4.0及以上",
-				"time": "2017-10-10",
-				"url": 'http://.....',
-				"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
-	        },{
-			 	platform: "Android",
-	        	"title": "Aeromind Android版",
-	            "summary": "便捷、高效、迅速",
-	            "size": "30.2 M",
-	            "version": "V2.0.0",
-	            "system": "Android4.0及以上",
-				"time": "2017-10-10",
-				"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
-	        },{
-			 	platform: "iOS",
-	        	"title": "Aeromind Android版",
-	            "summary": "便捷、高效、迅速",
-	            "size": "30.2 M",
-	            "version": "V2.0.0",
-	            "system": "Android4.0及以上",
-				"time": "2017-10-10",
-				"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
-	        }
-    	]
+    	"windows":{
+			"title": "Aeromind Android版",
+            "summary": "便捷、高效、迅速",
+            "size": "30.2 M",
+            "version": "V2.0.0",
+            "system": "Android4.0及以上",
+			"time": "2017-10-10",
+			"url": 'http://.....',
+			"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
+    	},
+    	"mac":{
+    		"title": "Aeromind Android版",
+            "summary": "便捷、高效、迅速",
+            "size": "30.2 M",
+            "version": "V2.0.0",
+            "system": "Android4.0及以上",
+			"time": "2017-10-10",
+			"url": 'http://.....',
+			"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
+		},
+		"android":{
+			"title": "Aeromind Android版",
+            "summary": "便捷、高效、迅速",
+            "size": "30.2 M",
+            "version": "V2.0.0",
+            "system": "Android4.0及以上",
+			"time": "2017-10-10",
+			"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
+		},
+		"ios":{
+			"title": "Aeromind Android版",
+            "summary": "便捷、高效、迅速",
+            "size": "30.2 M",
+            "version": "V2.0.0",
+            "system": "Android4.0及以上",
+			"time": "2017-10-10",
+			"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
+		}
     }
 }
 ```
@@ -238,7 +235,7 @@ http://host/admin/super/createVersion
 
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
-|版本号|version|String|true|不能重复|
+|自定义版本|title|String|true|不能重复|
 
 #### 成功返回样例
 ```javascript
@@ -262,7 +259,14 @@ http://host/admin/super/getCreateVersion
 ```javascript
 {
     "code": 0,
-    "msg": "OK"
+    "msg": "OK",
+    "versions":[
+		{
+			title: 'V1.0.0',
+			active: 0
+		}
+		...
+    ]
 }
 ```
 
@@ -274,7 +278,7 @@ http://host/admin/super/deleteVersion
 
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
-|版本号|version|String|true||
+|自定义版本|V|String|true||
 
 #### 成功返回样例
 ```javascript
@@ -292,7 +296,7 @@ http://host/admin/super/releaseVersion  //超级管理员才有权限
 
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
-|版本号|version|String|true||
+|自定义版本|V|String|true||
 
 #### 成功返回样例
 ```javascript
@@ -310,7 +314,7 @@ http://host/admin/super/releaseVersion
 
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
-|版本号|version|String|true||
+|自定义版本|V|String|true||
 
 #### 成功返回样例
 
@@ -329,7 +333,7 @@ http://host/admin/super/deleteVersion
 
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
-|版本号|version|String|true||
+|自定义版本|V|String|true||
 
 ```javascript
 {
@@ -346,7 +350,7 @@ http://host/admin/super/releaseVersion  //超级管理员才有权限
 
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
-|版本号|version|String|true||
+|自定义版本|V|String|true||
 
 ```javascript
 {
@@ -363,7 +367,7 @@ http://host/admin/super/releaseVersion
 
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
-|版本号|version|String|true||
+|自定义版本|V|String|true||
 
 ```javascript
 {
@@ -403,6 +407,7 @@ http://host/admin/super/setMain
 
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
+|自定义版本|V|String|true||
 |横幅|banner|Object|true||
 |透明logo| &nbsp; &nbsp;opacityLogo|String|true||
 |logo| &nbsp; &nbsp;logo|String|true||
@@ -419,10 +424,92 @@ http://host/admin/super/setMain
 |图片| &nbsp; &nbsp; &nbsp; &nbsp;pic|String|true||
 |title| &nbsp; &nbsp; &nbsp; &nbsp;title|String|true||
 |简介| &nbsp; &nbsp; &nbsp; &nbsp;summary|String|true||
-|下载入口|download|Object|String|true|
+|下载入口|download|Object|true||
 |title| &nbsp; &nbsp;title|String|true||
 |子标题| &nbsp; &nbsp;subTitle|String|true||
 |入口列表| &nbsp; &nbsp;list|Array|true||
 |图片1| &nbsp; &nbsp; &nbsp; &nbsp;pic1|String|true||
 |图片2| &nbsp; &nbsp; &nbsp; &nbsp;pic2|String|true||
-|下载地址| &nbsp; &nbsp; &nbsp; &nbsp;url|String|false||
+
+
+#### 成功返回样例
+```javascript
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+### 12. 下载页信息入库:  method: post
+
+```javascript
+http://host/admin/super/setDownload
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|自定义版本|V|String|true||
+|windows|windows|Object|true||
+|title| &nbsp; &nbsp;title|String|true||
+|简介| &nbsp; &nbsp;summary|String|true||
+|大小| &nbsp; &nbsp;size|String|true||
+|版本| &nbsp; &nbsp;version|String|true||
+|适应系统| &nbsp; &nbsp;system|String|true||
+|发布时间| &nbsp; &nbsp;time|Number|true|时间戳|
+|下载地址| &nbsp; &nbsp;url|String|true||
+|背景图片| &nbsp; &nbsp;backgroundPic|String|true||
+|mac|mac|Object|true||
+|title| &nbsp; &nbsp;title|String|true||
+|简介| &nbsp; &nbsp;summary|String|true||
+|大小| &nbsp; &nbsp;size|String|true||
+|版本| &nbsp; &nbsp;version|String|true||
+|适应系统| &nbsp; &nbsp;system|String|true||
+|发布时间| &nbsp; &nbsp;time|Number|true|时间戳|
+|下载地址| &nbsp; &nbsp;url|String|true||
+|背景图片| &nbsp; &nbsp;backgroundPic|String|true||
+|android|android|Object|true||
+|title| &nbsp; &nbsp;title|String|true||
+|简介| &nbsp; &nbsp;summary|String|true||
+|大小| &nbsp; &nbsp;size|String|true||
+|版本| &nbsp; &nbsp;version|String|true||
+|适应系统| &nbsp; &nbsp;system|String|true||
+|发布时间| &nbsp; &nbsp;time|Number|true|时间戳|
+|背景图片| &nbsp; &nbsp;backgroundPic|String|true||
+|更新日志标题|android|String|true||
+
+#### 成功返回样例
+```javascript
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+### 13. 版本详情入库:  method: post
+
+```javascript
+http://host/admin/super/setDetail
+```
+
+|参数名 |字段|类型|是否必填|备注|
+|-|-|-|-|-|
+|自定义版本|V|String|true||
+|平台|platform|String|true||
+|详情|details|Array|true||
+|title| &nbsp; &nbsp;title|String|true||
+|图片| &nbsp; &nbsp;imgs|Array|true||
+|地址| &nbsp; &nbsp; &nbsp; &nbsp;url|String|true||
+
+#### 成功返回样例
+```javascript
+{
+    "code": 0,
+    "msg": "OK"
+}
+```
+
+### 14. 图片上传:  method: post
+
+```javascript
+http://host/admin/super/uploadImg
+```
