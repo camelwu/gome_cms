@@ -106,7 +106,6 @@ http://host/admin/getDownloadPage?platform=Windows
     "code": 0,
     "msg": "OK",
     "data": {
-    	"version":'V2.0.0',
     	"windows":{
 			"title": "Aeromind Android版",
             "summary": "便捷、高效、迅速",
@@ -165,30 +164,37 @@ http://host/admin/getVersionList?platform=Windows
     "code": 0,
     "msg": "OK",
     "data": {
-    	"version":'V2.0.0',
-    	"platform": [
+    	"windows": [
 			{
-			 	"platform": "Windows",
-			 	"lists": [
-					{
-	        			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-						"time": "2017-10-10",
-						"version": "V1.1.1"
-					}
-					...
-			 	]
-	        },{
-	        	"platform": "Mac",
-			 	"lists": [
-					{
-	        			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-						"time": "2017-10-10",
-						"version": "V1.1.1"
-					}
-					...
-			 	]
-	        }
-	        ...
+    			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
+				"time": "2017-10-10",
+				"version": "V1.1.1"
+			},
+			....
+	    ],
+	    "mac": [
+	    	{
+    			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
+				"time": "2017-10-10",
+				"version": "V1.1.1"
+			},
+			...
+	    ],
+	    "android": [
+			{
+    			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
+				"time": "2017-10-10",
+				"version": "V1.1.1"
+			},
+			...
+    	],
+    	"ios":[
+			{
+    			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
+				"time": "2017-10-10",
+				"version": "V1.1.1"
+			},
+			...
     	]
     }
 }
