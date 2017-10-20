@@ -4,7 +4,7 @@
       <div style="padding: 14px;">
         <span>{{item.title}}</span>
         <div class="bottom clearfix" :class="[item.active == 0 ? colors: '']">
-          <el-button type="text" class="button">编辑</el-button>
+          <el-button type="text" class="button" @click="editorV(item.title)">编辑</el-button>
           <el-button type="text" class="button" v-if="item.active !== 2" @click="toOnline(item.title)">发布</el-button>
           <el-button type="text" class="button" @click="deleteVersion(item.title)">删除</el-button>
         </div>
@@ -84,7 +84,18 @@ export default {
       })
     },
     toOnline(title){
-
+      axios.post('/admin/super/releaseVersion',{title:title}).then((res)=>{
+        const data = res.data
+        if(data.code != 0){
+          return alert(data.msg)
+        }
+        alert("发布成功")
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    editorV(title){
+      this.$router.push({path:'/editor/main/'+title})
     }
   }
 }

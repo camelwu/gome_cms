@@ -367,7 +367,9 @@ http://host/admin/super/setMain
 |透明logo| &nbsp; &nbsp;opacityLogo|String|true||
 |logo| &nbsp; &nbsp;logo|String|true||
 |大背景图| &nbsp; &nbsp;backgroundPic|String|true||
-|文字图片| &nbsp; &nbsp;sPic|String|true||
+|模糊大背景图| &nbsp; &nbsp;blurBackgroundPic|String|true||
+|文字图片| &nbsp; &nbsp;smallPic|String|true||
+|模糊文字图片| &nbsp; &nbsp;blurSmallPic|String|true||
 |介绍|introduction|Array|true||
 |图片| &nbsp; &nbsp;pic|String|true||
 |title| &nbsp; &nbsp;title|String|true||

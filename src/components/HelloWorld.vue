@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "../router/axios"
 export default {
   name: 'HelloWorld',
   data () {
@@ -32,6 +32,9 @@ export default {
         const data = res.data
         if(data.code != 0){
           return alert(data.msg)
+        }
+        if(data.isSuper){
+          return this.$router.push({path:'/v-home'})
         }
         this.$router.push({path:'/home'})
       })

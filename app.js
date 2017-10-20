@@ -1,3 +1,5 @@
+const fs = require('fs')
+const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -6,7 +8,15 @@ mongoose.promise = require('bluebird')
 const UserModel = require('./db/model/user')
 const VersionModel = require('./db/model/version')
 const OnlineModel = require('./db/model/online')
-const path = require('path')
+const multer = require('multer')
+const picPath = 'src/assets'
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, picPath)
+    }
+})
+const upload = multer({storage: storage})
+
 const port = 3005
 const app = express()
 
@@ -295,7 +305,7 @@ const aeromind = function(req, res, next){
 	if(!req.session.user){
 		return res.send({code: "10401", msg: "请登录"})
 	}
-	if(req.session.user.username == "aeromind"){
+	if(req.session.user.username == "aeromind-amind"){
 		return res.send({code: "10401", msg: "请更换账号登录"})
 	}
 	next()
@@ -541,7 +551,10 @@ router.post('/super/deleteVersion',aeromind, (req,res)=>{
 })
 //提交版本
 router.post('/super/releaseVersion',aeromind, (req, res)=>{
-	const title = req.body.title
+	const title = req.body.title.trim()
+	if(!title){
+		return res.send({code:10403, msg:'title 为空'})
+	}
 	VersionModel.findOne({active:3}).then((version)=>{
 		if(version){
 			if(version.title === title){
@@ -567,11 +580,40 @@ router.post('/super/releaseVersion',aeromind, (req, res)=>{
 			}).catch((err)=>{
 				res.send({code:"10500", msg:"system err"})
 			})
+		}else{
+			VersionModel.findOne({title:title}).then((version)=>{
+				if(!version){
+					return res.send({code:10403, msg:'提交的版本不存在'})
+				}
+				if(version.active == 2 || version.active == 3){
+					return res.send({code:10403, msg:'不能重复提交同一个版本'})
+				}
+				version.active = 3
+				version.save().then((version)=>{
+					res.send({code:0, msg:'ok'})
+				}).catch((err)=>{
+					res.send({code:"10500", msg:"system err"})
+				})
+			})
 		}
 	}).catch((err)=>{
 		res.send({code:"10500", msg:"system err"})
 	})	
 })
+//上传图片
+router.post('/super/uploadImg',aeromind, upload.single('pic'), (req, res)=>{
+	const mimetype = req.file.mimetype.split('/')[1]
+    const filename = req.file.filename 
+    const destination = req.file.destination
+
+    const oldpath = path.join(__dirname, destination, filename)
+    const newFileName = filename + '.' + mimetype
+    //改名
+    fs.renameSync(oldpath, path.join(__dirname, destination, newFileName))
+    
+    res.send({msg:'ok',code:0, src: '/assets/' + newFileName ,name: req.file.originalname})
+})
+
 //超级管理员获取 要上线的版本
 //获取版本
 router.get('/super/v-getCreateVersion',superman, (req, res)=>{
@@ -613,13 +655,16 @@ router.post('/super/v-releaseVersion',superman, (req, res)=>{
 	})
 })
 
-
-//router.use	
-/*new UserModel({
-username: "aeromind",
-password: "123.gome",
-isSuper: false
-}).save(()=>{
+/*router.get('/super/signup',(req, res)=>{
+	new UserModel({
+		username: "aeromind-admin",
+		password: "123.gome",
+		isSuper: falses
+	}).save(()=>{
+		res.send({code:0,msg:"ok"})
+	})
 })*/
+//router.use	
+/**/
 
 app.use('/admin', router)
