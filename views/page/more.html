@@ -5,15 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="author" content="下载"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="shortcut icon" type="image/x-icon" href="../css/img/website/favicon.ico" media="screen"/>
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="more.css">
-    <script id="header" src="../lib/header.js"></script>
-    <title>更多</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/css/img/website/favicon.ico" media="screen"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/more.css">
+    <title>Aeromind官网——<%=title%></title>
 </head>
 <body>
-<!-- <iframe src="header.html" frameborder="0" width="100%" height="86px" backgroundColor="#f9f9f9"></iframe> -->
-<div id="dkd"></div>
+<%include ./header.html%>
 <div class="container">
     <div class="container-box clearfix">
         <div class="menu" id="menu">
@@ -394,14 +392,12 @@
             </div>
         </div>
     </div>
-    <iframe src="footer.html" width="100%" frameborder="0" height="263px"></iframe>
+    <%include ./footer.html%>
 </div>
 </body>
 </html>
 <script>
-    document.getElementById('dkd').innerHTML = tpl_head ? tpl_head : '';
-    document.body[0];
-    document.body.appendChild
+
     var menu = document.getElementById('menu');
     /*获取左边三个菜单*/
     var tab = document.getElementById('content');
@@ -421,23 +417,32 @@
     var two = document.getElementById('two');
     var three = document.getElementById('three');
     var aH3 = document.getElementsByClassName('h3');
+    var sel = '<%=para%>';
 
-    // 跳到指定位置
-    var a = document.location.href;
-    if (a.indexOf("id=menu2") != -1) {
-        document.getElementById("menu2").style.display = "block";
-        menu3.style.display = "none";
-        menu1.style.display = "none";
-        onebox.style.height = "50px";
-        onebox.classList.remove('active');
-        two.classList.add('active');
-    } else if (a.indexOf("id=menu3") != -1) {
-        document.getElementById("menu3").style.display = "block";
+     if (sel == '0') {
+        menu1.style.display = "block";
+        onebox.style.height = "auto";
         menu2.style.display = "none";
+        menu3.style.display = "none";
+        onebox.classList.add('active');
+        two.classList.remove('active');
+        three.classList.remove('active');
+    }else if(sel == '1'){
         menu1.style.display = "none";
-        onebox.classList.remove('active');
         onebox.style.height = "50px";
+        menu2.style.display = "block";
+        menu3.style.display = "none";
+        two.classList.add('active');
+        onebox.classList.remove('active');
+        three.classList.remove('active');
+    }else if(sel == '2'){
+        menu1.style.display = "none";
+        onebox.style.height = "50px";
+        menu2.style.display = "none";
+        menu3.style.display = "block";
         three.classList.add('active');
+        onebox.classList.remove('active');
+        two.classList.remove('active');
     }
 
     // click change tag

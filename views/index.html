@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="author" content="EC-FE team"/>
     <meta name="keywords" content="Aeromind,Aeromind官网,感觉,飞一般的感觉,给工作飞,国美Aeromind,智能办公,频道,无上限聊天频道">
-    <link rel="shortcut icon" type="image/x-icon" href="./css/favicon.ico" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="./css/website.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/css/favicon.ico" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/website.css">
     <title>Aeromind官网——给工作飞一般的感觉！</title>
 </head>
 <body>
@@ -41,100 +41,39 @@
     <a href="/downloads" class="backround-text">免费下载</a>
 </div>
 <div class="main" id="_main">
+    <%if (cover.introduction.length>0) {var list = cover.introduction,len=list.length %>
+    <% for(var i=0;i<len;i++){ %>
     <div class="backround-indtrod clearfix">
         <div class="indtrod-content">
             <div class="indtrod-box">
-                <p class="indtrod-text">更符合企业场景的沟通方式</p>
-                <p class="indtrod-tex">团队智能频道，是专门为企业量身定制的一种多人沟通及协作方式。让企业沟通更直接、高效。
+                <p class="indtrod-text"><%=list[i].title%></p>
+                <p class="indtrod-tex"><%=list[i].summary%>
                 </p>
             </div>
-            <img src="./css/img/website/talk.png" alt="" class="indtrod-img">
+            <img src="/css<%=list[i].pic%>" alt="" class="indtrod-img">
         </div>
     </div>
-    <div class="backround-indtrod clearfix odd">
-        <div class="indtrod-content">
-            <img src="./css/img/website/group.png" alt="" class="indtrod-img">
-            <div class="indtrod-box">
-                <p class="indtrod-text">支持万人企业通讯录</p>
-                <p class="indtrod-tex">企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="backround-indtrod clearfix">
-        <div class="indtrod-content">
-            <div class="indtrod-box">
-                <p class="indtrod-text">多平台事务处理更便捷</p>
-                <p class="indtrod-tex">预置审批、公告、考勤官方OA应用，精选丰富的第三方应用覆盖更多事务处理。
-                </p>
-            </div>
-            <img src="./css/img/website/grou.png" alt="" class="indtrod-img">
-        </div>
-    </div>
+    <% } %>
+    <% } %>
     <div class="backround-indtrod clearfix odd">
         <div class="back-text">
             <p class="back-te">Aeromind 产品特色</p>
             <p class="back-tex">对企业成员进行智能管理，对沟通信息、协作信息进行精细处理及整合</p>
         </div>
         <div class="ul-box">
+            <%if (cover.feature.list.length>0) {var list = cover.feature.list,len=list.length %>
             <ul class="back-ul clearfix">
+                <% for(var i=0;i<len;i++){ %>
                 <li class="back-li">
                     <img src="./css/img/website/people.png" class="li-img">
                     <div class="li-text">
-                        <p class="li-text-one">成员无上限</p>
-                        <p class="li-text-two">频道支持无上限的企业全员，管理员可智能创建频道。</p>
+                        <p class="li-text-one"><%=list[i].title%></p>
+                        <p class="li-text-two"><%=list[i].summary%></p>
                     </div>
                 </li>
-                <li class="back-li one">
-                    <img src="./css/img/website/cloud.png" class="li-img">
-                    <div class="li-text">
-                        <p class="li-text-one">云端消息存储</p>
-                        <p class="li-text-two">频道消息可永久保存和查看，频道消息还可以点赞哦。</p>
-                    </div>
-                </li>
-                <li class="back-li one">
-                    <img src="./css/img/website/important.png" class="li-img">
-                    <div class="li-text">
-                        <p class="li-text-one">重要消息提醒</p>
-                        <p class="li-text-two">频道只提醒特殊类型消息，避免无效消息干扰和流量耗费。</p>
-                    </div>
-                </li>
-                <li class="back-li one">
-                    <img src="./css/img/website/door.png" class="li-img">
-                    <div class="li-text">
-                        <p class="li-text-one">加入企业无门槛</p>
-                        <p class="li-text-two">短信、邮箱多种邀请方式，员工加入企业邀请高触达率。</p>
-                    </div>
-                </li>
-                <li class="back-li">
-                    <img src="./css/img/website/kaoqin.png" class="li-img">
-                    <div class="li-text">
-                        <p class="li-text-one">考勤</p>
-                        <p class="li-text-two">手机极速打卡，可视化精准考勤数据。</p>
-                    </div>
-                </li>
-                <li class="back-li one">
-                    <img src="./css/img/website/shenpi.png" class="li-img">
-                    <div class="li-text">
-                        <p class="li-text-one">审批</p>
-                        <p class="li-text-two">默认、自定义审批模板，移动审批处理事务更及时。</p>
-                    </div>
-                </li>
-                <li class="back-li one">
-                    <img src="./css/img/website/gonggao.png" class="li-img">
-                    <div class="li-text">
-                        <p class="li-text-one">公告</p>
-                        <p class="li-text-two">随时随地发公告，已读未读一目了然。</p>
-                    </div>
-                </li>
-                <li class="back-li one">
-                    <img src="./css/img/website/anquan.png" class="li-img">
-                    <div class="li-text">
-                        <p class="li-text-one">数据安全保障</p>
-                        <p class="li-text-two">企业内部沟通信息全程加密，重要信息不泄露。</p>
-                    </div>
-                </li>
+                <% } %>
             </ul>
+            <% } %>
         </div>
     </div>
     <div class="backround-indtrod clearfix">
@@ -143,38 +82,18 @@
             <p class="back-tex">包括 Windows、macOS、Android、iOS 平台的客户端已经开发就绪，可以选择任何一个下载使用</p>
         </div>
         <div class="back-link clearfix">
+            <%if (cover.download.list.length>0) {var list = cover.download.list,len=list.length %>
+            <% for(var i=0;i<len;i++){ %>
             <div class="link-box" id="win-download">
                 <div class="link-img-win">
-                    <span class="win-logo-img index-download-normal-icon"></span>
-                    <span class="down-img index-download-hover-icon"></span>
+                    <span class="win-logo-img index-download-normal-icon" style="background: url(/css<%=list[i].pic1%>) no-repeat;background-size: contain;"></span>
+                    <span class="down-img index-download-hover-icon" style="background: url(/css<%=list[i].pic2%>) no-repeat;background-size: contain;"></span>
                 </div>
                 <span class="link-span-title">Windows</span>
                 <span class="link-down-desc">点击下载</span>
             </div>
-            <div class="link-box link" id="mac-download">
-                <div class="link-img-mac">
-                    <span class="mac-logo-img index-download-normal-icon"></span>
-                    <span class="down-img index-download-hover-icon"></span>
-                </div>
-                <span class="link-span-title">macOS</span>
-                <span class="link-down-desc">点击下载</span>
-            </div>
-            <div class="link-box link" id="a-download">
-                <div class="link-img-android">
-                    <span class="and-logo-img index-download-normal-icon"></span>
-                    <span class="qr-code-img index-download-hover-icon"></span>
-                </div>
-                <span class="link-span-title">Android</span>
-                <span class="link-down-desc">扫描二维码下载</span>
-            </div>
-            <div class="link-box link" id="i-download">
-                <div class="link-img-ios">
-                    <span class="ios-logo-img index-download-normal-icon"></span>
-                    <span class="qr-code-img index-download-hover-icon"></span>
-                </div>
-                <span class="link-span-title">iOS</span>
-                <span class="link-down-desc">扫描二维码下载</span>
-            </div>
+            <% } %>
+            <% } %>
         </div>
     </div>
 </div>

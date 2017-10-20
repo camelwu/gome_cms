@@ -343,15 +343,12 @@ body{
     transform: scale(1,1);
 }
 .win-logo-img{
-    background: url(../css/img/website/win-2x.png) no-repeat;
-    background-size: contain;
     border:transparent;
     width: 100%;
     height: 100%;
     display: block;
 }
 .down-img{
-    background: url(../css/img/website/xiazai.png) no-repeat;
     background-size: contain;
     width: 100%;
     height: 100%;

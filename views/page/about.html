@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="shortcut icon" type="image/x-icon" href="/css/img/website/favicon.ico" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/about.css">
-    <title>关于我们</title>
+    <title>Aeromind官网——<%=title%></title>
 </head>
 <body>
 <%include ./header.html%>
@@ -63,9 +63,11 @@
     var divs = document.getElementById('content').children;
     var one = document.getElementById('titleOne');
     var two = document.getElementById('titleTwo');
+    var first = document.getElementById('first');
+    var second = document.getElementById('second');
     var sel = '<%=para%>';
     var a = document.location.href;
-    if (sel != '1') {
+    if (sel != '0') {
         document.getElementById("second").style.display = "block";
         first.style.display = "none";
         one.classList.remove('selected');
