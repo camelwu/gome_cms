@@ -355,7 +355,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 		if(version){
 			return res.send({code:"10405",msg:"title 重复"})
 		}
-		VersionModel.findOne({active:2}).then((version)=>{
+		VersionModel.findOne({active:6}).then((version)=>{
 			if(version){
 				new VersionModel({
 					"title": title,
@@ -612,6 +612,46 @@ router.post('/super/uploadImg',aeromind, upload.single('pic'), (req, res)=>{
     fs.renameSync(oldpath, path.join(__dirname, destination, newFileName))
     
     res.send({msg:'ok',code:0, src: '/assets/' + newFileName ,name: req.file.originalname})
+})
+//主页信息
+router.post('/super/setMain',aeromind, (req, res)=>{
+	const title = req.body.title
+	const cover = req.body.banner
+	const introduction = req.body.introduction
+	const feature = req.body.feature
+	const downloadEnter = req.body.download
+
+	if(!title){
+		return res.send({code:10405, msg: 'version 不能为空'})
+	}
+
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({code:10405, msg: 'version 不存在'})
+		}
+
+		if(cover){
+			version.cover = cover
+		}
+		if(introduction){
+			version.introduction = introduction
+		}
+		if(feature){
+			version.feature = feature
+		}
+		if(downloadEnter){
+			version.downloadEnter = downloadEnter
+		}
+
+		version.save().then((version)=>{
+			res.send({code:0, msg:"ok"})
+		}).catch((err)=>{
+			res.send({code:"10500", msg:"system err"})
+		})
+
+	}).catch((err)=>{
+		res.send({code:"10500", msg:"system err"})
+	})
 })
 
 //超级管理员获取 要上线的版本

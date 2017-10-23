@@ -10,7 +10,16 @@ const VersionSchema = new mongoose.Schema({
     "winoows": Object,
     "ios": Object,
     "mac": Object,
-    "adroid": Object
+    "adroid": Object,
+    "createTime": {
+    	type:Number,
+    	default: +(new Date())
+    },
+    "updateTime": {
+    	type: Number,
+    	default: +(new Date())
+    },
+    "onlineTime":Number
 })
 /*
 
@@ -51,5 +60,14 @@ const VersionSchema = new mongoose.Schema({
 }	
 
 */
+VersionSchema.pre('save',function(next){
+	if(this.isNew){
+		this.createTime = this.updateTime = +(new Date())
+	}else{
+		this.updateTime = +(new Date())
+	}
+	next()
+})
+
 
 module.exports = VersionSchema

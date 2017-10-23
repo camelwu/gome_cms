@@ -363,25 +363,25 @@ http://host/admin/super/setMain
 |参数名 |字段|类型|是否必填|备注|
 |-|-|-|-|-|
 |自定义版本|V|String|true||
-|横幅|banner|Object|true||
+|横幅|banner|Object|false||
 |透明logo| &nbsp; &nbsp;opacityLogo|String|true||
 |logo| &nbsp; &nbsp;logo|String|true||
 |大背景图| &nbsp; &nbsp;backgroundPic|String|true||
 |模糊大背景图| &nbsp; &nbsp;blurBackgroundPic|String|true||
 |文字图片| &nbsp; &nbsp;smallPic|String|true||
 |模糊文字图片| &nbsp; &nbsp;blurSmallPic|String|true||
-|介绍|introduction|Array|true||
+|介绍|introduction|Array|false||
 |图片| &nbsp; &nbsp;pic|String|true||
 |title| &nbsp; &nbsp;title|String|true||
 |简介| &nbsp; &nbsp;summary|String|true||
-|功能介绍|feature|Object|true||
+|功能介绍|feature|Object|false||
 |title| &nbsp; &nbsp;title|String|true||
 |子标题| &nbsp; &nbsp;subTitle|String|true||
 |功能列表| &nbsp; &nbsp;list|Array|true||
 |图片| &nbsp; &nbsp; &nbsp; &nbsp;pic|String|true||
 |title| &nbsp; &nbsp; &nbsp; &nbsp;title|String|true||
 |简介| &nbsp; &nbsp; &nbsp; &nbsp;summary|String|true||
-|下载入口|download|Object|true||
+|下载入口|download|Object|false||
 |title| &nbsp; &nbsp;title|String|true||
 |子标题| &nbsp; &nbsp;subTitle|String|true||
 |入口列表| &nbsp; &nbsp;list|Array|true||
