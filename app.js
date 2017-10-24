@@ -39,112 +39,146 @@ app.use(bodyParser.urlencoded({ extended: true ,limit:5000000}))
 const router = express.Router()
 
 //主页信息
-router.get('/getMain',(req, res)=>{
-	res.send({
-	    "code": 0,
-	    "msg": "OK",
-	    "data": {
-	    	"version":'V2.0.0',
-	        "cover": {
-	            "opacityLogo": "/img/T1SRKTBQAv1RCvBVdK.png",
-	            "logo": "/img/T1SRKTBQAv1RCvBVdK.png",
-				"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png",
-				"sPic": "/img/T1SRKTBQAv1RCvBVdK.png"
-	        },
-	        "introduction": [
-	            {
-	                "pic": "/img/T1SRKTBQAv1RCvBVdK.png",
-	                "title": "支持万人企业通讯录",
-	                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。",
-	                "detail": {}
-	            },
-	            {
-	                "pic": "/img/T1SRKTBQAv1RCvBVdK.png",
-	                "title": "支持万人企业通讯录",
-	                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。",
-	                "detail": {}
-	            },
-	            {
-	                "pic": "/img/T1SRKTBQAv1RCvBVdK.png",
-	                "title": "支持万人企业通讯录",
-	                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。",
-	                "detail": {}
-	            }
-	        ],
-			"feature": {
-				"title": "",
-				"subTitle": "",
-				"list": [
-					{
-						"pic" : "/img/T1SRKTBQAv1RCvBVdK.png",
-						"title": "支持万人企业通讯录",
-		                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-					},
-					{
-						"pic" : "/img/T1SRKTBQAv1RCvBVdK.png",
-						"title": "支持万人企业通讯录",
-		                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-					},
-					{
-						"pic" : "/img/T1SRKTBQAv1RCvBVdK.png",
-						"title": "支持万人企业通讯录",
-		                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-					},
-					{
-						"pic" : "/img/T1SRKTBQAv1RCvBVdK.png",
-						"title": "支持万人企业通讯录",
-		                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-					},
-					{
-						"pic" : "/img/T1SRKTBQAv1RCvBVdK.png",
-						"title": "支持万人企业通讯录",
-		                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-					},
-					{
-						"pic" : "/img/T1SRKTBQAv1RCvBVdK.png",
-						"title": "支持万人企业通讯录",
-		                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-					},
-					{
-						"pic" : "/img/T1SRKTBQAv1RCvBVdK.png",
-						"title": "支持万人企业通讯录",
-		                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-					},
-					{
-						"pic" : "/img/T1SRKTBQAv1RCvBVdK.png",
-						"title": "支持万人企业通讯录",
-		                "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-					}
-				]
-			},
-			"downloadEnter": {
-				"title": "",
-				"subTitle": "",
-				"list": [
-					{
-						"pic1": "",
-						"pic2": "",
-						"url" : ""
-					},
-					{
-						"pic1": "",
-						"pic2": "",
-						"url" : ""
-					},
-					{
-						"pic1": "",
-						"pic2": "",
-						"url" : ""
-					},
-					{
-						"pic1": "",
-						"pic2": "",
-						"url" : ""
-					}
-				]
+router.get('/getMainPage',(req, res)=>{
+	const title = req.query.title 
+	console.log(title)
+	if( !title){
+		VersionModel.findOne({active:2}).then((version)=>{
+			if(!version){
+				return res.send({
+				    "code": 0,
+				    "msg": "OK",
+				    "data": {
+				        "cover": {
+				            "opacityLogo": "",
+				            "logo": "",
+							"backgroundPic": "",
+							"smallPic": "",
+							"blurBackgroundPic":"",
+							"blurSmallPic":""
+				        },
+				        "introduction": [
+				            {
+				                "pic": "",
+				                "title": "",
+				                "summary": ""
+				            },
+				            {
+				                "pic": "",
+				                "title": "",
+				                "summary": ""
+				            },
+				            {
+				                "pic": "",
+				                "title": "",
+				                "summary": ""
+				            }
+				        ],
+						"feature": {
+							"title": "",
+							"subTitle": "",
+							"list": [
+								{
+									"pic" : "",
+									"title": "",
+					                "summary": ""
+								},
+								{
+									"pic" : "",
+									"title": "",
+					                "summary": ""
+								},
+								{
+									"pic" : "",
+									"title": "",
+					                "summary": ""
+								},
+								{
+									"pic" : "",
+									"title": "",
+					                "summary": ""
+								},
+								{
+									"pic" : "",
+									"title": "",
+					                "summary": ""
+								},
+								{
+									"pic" : "",
+									"title": "",
+					                "summary": ""
+								},
+								{
+									"pic" : "",
+									"title": "",
+					                "summary": ""
+								},
+								{
+									"pic" : "",
+									"title": "",
+					                "summary": ""
+								}
+							]
+						},
+						"download": {
+							"title": "",
+							"subTitle": "",
+							"list": [
+								{
+									"pic1": "",
+									"pic2": "",
+									"url" : ""
+								},
+								{
+									"pic1": "",
+									"pic2": "",
+									"url" : ""
+								},
+								{
+									"pic1": "",
+									"pic2": ""
+								},
+								{
+									"pic1": "",
+									"pic2": ""
+								}
+							]
+						}
+				    }
+				})
 			}
-	    }
-	})
+			res.send({
+				code:0,
+				msg:'ok',
+				data:{
+					"cover":version.cover,
+					"introduction":version.introduction,
+					"feature":version.feature,
+					"download":version.downloadEnter
+				}
+			})
+		}).catch((err)=>{
+			res.send({code:10500,msg:"system err"})
+		})
+	}else{
+		VersionModel.findOne({title:title}).then((version)=>{
+			if(!version){
+				return res.send({code:10405,msg:'版本不存在'})
+			}
+			res.send({
+				code:0,
+				msg:'ok',
+				data:{
+					"cover":version.cover,
+					"introduction":version.introduction,
+					"feature":version.feature,
+					"download":version.downloadEnter
+				}
+			})
+		}).catch((err)=>{
+			res.send({code:10500,msg:"system err"})
+		})
+	}
 })
 
 //下载banner部分
@@ -355,7 +389,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 		if(version){
 			return res.send({code:"10405",msg:"title 重复"})
 		}
-		VersionModel.findOne({active:6}).then((version)=>{
+		VersionModel.findOne({active:2}).then((version)=>{
 			if(version){
 				new VersionModel({
 					"title": title,
@@ -364,15 +398,17 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 				    "introduction": version.introduction,
 				    "feature":version.feature,
 				    "downloadEnter": version.downloadEnter,
-				    "winoows": version.windows,
+				    "windows": version.windows,
 				    "ios": version.ios,
 				    "mac": version.mac,
-				    "adroid": version.adroid
+				    "android": version.android
 				}).save((err, version)=>{
 					if(err){
 						return res.send({code:"10500",msg:"system err"})
 					}
 					res.send({code:"0",msg:"ok",data:{title: title, active: 1}})
+				}).catch((err)=>{
+					res.send({code:"10500",msg:"system err"})
 				})
 			}else{
 				new VersionModel({
@@ -382,7 +418,9 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 				    	"opacityLogo": "",
 			            "logo": "",
 						"backgroundPic": "",
-						"sPic": ""
+						"blurBackgroundPic":"",
+						"smallPic": "",
+						"blurSmallPic":""
 				    },
 				    "introduction": [
 				    	{
@@ -472,7 +510,14 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 						"time": 0,
 						"url": '',
 						"backgroundPic": "",
-						"detail":[]
+						"detail":[
+							{
+								"title": "",
+								"time": "",
+								"version":"",
+								"list":[]
+							}
+						]
 					},
 				    "ios": {
 						"title": "",
@@ -481,9 +526,15 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 				        "version": "",
 				        "system": "",
 						"time": 0,
-						"url": '',
 						"backgroundPic": "",
-						"detail":[]
+						"detail":[
+							{
+								"title": "",
+								"time": "",
+								"version":"",
+								"list":[]
+							}
+						]
 					},
 				    "mac": {
 				    	"title": "",
@@ -492,10 +543,18 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 			            "version": "",
 			            "system": "",
 						"time": 0,
+						"url": '',
 						"backgroundPic": "",
-						"detail":[]
+						"detail":[
+							{
+								"title": "",
+								"time": "",
+								"version":"",
+								"list":[]
+							}
+						]
 				    },
-				    "adroid": {
+				    "android": {
 				    	"title": "",
 			            "summary": "",
 			            "size": "",
@@ -503,17 +562,26 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 			            "system": "",
 						"time": 0,
 						"backgroundPic": "",
-						"detail":[]
+						"detail":[
+							{
+								"title": "",
+								"time": "",
+								"version":"",
+								"list":[]
+							}
+						]
 				    }
 				}).save((err, version)=>{
 					if(err){
 						return res.send({code:"10500",msg:"system err"})
 					}
 					res.send({code:"0",msg:"ok",data:{title: title, active: 1}})
+				}).catch((err)=>{
+					res.send({code:"10500",msg:"system err"})
 				})
 			}
 		}).catch((err)=>{
-			console.log(err)
+			res.send({code:"10500",msg:"system err"})
 		})
 	})	
 })
@@ -611,9 +679,9 @@ router.post('/super/uploadImg',aeromind, upload.single('pic'), (req, res)=>{
     //改名
     fs.renameSync(oldpath, path.join(__dirname, destination, newFileName))
     
-    res.send({msg:'ok',code:0, src: '/assets/' + newFileName ,name: req.file.originalname})
+    res.send({msg:'ok',code:0, src: newFileName ,name: req.file.originalname})
 })
-//主页信息
+//主页信息录入
 router.post('/super/setMain',aeromind, (req, res)=>{
 	const title = req.body.title
 	const cover = req.body.banner
@@ -642,6 +710,71 @@ router.post('/super/setMain',aeromind, (req, res)=>{
 		if(downloadEnter){
 			version.downloadEnter = downloadEnter
 		}
+		version.save().then((version)=>{
+			res.send({code:0, msg:"ok"})
+		}).catch((err)=>{
+			res.send({code:"10500", msg:"system err"})
+		})
+
+	}).catch((err)=>{
+		res.send({code:"10500", msg:"system err"})
+	})
+})
+//download录入
+router.post('/super/setDownload',aeromind, (req, res)=>{
+	const title = req.body.title
+	const windows = req.body.windows
+	const ios = req.body.ios
+	const android = req.body.android
+	const mac = req.body.mac
+
+	if(!title){
+		return res.send({code:10405, msg: 'version 不能为空'})
+	}
+
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({code:10405, msg: 'version 不存在'})
+		}
+
+		if(windows){
+			version.windows.title = windows.title
+			version.windows.summary = windows.summary
+			version.windows.size = windows.size
+			version.windows.version = windows.version
+			version.windows.time = windows.time
+			version.windows.system = windows.system
+			version.windows.url = windows.url
+			version.windows.backgroundPic = windows.backgroundPic
+		}
+		if(ios){
+			version.ios.title = ios.title
+			version.ios.summary = ios.summary
+			version.ios.size = ios.size
+			version.ios.version = ios.version
+			version.ios.time = ios.time
+			version.ios.system = ios.system
+			version.ios.backgroundPic = ios.backgroundPic
+		}
+		if(mac){
+			version.mac.title = mac.title
+			version.mac.summary = mac.summary
+			version.mac.size = mac.size
+			version.mac.version = mac.version
+			version.mac.time = mac.time
+			version.mac.system = mac.system
+			version.mac.url = mac.url
+			version.mac.backgroundPic = mac.backgroundPic
+		}
+		if(android){
+			version.android.title = android.title
+			version.android.summary = android.summary
+			version.android.size = android.size
+			version.android.version = android.version
+			version.android.time = android.time
+			version.android.system = android.system
+			version.android.backgroundPic = android.backgroundPic
+		}
 
 		version.save().then((version)=>{
 			res.send({code:0, msg:"ok"})
@@ -653,7 +786,82 @@ router.post('/super/setMain',aeromind, (req, res)=>{
 		res.send({code:"10500", msg:"system err"})
 	})
 })
+//列表标题录入
+router.post('/super/setDownload',aeromind, (req, res)=>{
+	const title = req.body.title
+	const platform = req.body.platform
+	const subTitle = req.body.subTitle
+	const version = req.body.version
+	const time = req.body.time
 
+	if(!title){
+		return res.send({code:10405, msg: 'version 不能为空'})
+	}
+
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({code:10405, msg: 'version 不存在'})
+		}
+
+		if( platform && subTitle && version && time ){
+			version[platform].detail.unshift(version[platform].detail[0])
+
+			version[platform].detail[0].title = subTitle
+			version[platform].detail[0].version = version
+			version[platform].detail[0].time = time
+
+		}else{
+			return res.send({code:10405, msg: '参数不正确'})
+		}
+		
+		version.save().then((version)=>{
+			res.send({code:0, msg:"ok"})
+		}).catch((err)=>{
+			res.send({code:"10500", msg:"system err"})
+		})
+
+	}).catch((err)=>{
+		res.send({code:"10500", msg:"system err"})
+	})
+})
+//详情录入
+router.post('/super/setDownload',aeromind, (req, res)=>{
+	const title = req.body.title
+	const platform = req.body.platform
+	const version = req.body.version
+	const list = req.body.list
+
+	if(!title){
+		return res.send({code:10405, msg: 'version 不能为空'})
+	}
+
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({code:10405, msg: 'version 不存在'})
+		}
+
+		if( platform && version){
+			version[platform].detail = version[platform].detail.map((item)=>{
+				if(item.version == version){
+					item.list = list
+				}
+				return item
+			})
+
+		}else{
+			return res.send({code:10405, msg: '参数不正确'})
+		}
+		
+		version.save().then((version)=>{
+			res.send({code:0, msg:"ok"})
+		}).catch((err)=>{
+			res.send({code:"10500", msg:"system err"})
+		})
+
+	}).catch((err)=>{
+		res.send({code:"10500", msg:"system err"})
+	})
+})
 //超级管理员获取 要上线的版本
 //获取版本
 router.get('/super/v-getCreateVersion',superman, (req, res)=>{

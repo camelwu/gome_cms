@@ -14,7 +14,7 @@
       <h1>banner</h1>
       <el-form label-width="140px" class="button-line">
         <el-form-item class="item" label="白色底logo">
-          <el-input v-model="banner.logo" disabled></el-input>
+         <el-input v-model="banner.logo" disabled></el-input>
           <el-upload
             class="upload"
             name="pic"
@@ -85,7 +85,7 @@
         </el-form-item>
       </el-form>
       <h1>introduction</h1>
-      <el-form label-width="140px" class="button-line">
+      <el-form label-width="140px" class="button-line" >
         <div v-for="(item, index) in introduction">
           <span>第{{index + 1}}组</span>
           <el-form-item class="item" label="图片">
@@ -140,7 +140,7 @@
           </el-form-item>
         </div>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('introduction')">保存</el-button>
+          <el-button type="primary" @click="submitForm('feature')">保存</el-button>
           <el-button type="primary" @click="preView">预览</el-button>
         </el-form-item>
       </el-form>
@@ -181,7 +181,7 @@
           </el-form-item>
         </div>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('introduction')">保存</el-button>
+          <el-button type="primary" @click="submitForm('download')">保存</el-button>
           <el-button type="primary" @click="preView">预览</el-button>
         </el-form-item>
       </el-form>
@@ -199,17 +199,11 @@ export default {
       version:'',
       banner:{
         logo:"",
-        logoSrc: "",
         opacityLogo:"",
-        opacityLogoSrc:"",
         backgroundPic:"",
-        backgroundPicSrc:"",
         blurBackgroundPic:"",
-        blurBackgroundPicSrc:"",
         smallPic:"",
-        smallPicSrc:"",
-        blurSmallPic:"",
-        blurSmallPicSrc:""
+        blurSmallPic:""
       },
       introduction:[
         {
@@ -312,9 +306,20 @@ export default {
     }
   },
   created(){
-    console.log(this.$route.params.title)
     this.version = this.$route.params.title
-    //axios.get('')
+    axios.get('/admin/getMainPage',{params:{title:this.version}}).then((res)=>{
+      const data = res.data 
+      console.log(data)
+
+      if(data.code == 0){
+        this.banner = data.data.cover
+        this.introduction = data.data.introduction
+        this.feature = data.data.feature
+        this.download = data.data.download
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
   },
   methods:{
     preView(){
@@ -351,16 +356,16 @@ export default {
       })
     },
     formatFeature(){
-      const list = this.download.list.map((item)=>{
+      const list = this.feature.list.map((item)=>{
         return{
           pic: item.picSrc,
           title: item.title,
           summary: item.summary
         }
-      }) 
+      })
       return {
-        title: this.download.title,
-        subTitle: this.download.subTitle,
+        title: this.feature.title,
+        subTitle: this.feature.subTitle,
         list: list
       }
     },
@@ -373,28 +378,31 @@ export default {
         }
       }) 
       return {
-        title: this.feature.title,
-        subTitle: this.feature.subTitle,
+        title: this.download.title,
+        subTitle: this.download.subTitle,
         list: list
       }
     },
     uploadSuccess(name, subName, index){
       const _this = this
       return (res,file)=>{
-          if(res.code == 10401){
-            alert('登录失效，请重新登录')
-            return this.$router.push({path:'/'})
-          }
-          if(res.code != 0){
-            return alert(res.msg)
-          }
-          if(typeof index == 'number'){
-            this[name][index][subName] = res.name
-            this[name][index][subName+'Src'] =  res.src
-          }else{
-            this[name][subName] = res.name
-            this[name][subName+'Src'] =  res.src
-          }
+        if(res.code == 10401){
+          alert('登录失效，请重新登录')
+          return this.$router.push({path:'/'})
+        }
+        if(res.code != 0){
+          return alert(res.msg)
+        }
+        if(name == 'banner'){
+          this.banner[subName] = res.name
+          this.banner[subName+'Src'] =  res.src
+        }else if(name == 'introduction'){
+          this.introduction[index][subName] = res.name
+          this.introduction[index][subName+'Src'] =  res.src
+        }else if(name == 'feature' || name == 'download'){
+          this.feature.list[index][subName] = res.name
+          this.feature.list[index][subName+'Src'] =  res.src
+        }
       }
     },
     submitForm(name){
@@ -432,6 +440,7 @@ export default {
         })
       }else if(name == 'feature'){
         const feature = this.formatFeature()
+        console.log(feature)
         if(!feature){
           return alert('产品特色 有数据为空')
         }

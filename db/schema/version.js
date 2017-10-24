@@ -10,7 +10,7 @@ const VersionSchema = new mongoose.Schema({
     "winoows": Object,
     "ios": Object,
     "mac": Object,
-    "adroid": Object,
+    "android": Object,
     "createTime": {
     	type:Number,
     	default: +(new Date())
@@ -49,6 +49,8 @@ const VersionSchema = new mongoose.Schema({
 	windows:{
 		time...
 		version...
+		title:...
+		size:...
 		detail:[
 			{
 				pic:..

@@ -46,12 +46,13 @@ http://host/admin/getMainPage
     "code": 0,
     "msg": "OK",
     "data": {
-    	"version":'V2.0.0',
         "cover": {
             "opacityLogo": "/img/T1SRKTBQAv1RCvBVdK.png",
             "logo": "/img/T1SRKTBQAv1RCvBVdK.png",
 			"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png",
-			"sPic": "/img/T1SRKTBQAv1RCvBVdK.png"
+			"smallPic": "/img/T1SRKTBQAv1RCvBVdK.png",
+			"blurBackgroundPic":"",
+			"blurSmallPic":""
         },
         "introduction": [
             {
