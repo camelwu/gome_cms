@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const ejs = require('ejs')
 const fs = require('fs')
+//const axios = require('axios')
 const app = express()
 const domain = 'https://local/'
 
@@ -12,15 +13,33 @@ app.use('/css', express.static('views/css'))
 app.use('/versionList', express.static('views/versionList'))
 app.use('/js', express.static('views/js'))
 app.use('/page', express.static('views/page'))
+app.use('/h5',express.static('views/h5'))
+
 const lobj = {
 	windows: 'windows',
 	mac: '苹果Mac',
 	and: '安卓',
 	ios: '苹果'
 }
-/*
-开始获取数据并，路由
-*/
+const ajax = axios.create({
+  baseURL: 'http://localhost',
+  timeout:1000*3,
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    'X-Requested-with':'XMLHttpRequest'
+
+  },
+  proxy:{
+    host:"127.0.0.1",
+    port:3005,
+    auth:{
+      username:'cdd',
+      password:'123456'
+    }
+  }
+})
+
+
 // 首页
 app.get("/", function(req, res) {
 	let home = {
@@ -87,7 +106,7 @@ app.get("/downloads", function(req, res) {
                 "system": "Android4.0及以上",
                 "time": "2017-10-10",
                 "url": 'http://.....',
-                "backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
+                "backgroundPic": "/img/download/windowsBanner.png"
             },
             "mac":{
                 "title": "Aeromind Mac版",
@@ -230,6 +249,11 @@ app.get("/versionList", function(req, res) {
                     "time": "2017-10-10",
                     "version": "V1.3.0"
                 },
+                {
+                    "title": "Aeromind1.3.0 for ios 我们正式更名为啦！",
+                    "time": "2017-10-10",
+                    "version": "V1.3.0"
+                }
             ]
         }
     }
@@ -238,6 +262,16 @@ app.get("/versionList", function(req, res) {
 })
 // 日志
 app.get("/updates/:ver", function(req, res) {
+    let ver = req.params.ver.toLowerCase()
+    let ary = ver.split('-')
+    // if(ary[0] in [windows,mac,ios,android]){
+    //     let v = ver.substring("-").test(v(/\d).(\d).(\d)/))
+    // }
+    /*
+ary[o] in [windows,mac,ios,android]
+1.1.1
+v(\d).(\d).(\d)
+    */
     if (true) {
         let result = {
             "code": 0,
@@ -253,13 +287,6 @@ app.get("/updates/:ver", function(req, res) {
                             "/img/download/WechatIMG9.png",
                             "/img/download/WechatIMG9.png"
                         ]
-                    },
-                    {
-                        "title": "Aeromind1.3.0 for Ws 我们正式更名为“Aeromind”啦！",
-                        "imgs": [
-                            "/img/a.png",
-                            "/img/b.png"
-                        ]
                     }
                 ]
             }
@@ -269,8 +296,30 @@ app.get("/updates/:ver", function(req, res) {
     } else {
         res.redirect('/')
     }
-
-    // res.render("index", {title : "", domain : domain})
+})
+//h5模板
+app.get("/html5", function(req, res) {
+    let result = {
+        "code": 0,
+        "msg": "OK",
+        "data": {
+            "version":'V2.0.0',
+            "title": 'Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！',
+            "time": "2017-10-10",
+            "detail": [
+                {
+                    "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
+                    "introduction":"大家期盼已久的文件传输功能终于上线！经产品汪们反复调研实践，将文件传输上限定为500M，并将文件格式扩展，现能支持更多",
+                    "imgs": [
+                        "/img/download/WechatIMG9.png",
+                        "/img/download/WechatIMG9.png"
+                    ]
+                }
+            ]
+         }
+    }
+    let number = result.data
+    res.render("page/h5", {title : "h5模板", domain : domain, number: number})
 })
 var server = app.listen(3000, function () {
   var host = server.address().address

@@ -64,7 +64,11 @@
             <%if (cover.feature.list.length>0) {var list = cover.feature.list,len=list.length %>
             <ul class="back-ul clearfix">
                 <% for(var i=0;i<len;i++){ %>
+                <%if (i==0 || i==4) {%>
                 <li class="back-li">
+                <% }else{ %>
+                <li class="back-li one">
+                <% }%>
                     <img src="./css/img/website/people.png" class="li-img">
                     <div class="li-text">
                         <p class="li-text-one"><%=list[i].title%></p>
@@ -84,7 +88,11 @@
         <div class="back-link clearfix">
             <%if (cover.download.list.length>0) {var list = cover.download.list,len=list.length %>
             <% for(var i=0;i<len;i++){ %>
+            <%if (i==0) {%>
             <div class="link-box" id="win-download">
+            <% }else{ %>
+            <div class="link-box link" id="win-download">
+            <% } %>
                 <div class="link-img-win">
                     <span class="win-logo-img index-download-normal-icon" style="background: url(/css<%=list[i].pic1%>) no-repeat;background-size: contain;"></span>
                     <span class="down-img index-download-hover-icon" style="background: url(/css<%=list[i].pic2%>) no-repeat;background-size: contain;"></span>
