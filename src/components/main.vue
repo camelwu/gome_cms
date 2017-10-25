@@ -119,10 +119,10 @@
         <el-form-item class="item" label="大简介">
           <el-input v-model="feature.subTitle"></el-input>
         </el-form-item>
-        <div v-for="(item, index) in feature.list">
+        <div v-for="(names, index) in feature.list">
           <span>第{{index + 1}}组</span>
           <el-form-item class="item" label="图片">
-            <el-input v-model="item.pic" disabled></el-input>
+            <el-input v-model="names.pic" disabled></el-input>
             <el-upload
             class="upload"
             name="pic"
@@ -133,10 +133,10 @@
           </el-upload>
           </el-form-item>
           <el-form-item class="item" label="标题" >
-            <el-input v-model="item.title"></el-input>
+            <el-input v-model="names.title"></el-input>
           </el-form-item>
           <el-form-item class="item" label="简介">
-            <el-input v-model="item.summary"></el-input>
+            <el-input v-model="names.summary"></el-input>
           </el-form-item>
         </div>
         <el-form-item>
@@ -209,16 +209,13 @@ export default {
         {
           pic:'',
           title:'',
-          picSrc:'',
           summary:''
         },{
           pic:'',
           title:'',
-          picSrc:'',
           summary:''
         },{
           pic:'',
-          picSrc:'',
           title:'',
           summary:''
         }
@@ -327,60 +324,40 @@ export default {
     },
     formatBanner(){
       if(
-          this.banner.opacityLogoSrc
-          && this.banner.logoSrc
-          && this.banner.backgroundPicSrc
-          && this.banner.blurBackgroundPicSrc
-          && this.banner.smallPicSrc
-          && this.banner.blurSmallPicSrc
+          this.banner.opacityLogo
+          && this.banner.logo
+          && this.banner.backgroundPic
+          && this.banner.blurBackgroundPic
+          && this.banner.smallPic
+          && this.banner.blurSmallPic
         ){
         return {
-          opacityLogo:this.banner.opacityLogoSrc,
-          logo:this.banner.logoSrc,
-          backgroundPic:this.banner.backgroundPicSrc,
-          blurBackgroundPic:this.banner.blurBackgroundPicSrc,
-          smallPic:this.banner.smallPicSrc,
-          blurSmallPic:this.banner.blurSmallPicSrc
+          opacityLogo:this.banner.opacityLogo,
+          logo:this.banner.logo,
+          backgroundPic:this.banner.backgroundPic,
+          blurBackgroundPic:this.banner.blurBackgroundPic,
+          smallPic:this.banner.smallPic,
+          blurSmallPic:this.banner.blurSmallPic
         }
       }else{
        return false 
       }
     },
     formatIntroduction(){
-      return this.introduction.map((item)=>{
-        return {
-          pic:item.picSrc,
-          title:item.title,
-          summary:item.summary
-        }
-      })
+      return this.introduction
     },
     formatFeature(){
-      const list = this.feature.list.map((item)=>{
-        return{
-          pic: item.picSrc,
-          title: item.title,
-          summary: item.summary
-        }
-      })
       return {
         title: this.feature.title,
         subTitle: this.feature.subTitle,
-        list: list
+        list: this.feature.list
       }
     },
     formatDownload(){
-      const list = this.feature.list.map((item)=>{
-        return{
-          pic: item.picSrc,
-          title: item.title,
-          summary: item.summary
-        }
-      }) 
       return {
         title: this.download.title,
         subTitle: this.download.subTitle,
-        list: list
+        list: this.download.list
       }
     },
     uploadSuccess(name, subName, index){
@@ -394,14 +371,14 @@ export default {
           return alert(res.msg)
         }
         if(name == 'banner'){
-          this.banner[subName] = res.name
-          this.banner[subName+'Src'] =  res.src
+          this.banner[subName] = res.src
         }else if(name == 'introduction'){
-          this.introduction[index][subName] = res.name
-          this.introduction[index][subName+'Src'] =  res.src
-        }else if(name == 'feature' || name == 'download'){
-          this.feature.list[index][subName] = res.name
-          this.feature.list[index][subName+'Src'] =  res.src
+          this.introduction[index][subName] = res.src
+        }else if(name == 'feature'){
+          this.feature.list[index][subName] = res.src
+          console.log(this.feature)
+        }else if(name == 'download'){
+          this.download.list[index][subName] = res.src
         }
       }
     },

@@ -7,7 +7,7 @@ const VersionSchema = new mongoose.Schema({
     "introduction": Array,
     "feature":Object,
     "downloadEnter": Object,
-    "winoows": Object,
+    "windows": Object,
     "ios": Object,
     "mac": Object,
     "android": Object,

@@ -40,10 +40,9 @@ const router = express.Router()
 
 //主页信息
 router.get('/getMainPage',(req, res)=>{
-	const title = req.query.title 
-	console.log(title)
+	const title = req.query.title
 	if( !title){
-		VersionModel.findOne({active:2}).then((version)=>{
+		VersionModel.findOne({active:10}).then((version)=>{
 			if(!version){
 				return res.send({
 				    "code": 0,
@@ -311,27 +310,74 @@ router.get('/getVersionList',(req, res)=>{
 
 //版本详情
 router.get('/getVersionDetail',(req, res)=>{
+	const title = req.query.title
 	const version = req.query.version
 	const platform = req.query.platform
+	if(!title){
+		VersionModel.findOne({active:10}).then((activeVersion)=>{
+			if(activeVersion){
+				const detail = activeVersion[platform].detail
 
-	res.send({
-	    "code": 0,
-	    "msg": "OK",
-	    "data": {
-	    	"version":'V2.0.0',
-	    	"title": 'Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！',
-	    	"time": "2017-10-10",
-	    	"detail": [
-				{
-	    			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-					"imgs": [
-						"/img/a.png",
-						"/img/b.png"
-					]
-		        }
-	    	]
-	    }
-	})
+				const resVersionArr = detail.map((item)=>{
+					if(item.version == version){
+						return item.list
+					}
+				})
+
+				res.send({code:0,msg:'ok',data:resVersionArr || ""})
+			}else{
+				res.send({
+				    "code": 0,
+				    "msg": "OK",
+				    "data": {
+				    	"version":'',
+				    	"title": '',
+				    	"time": "",
+				    	"platform":'',
+				    	"list": [
+							{
+				    			"title": "",
+								"imgs": []
+					        }
+				    	]
+				    }
+				})
+			}
+		}).catch((err)=>{
+			res.send({code:10500,msg:'system err'})
+		})
+	}else{
+		VersionModel.findOne({title:title}).then((activeVersion)=>{
+			if(activeVersion){
+				const detail = activeVersion[platform].detail
+				let resVersionArr = {}
+				detail.map((item)=>{
+					if(item.version == version){
+						resVersionArr = item
+					}
+					return item
+				})
+				if(resVersionArr.length){
+					res.send({code:10405,msg:'编辑的版本不存在'})
+				}else{
+					res.send({code:0,msg:'ok',data:resVersionArr.list || [{title:'',imgs:[]}]})
+				}
+			}else{
+				res.send({
+				    "code": 0,
+				    "msg": "OK",
+				    "data": [
+						{
+			    			"title": "",
+							"imgs": []
+				        }
+			    	]
+				})
+			}
+		}).catch((err)=>{
+			res.send({code:10500,msg:'system err'})
+		})
+	}
 })
 
 //## 入库接口
@@ -387,9 +433,9 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 			return res.send({code:"10500",msg:"system err"})
 		}
 		if(version){
-			return res.send({code:"10405",msg:"title 重复"})
+			return res.send({code:"10405",msg:"version 重复"})
 		}
-		VersionModel.findOne({active:2}).then((version)=>{
+		VersionModel.findOne({active:10}).then((version)=>{
 			if(version){
 				new VersionModel({
 					"title": title,
@@ -407,8 +453,6 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 						return res.send({code:"10500",msg:"system err"})
 					}
 					res.send({code:"0",msg:"ok",data:{title: title, active: 1}})
-				}).catch((err)=>{
-					res.send({code:"10500",msg:"system err"})
 				})
 			}else{
 				new VersionModel({
@@ -492,12 +536,10 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"url" : ""
 							},{
 								"pic1": "",
-								"pic2": "",
-								"url" : ""
+								"pic2": ""
 							},{
 								"pic1": "",
-								"pic2": "",
-								"url" : ""
+								"pic2": ""
 							}
 						]
 				    },
@@ -515,7 +557,12 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"title": "",
 								"time": "",
 								"version":"",
-								"list":[]
+								"list":[
+									{
+										"title":'',
+										"imgs":[]
+									}
+								]
 							}
 						]
 					},
@@ -532,7 +579,12 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"title": "",
 								"time": "",
 								"version":"",
-								"list":[]
+								"list":[
+									{
+										"title":'',
+										"imgs":[]
+									}
+								]
 							}
 						]
 					},
@@ -550,7 +602,12 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"title": "",
 								"time": "",
 								"version":"",
-								"list":[]
+								"list":[
+									{
+										"title":'',
+										"imgs":[]
+									}
+								]
 							}
 						]
 				    },
@@ -567,7 +624,12 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"title": "",
 								"time": "",
 								"version":"",
-								"list":[]
+								"list":[
+									{
+										"title":'',
+										"imgs":[]
+									}
+								]
 							}
 						]
 				    }
@@ -576,8 +638,6 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 						return res.send({code:"10500",msg:"system err"})
 					}
 					res.send({code:"0",msg:"ok",data:{title: title, active: 1}})
-				}).catch((err)=>{
-					res.send({code:"10500",msg:"system err"})
 				})
 			}
 		}).catch((err)=>{
@@ -625,6 +685,8 @@ router.post('/super/releaseVersion',aeromind, (req, res)=>{
 	}
 	VersionModel.findOne({active:3}).then((version)=>{
 		if(version){
+			return res.send({code:10403, msg:'已有一个版本提交，请通过审核后再试'})
+
 			if(version.title === title){
 				return res.send({code:10403, msg:'不能重复提交同一个版本'})
 			}
@@ -653,8 +715,8 @@ router.post('/super/releaseVersion',aeromind, (req, res)=>{
 				if(!version){
 					return res.send({code:10403, msg:'提交的版本不存在'})
 				}
-				if(version.active == 2 || version.active == 3){
-					return res.send({code:10403, msg:'不能重复提交同一个版本'})
+				if(version.active == 2){
+					return res.send({code:10403, msg:'此版本已上线'})
 				}
 				version.active = 3
 				version.save().then((version)=>{
@@ -697,7 +759,7 @@ router.post('/super/setMain',aeromind, (req, res)=>{
 		if(!version){
 			return res.send({code:10405, msg: 'version 不存在'})
 		}
-
+		version.active = 1
 		if(cover){
 			version.cover = cover
 		}
@@ -736,7 +798,7 @@ router.post('/super/setDownload',aeromind, (req, res)=>{
 		if(!version){
 			return res.send({code:10405, msg: 'version 不存在'})
 		}
-
+		version.active = 1
 		if(windows){
 			version.windows.title = windows.title
 			version.windows.summary = windows.summary
@@ -787,7 +849,7 @@ router.post('/super/setDownload',aeromind, (req, res)=>{
 	})
 })
 //列表标题录入
-router.post('/super/setDownload',aeromind, (req, res)=>{
+router.post('/super/setList',aeromind, (req, res)=>{
 	const title = req.body.title
 	const platform = req.body.platform
 	const subTitle = req.body.subTitle
@@ -802,6 +864,7 @@ router.post('/super/setDownload',aeromind, (req, res)=>{
 		if(!version){
 			return res.send({code:10405, msg: 'version 不存在'})
 		}
+		version.active = 1
 
 		if( platform && subTitle && version && time ){
 			version[platform].detail.unshift(version[platform].detail[0])
@@ -825,7 +888,7 @@ router.post('/super/setDownload',aeromind, (req, res)=>{
 	})
 })
 //详情录入
-router.post('/super/setDownload',aeromind, (req, res)=>{
+router.post('/super/setDetail',aeromind, (req, res)=>{
 	const title = req.body.title
 	const platform = req.body.platform
 	const version = req.body.version
@@ -840,24 +903,30 @@ router.post('/super/setDownload',aeromind, (req, res)=>{
 			return res.send({code:10405, msg: 'version 不存在'})
 		}
 
+		version.active = 1
+		let hasVersion = false
 		if( platform && version){
 			version[platform].detail = version[platform].detail.map((item)=>{
 				if(item.version == version){
 					item.list = list
+					console.log("hasVersion",hasVersion)
+					hasVersion = true
 				}
 				return item
 			})
-
 		}else{
 			return res.send({code:10405, msg: '参数不正确'})
 		}
 		
-		version.save().then((version)=>{
-			res.send({code:0, msg:"ok"})
-		}).catch((err)=>{
-			res.send({code:"10500", msg:"system err"})
-		})
-
+		if(hasVersion){
+			version.save().then((version)=>{
+				res.send({code:0, msg:"ok"})
+			}).catch((err)=>{
+				res.send({code:"10500", msg:"system err"})
+			})
+		}else{
+			res.send({code:"10405", msg:"没有此版本"})
+		}
 	}).catch((err)=>{
 		res.send({code:"10500", msg:"system err"})
 	})
@@ -893,7 +962,46 @@ router.post('/super/v-releaseVersion',superman, (req, res)=>{
 		if(version.active == 3){
 			version.active = 2
 			version.save().then((version)=>{
-				res.send({code: 0, msg:"此版本上线成功"})
+				VersionModel.findOne({active:10}).then((activeVersion)=>{
+					if(!activeVersion){
+						new VersionModel({
+							"title": '_online',
+							"active": 10,
+						    "cover": version.cover,
+						    "introduction": version.introduction,
+						    "feature":version.feature,
+						    "downloadEnter": version.downloadEnter,
+						    "windows": version.windows,
+						    "ios": version.ios,
+						    "mac": version.mac,
+						    "android": version.android,
+						    "onlineTime": +(new Date())
+						}).save((err, version)=>{
+							if(err){
+								return res.send({code:"10500",msg:"system err"})
+							}
+							res.send({code: 0, msg:"此版本上线成功"})
+						})
+					}else{
+						activeVersion.title = "_online"
+						activeVersion.active = 10
+						activeVersion.cover = version.cover
+						activeVersion.introduction = version.introduction
+						activeVersion.feature =version.feature
+						activeVersion.downloadEnter = version.downloadEnter
+						activeVersion.windows = version.windows
+						activeVersion.ios = version.ios
+						activeVersion.mac = version.mac
+						activeVersion.android = version.android
+						activeVersion.onlineTime = +(new Date())
+
+						activeVersion.save().then((version)=>{
+							res.send({code: 0, msg:"此版本上线成功"})
+						}).catch((err)=>{
+							res.send({code:"10500", msg:"system err"})
+						})
+					}
+				})
 			}).catch((err)=>{
 				res.send({code:"10500", msg:"system err"})
 			})
