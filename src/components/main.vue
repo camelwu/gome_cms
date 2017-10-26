@@ -485,10 +485,16 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$router.push({path:'/download/'+this.version})
+          this.$router.push({ name: 'download', params: {
+              title: this.$route.params.title
+            }
+          })
         }).catch(() => {})
       }else{
-        this.$router.push({path:'/download/'+this.version})
+        this.$router.push({ name: 'download', params: {
+            title: this.$route.params.title
+          }
+        })
       }
     }
   }

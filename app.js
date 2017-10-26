@@ -149,27 +149,33 @@ router.get('/getMain',(req, res)=>{
 
 //下载banner部分
 router.get('/getDownload',(req, res)=>{
+	let title = req.query.version
+	VersionModel.findOne({title:title}).then((version)=>{
+		console.log(version)
+	}).catch((err)=>{
+		//res.send({code:"10500", msg:"system err"})
+	})
 	const platform = req.query.platform
 	const platformData = []
 	const Windows = {
 	 	"platform": "Windows",
-    	"title": "Aeromind Android版",
+    	"title": "Aeromind Windows版",
         "summary": "便捷、高效、迅速",
         "size": "30.2 M",
         "version": "V2.0.0",
-        "system": "Android4.0及以上",
+        "system": "Windows4.0及以上",
 		"time": "2017-10-10",
 		"url": 'http://.....',
 		"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
     }
     const Mac = {
 	 	"platform": "Mac",
-    	"title": "Aeromind Android版",
+    	"title": "Aeromind Mac版",
         "summary": "便捷、高效、迅速",
         "size": "30.2 M",
         "version": "V2.0.0",
-        "system": "Android4.0及以上",
-		"time": "2017-10-10",
+        "system": "Mac4.0及以上",
+		"time": "2017-10-20",
 		"url": 'http://.....',
 		"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
     }
@@ -180,17 +186,17 @@ router.get('/getDownload',(req, res)=>{
         "size": "30.2 M",
         "version": "V2.0.0",
         "system": "Android4.0及以上",
-		"time": "2017-10-10",
+		"time": "2017-10-30",
 		"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
     }
     const iOS = {
 	 	"platform": "iOS",
-    	"title": "Aeromind Android版",
+    	"title": "Aeromind iOS版",
         "summary": "便捷、高效、迅速",
         "size": "30.2 M",
         "version": "V2.0.0",
-        "system": "Android4.0及以上",
-		"time": "2017-10-10",
+        "system": "iOS4.0及以上",
+		"time": "2017-11-10",
 		"backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
     }
 	if(platform == "Windows"){
@@ -367,7 +373,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 				    "winoows": version.windows,
 				    "ios": version.ios,
 				    "mac": version.mac,
-				    "adroid": version.adroid
+				    "android": version.android
 				}).save((err, version)=>{
 					if(err){
 						return res.send({code:"10500",msg:"system err"})
@@ -495,7 +501,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 						"backgroundPic": "",
 						"detail":[]
 				    },
-				    "adroid": {
+				    "android": {
 				    	"title": "",
 			            "summary": "",
 			            "size": "",
@@ -695,16 +701,20 @@ router.post('/super/v-releaseVersion',superman, (req, res)=>{
 	})
 })
 
-/*router.get('/super/signup',(req, res)=>{
+router.get('/super/signup',(req, res)=>{
 	new UserModel({
-		username: "aeromind-admin",
+		username: "test",
 		password: "123.gome",
-		isSuper: falses
+		isSuper: false
 	}).save(()=>{
 		res.send({code:0,msg:"ok"})
 	})
-})*/
+})
 //router.use	
 /**/
+router.post('/super/releaseDownload', aeromind, (req, res) => {
+	console.log(req.body)
+	res.send({code: 200, msg:"ok"})
+})
 
 app.use('/admin', router)

@@ -4,11 +4,11 @@ import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/home'
 import VHome from '@/components/v-home'
 import Main from '@/components/main'
+import Download from '@/components/download'
 
 Vue.use(Router)
 
 export default new Router({
-	mode:'history',
 	routes: [
 		{
 		  path: '/',
@@ -24,6 +24,10 @@ export default new Router({
 		},{
 			path: "/editor/main/:title",
 			component: Main
+		},{
+			path: "/download/:title",
+			name: 'download',
+			component: Download
 		}
 	]
 })
