@@ -6,7 +6,6 @@
         <div class="bottom clearfix" :class="[item.active == 0 ? colors: '']">
           <el-button type="text" class="button" @click="editorV(item.title)">编辑</el-button>
           <el-button type="text" class="button" v-if="item.active !== 2" @click="toOnline(item.title)">发布</el-button>
-          <el-button type="text" class="button" @click="deleteVersion(item.title)">删除</el-button>
         </div>
       </div>
     </el-card>
@@ -95,7 +94,8 @@ export default {
       })
     },
     editorV(title){
-      this.$router.push({path:'/editor/main/'+title})
+      //this.$router.push({path:'/editor/main/'+title})
+      this.$router.push({path:'/editor/detail/'+title+'/windows/V1.2.0'})
     }
   }
 }

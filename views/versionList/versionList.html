@@ -20,11 +20,19 @@
             <%if (vers.ios.length>0) { var list = vers.ios,len = list.length %>
             <ul class="ver-ul selected clearfix" id="Ios">
                 <% for(var i=0;i<len;i++) { %>
+                <%if (i==len-1) {%>
+                <li class="ver-li last-li">
+                <% }else{ %>
                 <li class="ver-li">
-                    <a href="/updates/ios-<%=list[i].version%>.html" class="ver-li-a">
+                <% } %>
+                    <a href="/updates/ios-<%=list[i].version%>" class="ver-li-a">
                         <%=list[i].title%>
                         <span></span>
+                        <%if (i==0){%>
                         <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
                     </a>
                     <p>发布日期：<%=list[i].time%></p>
                 </li>
@@ -38,11 +46,19 @@
             <%if (vers.android.length>0) { var list = vers.android,len = list.length %>
             <ul class="ver-ul  clearfix" id="Android">
                <% for(var i=0;i<len;i++) { %>
+                <%if (i==len-1) {%>
+                <li class="ver-li last-li">
+                <% }else{ %>
                 <li class="ver-li">
+                <% } %>
                     <a href="/updates/android-<%=list[i].version%>.html" class="ver-li-a">
                         <%=list[i].title%>
                         <span></span>
+                        <%if (i==0){%>
                         <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
                     </a>
                     <p>发布日期：<%=list[i].time%></p>
                 </li>
@@ -56,11 +72,19 @@
             <%if (vers.android.length>0) { var list = vers.android,len = list.length %>
             <ul class="ver-ul  clearfix" id="Mac">
                 <% for(var i=0;i<len;i++) { %>
+                <%if (i==len-1) {%>
+                <li class="ver-li last-li">
+                <% }else{ %>
                 <li class="ver-li">
+                <% } %>
                     <a href="/updates/mac-<%=list[i].version%>.html" class="ver-li-a">
                         <%=list[i].title%>
                         <span></span>
+                        <%if (i==0){%>
                         <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
                     </a>
                     <p>发布日期：<%=list[i].time%></p>
                 </li>
@@ -74,11 +98,19 @@
             <%if (vers.windows.length>0) { var list = vers.windows,len = list.length %>
             <ul class="ver-ul  clearfix" id="Windows">
                <% for(var i=0;i<len;i++) { %>
+               <%if (i==len-1) {%>
+                <li class="ver-li last-li">
+                <% }else{ %>
                 <li class="ver-li">
+                <% } %>
                     <a href="/updates/windows-<%=list[i].version%>.html" class="ver-li-a">
                         <%=list[i].title%>
                         <span></span>
+                       <%if (i==0){%>
                         <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
                     </a>
                     <p>发布日期：<%=list[i].time%></p>
                 </li>

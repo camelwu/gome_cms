@@ -14,7 +14,7 @@
       <h1>banner</h1>
       <el-form label-width="140px" class="button-line">
         <el-form-item class="item" label="白色底logo">
-          <el-input v-model="banner.logo" disabled></el-input>
+         <el-input v-model="banner.logo" disabled></el-input>
           <el-upload
             class="upload"
             name="pic"
@@ -85,7 +85,7 @@
         </el-form-item>
       </el-form>
       <h1>introduction</h1>
-      <el-form label-width="140px" class="button-line">
+      <el-form label-width="140px" class="button-line" >
         <div v-for="(item, index) in introduction">
           <span>第{{index + 1}}组</span>
           <el-form-item class="item" label="图片">
@@ -119,10 +119,10 @@
         <el-form-item class="item" label="大简介">
           <el-input v-model="feature.subTitle"></el-input>
         </el-form-item>
-        <div v-for="(item, index) in feature.list">
+        <div v-for="(names, index) in feature.list">
           <span>第{{index + 1}}组</span>
           <el-form-item class="item" label="图片">
-            <el-input v-model="item.pic" disabled></el-input>
+            <el-input v-model="names.pic" disabled></el-input>
             <el-upload
             class="upload"
             name="pic"
@@ -133,14 +133,14 @@
           </el-upload>
           </el-form-item>
           <el-form-item class="item" label="标题" >
-            <el-input v-model="item.title"></el-input>
+            <el-input v-model="names.title"></el-input>
           </el-form-item>
           <el-form-item class="item" label="简介">
-            <el-input v-model="item.summary"></el-input>
+            <el-input v-model="names.summary"></el-input>
           </el-form-item>
         </div>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('introduction')">保存</el-button>
+          <el-button type="primary" @click="submitForm('feature')">保存</el-button>
           <el-button type="primary" @click="preView">预览</el-button>
         </el-form-item>
       </el-form>
@@ -181,7 +181,7 @@
           </el-form-item>
         </div>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('introduction')">保存</el-button>
+          <el-button type="primary" @click="submitForm('download')">保存</el-button>
           <el-button type="primary" @click="preView">预览</el-button>
         </el-form-item>
       </el-form>
@@ -199,32 +199,23 @@ export default {
       version:'',
       banner:{
         logo:"",
-        logoSrc: "",
         opacityLogo:"",
-        opacityLogoSrc:"",
         backgroundPic:"",
-        backgroundPicSrc:"",
         blurBackgroundPic:"",
-        blurBackgroundPicSrc:"",
         smallPic:"",
-        smallPicSrc:"",
-        blurSmallPic:"",
-        blurSmallPicSrc:""
+        blurSmallPic:""
       },
       introduction:[
         {
           pic:'',
           title:'',
-          picSrc:'',
           summary:''
         },{
           pic:'',
           title:'',
-          picSrc:'',
           summary:''
         },{
           pic:'',
-          picSrc:'',
           title:'',
           summary:''
         }
@@ -312,9 +303,20 @@ export default {
     }
   },
   created(){
-    console.log(this.$route.params.title)
     this.version = this.$route.params.title
-    //axios.get('')
+    axios.get('/admin/getMainPage',{params:{title:this.version}}).then((res)=>{
+      const data = res.data 
+      console.log(data)
+
+      if(data.code == 0){
+        this.banner = data.data.cover
+        this.introduction = data.data.introduction
+        this.feature = data.data.feature
+        this.download = data.data.download
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
   },
   methods:{
     preView(){
@@ -322,79 +324,62 @@ export default {
     },
     formatBanner(){
       if(
-          this.banner.opacityLogoSrc
-          && this.banner.logoSrc
-          && this.banner.backgroundPicSrc
-          && this.banner.blurBackgroundPicSrc
-          && this.banner.smallPicSrc
-          && this.banner.blurSmallPicSrc
+          this.banner.opacityLogo
+          && this.banner.logo
+          && this.banner.backgroundPic
+          && this.banner.blurBackgroundPic
+          && this.banner.smallPic
+          && this.banner.blurSmallPic
         ){
         return {
-          opacityLogo:this.banner.opacityLogoSrc,
-          logo:this.banner.logoSrc,
-          backgroundPic:this.banner.backgroundPicSrc,
-          blurBackgroundPic:this.banner.blurBackgroundPicSrc,
-          smallPic:this.banner.smallPicSrc,
-          blurSmallPic:this.banner.blurSmallPicSrc
+          opacityLogo:this.banner.opacityLogo,
+          logo:this.banner.logo,
+          backgroundPic:this.banner.backgroundPic,
+          blurBackgroundPic:this.banner.blurBackgroundPic,
+          smallPic:this.banner.smallPic,
+          blurSmallPic:this.banner.blurSmallPic
         }
       }else{
        return false 
       }
     },
     formatIntroduction(){
-      return this.introduction.map((item)=>{
-        return {
-          pic:item.picSrc,
-          title:item.title,
-          summary:item.summary
-        }
-      })
+      return this.introduction
     },
     formatFeature(){
-      const list = this.download.list.map((item)=>{
-        return{
-          pic: item.picSrc,
-          title: item.title,
-          summary: item.summary
-        }
-      }) 
-      return {
-        title: this.download.title,
-        subTitle: this.download.subTitle,
-        list: list
-      }
-    },
-    formatDownload(){
-      const list = this.feature.list.map((item)=>{
-        return{
-          pic: item.picSrc,
-          title: item.title,
-          summary: item.summary
-        }
-      }) 
       return {
         title: this.feature.title,
         subTitle: this.feature.subTitle,
-        list: list
+        list: this.feature.list
+      }
+    },
+    formatDownload(){
+      return {
+        title: this.download.title,
+        subTitle: this.download.subTitle,
+        list: this.download.list
       }
     },
     uploadSuccess(name, subName, index){
       const _this = this
       return (res,file)=>{
-          if(res.code == 10401){
-            alert('登录失效，请重新登录')
-            return this.$router.push({path:'/'})
-          }
-          if(res.code != 0){
-            return alert(res.msg)
-          }
-          if(typeof index == 'number'){
-            this[name][index][subName] = res.name
-            this[name][index][subName+'Src'] =  res.src
-          }else{
-            this[name][subName] = res.name
-            this[name][subName+'Src'] =  res.src
-          }
+        if(res.code == 10401){
+          alert('登录失效，请重新登录')
+          return this.$router.push({path:'/'})
+        }
+        if(res.code != 0){
+          return alert(res.msg)
+        }
+        if(name == 'banner'){
+          this.banner[subName] = res.src
+        }else if(name == 'introduction'){
+          this.introduction[index][subName] = res.src
+        }else if(name == 'feature'){
+          this.feature.list[index][subName] = res.src
+          console.log(this.feature)
+        }else if(name == 'download'){
+          this.download.list[index][subName] = res.src
+        }
       }
     },
     submitForm(name){
@@ -432,6 +417,7 @@ export default {
         })
       }else if(name == 'feature'){
         const feature = this.formatFeature()
+        console.log(feature)
         if(!feature){
           return alert('产品特色 有数据为空')
         }

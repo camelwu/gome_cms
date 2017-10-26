@@ -5,6 +5,7 @@ import Home from '@/components/home'
 import VHome from '@/components/v-home'
 import Main from '@/components/main'
 import Download from '@/components/download'
+import Detail from '@/components/detail'
 
 Vue.use(Router)
 
@@ -28,6 +29,9 @@ export default new Router({
 			path: "/download/:title",
 			name: 'download',
 			component: Download
+		},{
+			path: "/editor/detail/:title/:platform/:version",
+			component: Detail
 		}
 	]
 })

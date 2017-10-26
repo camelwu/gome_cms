@@ -19,14 +19,14 @@
     <span class="ios-btn">iOS</span>
 </div>
 <div class="content-box" id="contentBox">
-    <div class="windows-content show" style="background: url(/css/img/download/windowsBanner.png) no-repeat center top;">
+    <%if (banner.windows) { var info = banner.windows; %>
+    <div class="windows-content show" style="background: url(/css<%=info.backgroundPic%>) no-repeat center top;">
         <div class="download">
-            <%if (banner.windows) { var info = banner.windows; %>
                 <p class="title"><%=info.title%></p>
                 <p class="slogan"><%=info.summary%></p>
                 <p class="size-version"><span class="size">大小：<%=info.size%></span><span class="version">版本：V1.3.0</span></p>
                 <p class="system-time"><span class="system">适应系统：Win7及以上</span><span class="time">发布日期：2017-10-10</span></p>
-                <a href="https://download.meixincdn.com/mxoffice/gomeplus/pc/windows/Aeromind_1_3_0.exe" class="download-btn"><span>Windows版</span></a>
+                <a href="<%=info.url%>" class="download-btn"><span>Windows版</span></a>
                 <% }else{ %>
                 <p class="title">请添加Windows数据！</p>
             <% } %>
@@ -37,21 +37,27 @@
             <ul>
                 <% for(var i=0;i<len;i++) { %>
                 <li><a href="/updates/windows-<%=list[i].version%>"><%=list[i].title%>
-                    <span class="new">New</span><span class="time"><%=list[i].time%></span></a></li>
+                        <%if (i==0){%>
+                        <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    <span class="time"><%=list[i].time%></span></a>
+                </li>
                 <% } %>
             </ul>
             <a class="more" href="/versionList#Windows">查看更多>></a>
             <% } %>
         </div>
     </div>
-    <div class="mac-content hide">
+    <%if (banner.mac) { var info = banner.mac; %>
+    <div class="mac-content hide" style="background: url(/css<%=info.backgroundPic%>) no-repeat center top;">
        <div class="download">
-            <%if (banner.mac) { var info = banner.mac; %>
                 <p class="title"><%=info.title%></p>
                 <p class="slogan"><%=info.summary%></p>
                 <p class="size-version"><span class="size">大小：<%=info.size%></span><span class="version">版本：V1.3.0</span></p>
                 <p class="system-time"><span class="system">适应系统：Win7及以上</span><span class="time">发布日期：2017-10-10</span></p>
-                <a href="https://download.meixincdn.com/mxoffice/gomeplus/pc/windows/Aeromind_1_3_0.exe" class="download-btn"><span>Windows版</span></a>
+                <a  href="<%=info.url%>" class="download-btn"><span>Mac版</span></a>
                 <% }else{ %>
                 <p class="title">请添加Windows数据！</p>
             <% } %>
@@ -61,22 +67,28 @@
             <%if (ver.mac.length>0) { var list = ver.mac,len = list.length>9?9:list.length; %>
             <ul>
                 <% for(var i=0;i<len;i++) { %>
-                <li><a href="/updates/windows-<%=list[i].version%>"><%=list[i].title%>
-                    <span class="new">New</span><span class="time"><%=list[i].time%></span></a></li>
+                <li><a href="/updates/mac-<%=list[i].version%>"><%=list[i].title%>
+                    <%if (i==0){%>
+                    <span class="new">New</span>
+                    <% }else{ %>
+                    <span></span>
+                    <% } %>
+                    <span class="time"><%=list[i].time%></span></a>
+                </li>
                 <% } %>
             </ul>
             <a class="more" href="/versionList#Mac">查看更多>></a>
             <% } %>
         </div>
     </div>
-    <div class="android-content hide">
+    <%if (banner.android) { var info = banner.android; %>
+    <div class="android-content hide" style="background: url(/css<%=info.backgroundPic%>) no-repeat center top;">
        <div class="download">
-            <%if (banner.android) { var info = banner.android; %>
                 <p class="title"><%=info.title%></p>
                 <p class="slogan"><%=info.summary%></p>
                 <p class="size-version"><span class="size">大小：<%=info.size%></span><span class="version">版本：V1.3.0</span></p>
                 <p class="system-time"><span class="system">适应系统：Win7及以上</span><span class="time">发布日期：2017-10-10</span></p>
-                <a href="https://download.meixincdn.com/mxoffice/gomeplus/pc/windows/Aeromind_1_3_0.exe" class="download-btn"><span>Windows版</span></a>
+                <a  href="<%=info.url%>" class="download-btn"><span>Android版</span></a>
                 <% }else{ %>
                 <p class="title">请添加Windows数据！</p>
             <% } %>
@@ -87,21 +99,27 @@
             <ul>
                 <% for(var i=0;i<len;i++) { %>
                 <li><a href="/updates/android-<%=list[i].version%>"><%=list[i].title%>
-                    <span class="new">New</span><span class="time"><%=list[i].time%></span></a></li>
+                   <%if (i==0){%>
+                    <span class="new">New</span>
+                    <% }else{ %>
+                    <span></span>
+                    <% } %>
+                    <span class="time"><%=list[i].time%></span></a>
+                </li>
                 <% } %>
             </ul>
             <a class="more" href="/versionList#Android">查看更多>></a>
             <% } %>
         </div>
     </div>
-    <div class="ios-content hide">
+    <%if (banner.ios) { var info = banner.ios; %>
+    <div class="ios-content hide" style="background: url(/css<%=info.backgroundPic%>) no-repeat center top;">
         <div class="download">
-            <%if (banner.ios) { var info = banner.ios; %>
                 <p class="title"><%=info.title%></p>
                 <p class="slogan"><%=info.summary%></p>
                 <p class="size-version"><span class="size">大小：<%=info.size%></span><span class="version">版本：V1.3.0</span></p>
                 <p class="system-time"><span class="system">适应系统：Win7及以上</span><span class="time">发布日期：2017-10-10</span></p>
-                <a href="https://download.meixincdn.com/mxoffice/gomeplus/pc/windows/Aeromind_1_3_0.exe" class="download-btn"><span>Windows版</span></a>
+                <a  href="<%=info.url%>" class="download-btn"><span>Ios版</span></a>
                 <% }else{ %>
                 <p class="title">请添加Windows数据！</p>
             <% } %>
@@ -112,7 +130,13 @@
             <ul>
                 <% for(var i=0;i<len;i++) { %>
                 <li><a href="/updates/ios-<%=list[i].version%>"><%=list[i].title%>
-                    <span class="new">New</span><span class="time"><%=list[i].time%></span></a></li>
+                    <%if (i==0){%>
+                    <span class="new">New</span>
+                    <% }else{ %>
+                    <span></span>
+                    <% } %>
+                    <span class="time"><%=list[i].time%></span></a>
+                </li>
                 <% } %>
             </ul>
             <a class="more" href="/versionList#Ios">查看更多>></a>
