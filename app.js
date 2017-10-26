@@ -182,12 +182,32 @@ router.get('/getMainPage',(req, res)=>{
 
 //下载banner部分
 router.get('/getDownload',(req, res)=>{
-	let title = req.query.version
-	VersionModel.findOne({title:title}).then((version)=>{
+	let title = req.query.title
+	if(!title) {
+		return res.send({ code: "10405", msg: "params[version] is not exist" })
+	}
+	let platform = req.query.platform
+	VersionModel.findOne({ title: title }).then((version) => {
 		console.log(version)
+		if(!version) {
+			return res.send({ code: "10405", msg: "version is not exist" })
+		}
+		if(platform) {
+			let data = version[platform]
+			delete data.detail
+			return res.send({ code: "200", msg: "ok", "data": data})
+		}
+		let plats = ['windows', 'mac', 'ios', 'android']
+		let result = {}
+		plats.map((plat) => {
+			result[plat] = version[plat]
+			//delete result[plat].detail
+		})
+		return res.send({ code: "200", msg: "ok", "data": result})
 	}).catch((err)=>{
-		//res.send({code:"10500", msg:"system err"})
+		res.send({ code: "10500", msg: "system err" })
 	})
+	/*
 	const platform = req.query.platform
 	const platformData = []
 	const Windows = {
@@ -262,6 +282,7 @@ router.get('/getDownload',(req, res)=>{
 	    	"platform": platformData
 	    }
 	})
+	*/
 })
 
 //版本列表
@@ -1022,15 +1043,29 @@ router.get('/super/signup',(req, res)=>{
 		username: "test",
 		password: "123.gome",
 		isSuper: false
-	}).save(()=>{
-		res.send({code:0,msg:"ok"})
+	}).save(() => {
+		res.send({ code: 0, msg: "ok" })
 	})
 })
 //router.use	
 /**/
 router.post('/super/releaseDownload', aeromind, (req, res) => {
-	console.log(req.body)
-	res.send({code: 200, msg:"ok"})
+	const plat  = req.body.plat
+	const title = req.body.title
+	VersionModel.findOne({ title: title }).then((version) => {
+		if (!version) {
+			return res.send({ code: "10403", msg: "要上线的项目不存在" })
+		}
+		version.active = 2
+		version[plat] = req.body.data
+		version.save().then((version) => {
+			res.send({ code: 200, msg: "ok", data: version[plat] })
+		}).catch((err) => {
+			res.send({ code: "10500", msg: "system err" })
+		})
+	}).catch((err)=>{
+		res.send({ code: "10500", msg: "system err" })
+	})
 })
 
 app.use('/admin', router)

@@ -94,8 +94,8 @@ export default {
       })
     },
     editorV(title){
-      //this.$router.push({path:'/editor/main/'+title})
-      this.$router.push({path:'/editor/detail/'+title+'/windows/V1.2.0'})
+      this.$router.push({path:'/editor/main/'+title})
+      //this.$router.push({path:'/editor/detail/'+title+'/windows/V1.2.0'})
     }
   }
 }

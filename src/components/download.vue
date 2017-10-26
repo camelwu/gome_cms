@@ -2,11 +2,11 @@
    <div class="form-box">
       <el-tabs v-model="activeName" @tab-click="handleClick">
          <template v-if="platObj">
-            <el-tab-pane :key="index" v-for="(item, index) in platObj.platform" :label="item.platform" :name="item.platform">{{ item.platform }}</el-tab-pane>
+            <el-tab-pane :key="index" v-for="(item, index) in platObj" :label="index" :name="index">{{ index }}</el-tab-pane>
          </template>
       </el-tabs>
       <template v-if="platObj">
-         <el-form :key="index" v-show="activeName===item.platform" label-width="140px" class="button-line" v-for="(item, index) in platObj.platform">
+         <el-form :key="index" v-show="activeName===index" label-width="140px" class="button-line" v-for="(item, index) in platObj">
             <el-form-item class="item" label="下载标题" >
                <el-input v-model="item.title"></el-input>
             </el-form-item>
@@ -39,12 +39,31 @@
                   name="pic"
                   action="/admin/super/uploadImg"
                   :show-file-list="false"
-                  :on-success="uploadSuccess('banner','logo')">
+                  :on-success="uploadSuccess">
                   <el-button type="primary" icon="edit"></el-button>
                </el-upload>
             </el-form-item>
+
+            <h2>更新日志</h2>
+            <el-form-item class="item" label="日志标题">
+               <el-input v-model="hehe"></el-input>
+               <el-button type="primary" icon="minus" style="margin-left:20px;" @click="addLog"></el-button>
+               <el-button type="primary" icon="plus" style="margin-left:20px;" @click="removeLog"></el-button>
+            </el-form-item>
+            <el-form-item class="item" label="版本号">
+               <el-input v-model="hehe"></el-input>
+            </el-form-item>
+            <el-form-item class="item" label="日志日期">
+               <el-date-picker
+                  v-model="hehe"
+                  type="date"
+                  placeholder="选择日期">
+               </el-date-picker>
+            </el-form-item>
+
             <el-form-item>
                <el-button type="primary" @click="submitForm">保存</el-button>
+               <!-- <el-link>预览</el-link> -->
             </el-form-item>
          </el-form>
       </template>
@@ -56,36 +75,41 @@
 	export default {
     data () {
       return {
+         'hehe': '',
          'platObj': null,
          'activeName': ''
       }
     },
     async created () {
-      console.log(this.$route)
-      let version = 'v1.3.0'//this.$route.params.version
-      let { data } = await axios.get('/admin/getDownload', { params: { 'version': version } })
+      let title = this.$route.params.title
+      let { data } = await axios.get('/admin/getDownload', { params: { 'title': title } })
       this.platObj = data.data
-      this.activeName = this.platObj.platform[0].platform
+      this.activeName = Object.keys(this.platObj)[0]
     },
     methods: {
-      uploadSuccess () {
+      addLog () {
 
       },
+      removeLog () {
+
+      },
+      uploadSuccess (res) {
+         this.platObj[this.activeName].backgroundPic = res.src
+      },
       handleClick (tab, event) {
-         console.log(this.activeName)
+         //console.log(this.activeName)
       },
       async submitForm () {
-         let plat = null
-         this.platObj.platform.forEach((item) => {
-            if(item.platform === this.activeName)
-               return plat = item
-         })
+         let obj = this.platObj[this.activeName]
+         obj.time = new Date(obj.time).getTime()
          let { data } = await axios.post('/admin/super/releaseDownload', {
-            plat: plat
+            title: this.$route.params.title,
+            plat: this.activeName,
+            data: obj
          })
-         if(data.code == 0){
+         if(data.code === 200) {
             alert('保存成功')
-         }else{
+         } else {
             alert(data.msg)
          }
       }
