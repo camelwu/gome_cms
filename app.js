@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
+const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const session = require("express-session")
@@ -34,6 +35,16 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.json({limit:5000000}))
 app.use(bodyParser.urlencoded({ extended: true ,limit:5000000}))
+
+app.engine('html', ejs.renderFile)
+app.set('views', path.join(__dirname, './views'))
+app.set('view engine', 'html')
+
+app.use('/css', express.static('views/css'))
+app.use('/versionList', express.static('views/versionList'))
+app.use('/js', express.static('views/js'))
+app.use('/page', express.static('views/page'))
+app.use('/h5',express.static('views/h5'))
 
 //路由
 const router = express.Router()
@@ -1069,3 +1080,90 @@ router.post('/super/releaseDownload', aeromind, (req, res) => {
 })
 
 app.use('/admin', router)
+
+//预览
+const domain = 'https://work.gomeplus.com'
+app.get("/", function(req, res){
+	const title = req.query.version
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({msg:'版本不存在'})
+		}
+		res.render("index",{title:'首页',domain: domain,cover:{
+			cover: version.cover,
+			introduction: version.introduction,
+			feature: version.feature,
+			download:version.downloadEnter
+		}})
+	}).catch((err)=>{
+		res.send({code:10500, msg:'system err'})
+	})
+})
+// 下载
+app.get("/downloads", (req, res)=>{
+	const title = req.query.version
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({msg:'版本不存在'})
+		}
+		res.render("page/main", {title : "下载", domain : domain, banner:{
+			windows: version.windows,
+			ios: version.iso,
+			android: version.android,
+			mac: version.mac
+		}, ver: {
+			windows: version.windows.detail,
+			ios: version.iso.detail,
+			android: version.android.detail,
+			mac: version.mac.detail
+		}})
+	}).catch((err)=>{
+		res.send({code:10500, msg:'system err'})
+	})
+})
+// 关于我们
+app.get("/aboutus", function(req, res) {
+    res.render("page/about", {title : "公司介绍", domain : domain, para: '0'})
+})
+// 联系我们
+app.get("/contractus", function(req, res) {
+    res.render("page/about", {title : "联系我们", domain : domain, para: '1'})
+})
+// 常见问题
+app.get("/faq", function(req, res) {
+    res.render("page/more", {title : "常见问题", domain : domain, para: '0'})
+})
+// 服务协议
+app.get("/terms", function(req, res) {
+    res.render("page/more", {title : "服务协议", domain : domain, para: '1'})
+})
+// 隐私政策
+app.get("/pravites", function(req, res) {
+    res.render("page/more", {title : "隐私政策", domain : domain, para: '2'})
+})
+// 列表
+app.get("/versionList", function(req, res) {
+	const title = req.query.version
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({msg:'版本不存在'})
+		}
+		res.render("versionList/versionList", {title : "Version update list", domain:domain, vers: {
+			windows: version.windows.detail,
+			ios: version.iso.detail,
+			android: version.android.detail,
+			mac: version.mac.detail
+		}})
+	}).catch((err)=>{
+		res.send({code:10500, msg:'system err'})
+	})
+})
+// 日志
+app.get("/updates/:ver", function(req, res) {
+	const ver = req.params.ver
+    const platform = ver.split('-')[0]
+    const version = ver.split('-')[1]
+	const title = req.query.version 
+})
+//h5模板
+app.get("/html5", function(req, res) {})

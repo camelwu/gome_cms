@@ -361,7 +361,6 @@ export default {
       }
     },
     uploadSuccess(name, subName, index){
-      const _this = this
       return (res,file)=>{
         if(res.code == 10401){
           alert('登录失效，请重新登录')

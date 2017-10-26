@@ -3,8 +3,8 @@
 	 <el-form label-width="140px" class="button-line" v-for="(item , index) in list" :key="index">
         <el-form-item class="item" label="标题">
          <el-input v-model="item.title"></el-input>
-        <el-button type="primary" icon="minus" style="margin-left:20px;"></el-button>
-        <el-button type="primary" icon="plus"></el-button>
+        <el-button type="primary" icon="minus" style="margin-left:20px;" @click="del(index)"></el-button>
+        <el-button type="primary" icon="plus" @click="add(index)"></el-button>
         </el-form-item>
         <el-form-item class="item" label="图片" v-for="(url, count) in item.imgs" :key="count">
           <el-input v-model="item.imgs[count]" disabled></el-input>
@@ -16,13 +16,13 @@
             :on-success="uploadSuccess(index,count)">
             <el-button type="primary" icon="edit"></el-button>
           </el-upload>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('banner')">保存</el-button>
-          <el-button type="primary" @click="preView">预览</el-button>
-        </el-form-item>
-      </el-form>
-                
+          <!-- <el-button type="primary" icon="minus" style="margin-right:20px;" @click="delImg(count)"></el-button> -->
+        </el-form-item>      
+    </el-form>
+    <div>
+		<el-button type="primary" @click="submitForm('banner')">保存</el-button>
+		<el-button type="primary" @click="preView">预览</el-button>
+    </div>      
   </div>
 </template>
 
@@ -111,12 +111,27 @@ export default {
    	 	if(data.code !=0){
    	 		return alert(data.msg)
    	 	}
-
+   	 	alert('保存成功')
    	 }).catch((err)=>{
    	 	console.log(err)
    	 })
    },
-   preView(){}
+   preView(){},
+   add(num){
+   		this.list.splice(num+1,0,{
+	      	title:'',
+	      	imgs:[""]
+   		})
+   },
+   del(num){
+   		if(this.list.length == 1){
+   			return
+   		}
+   		this.list.splice(num,1)
+   },
+   delImg(num){
+
+   }
   }
 }
 </script>
@@ -140,5 +155,8 @@ export default {
 .item .upload{
   width:46px;
   float:right;
+}
+.button-line{
+	margin-bottom: 80px;
 }
 </style>
