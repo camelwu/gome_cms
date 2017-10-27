@@ -35,6 +35,26 @@ module.exports = {
         '/admin':{
             target: 'http://127.0.0.1:3005',
             changeOrigin: true
+        },
+        '/css':{
+            target: 'http://127.0.0.1:3005',
+            changeOrigin: true
+        },
+        '/versionList':{
+            target: 'http://127.0.0.1:3005',
+            changeOrigin: true
+        },
+        '/js':{
+            target: 'http://127.0.0.1:3005',
+            changeOrigin: true
+        },
+        '/page':{
+            target: 'http://127.0.0.1:3005',
+            changeOrigin: true
+        },
+        '/h5':{
+            target: 'http://127.0.0.1:3005',
+            changeOrigin: true
         }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
