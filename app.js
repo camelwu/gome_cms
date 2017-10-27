@@ -181,14 +181,13 @@ router.get('/getMainPage',(req, res)=>{
 })
 
 //下载banner部分
-router.get('/getDownload',(req, res)=>{
+router.get('/getDownload',(req, res) => {
 	let title = req.query.title
 	if(!title) {
 		return res.send({ code: "10405", msg: "params[version] is not exist" })
 	}
 	let platform = req.query.platform
 	VersionModel.findOne({ title: title }).then((version) => {
-		console.log(version)
 		if(!version) {
 			return res.send({ code: "10405", msg: "version is not exist" })
 		}
