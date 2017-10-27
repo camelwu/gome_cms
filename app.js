@@ -296,7 +296,28 @@ router.get('/getDownload',(req, res) => {
 })
 
 //版本列表
-router.get('/getVersionList',(req, res)=>{
+router.get('/getVersionList', (req, res) => {
+	VersionModel.findOne({ active: 10 }).then((version) => {
+		if(!version) {
+			return res.send({ code: 10405,msg: '查询的版本不存在' })
+		}
+		let plats = ['windows', 'mac', 'ios', 'android']
+		let result = {}
+		plats.map((plat) => {
+			let temp = version[plat].detail
+			let details = []
+			temp.map((detail) => {
+				delete detail.list
+				details.push(detail)
+			})
+			result[plat] = details
+		})
+		res.send({ code: 200, msg: result })
+	}).catch((err) => {
+		console.log(err)
+		res.send({ code: 10500, msg: 'system err' })
+	})
+	/*
 	res.send({
 	    "code": 0,
 	    "msg": "OK",
@@ -343,6 +364,7 @@ router.get('/getVersionList',(req, res)=>{
 	    	]
 	    }
 	})
+	*/
 })
 
 //版本详情
