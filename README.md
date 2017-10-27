@@ -226,7 +226,7 @@ http://host/admin/getVersionDetail
     	"title": 'Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！',
     	"time": "2017-10-10",
     	"platform":'windows',
-    	"detail": [
+    	"list": [
 			{
     			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
 				"imgs": [

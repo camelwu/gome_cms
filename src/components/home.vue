@@ -6,7 +6,7 @@
         <div class="bottom clearfix" :class="[item.active == 0 ? colors: '']">
           <el-button type="text" class="button" @click="editorV(item.title)">编辑</el-button>
           <el-button type="text" class="button" v-if="item.active !== 2" @click="toOnline(item.title)">发布</el-button>
-          <a class="pre" target="_blank" :href="'http://127.0.0.1:3005?version='+item.title">预览</a>
+          <a class="pre" target="_blank" :href="'/admin/pre?version='+item.title">预览</a>
         </div>
       </div>
     </el-card>

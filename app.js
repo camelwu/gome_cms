@@ -10,7 +10,7 @@ const UserModel = require('./db/model/user')
 const VersionModel = require('./db/model/version')
 const OnlineModel = require('./db/model/online')
 const multer = require('multer')
-const picPath = 'src/assets'
+const picPath = 'views/css/uploadImg'
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, picPath)
@@ -32,13 +32,14 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true
 }))
-app.use(express.static(path.join(__dirname, 'dist')));
+
 app.use(bodyParser.json({limit:5000000}))
 app.use(bodyParser.urlencoded({ extended: true ,limit:5000000}))
 
 app.engine('html', ejs.renderFile)
 app.set('views', path.join(__dirname, './views'))
 app.set('view engine', 'html')
+
 
 app.use('/css', express.static('views/css'))
 app.use('/versionList', express.static('views/versionList'))
@@ -1069,7 +1070,7 @@ router.post('/super/v-releaseVersion',superman, (req, res)=>{
 		res.send({code:"10500", msg:"system err"})
 	})
 })
-
+//注册
 router.get('/super/signup',(req, res)=>{
 	new UserModel({
 		username: "test",
@@ -1078,6 +1079,25 @@ router.get('/super/signup',(req, res)=>{
 	}).save(() => {
 		res.send({ code: 0, msg: "ok" })
 	})
+})
+//预览
+router.get('/pre',aeromind,(req, res)=>{
+	const title = req.query.version
+	res.redirect('http://127.0.0.1:3005?version='+title)
+})
+router.get('/pre/download',aeromind,(req, res)=>{
+	const title = req.query.version
+	res.redirect('http://127.0.0.1:3005/downloads?version='+title)
+})
+router.get('/pre/versionList',aeromind,(req, res)=>{
+	const title = req.query.version
+	res.redirect('http://127.0.0.1:3005/versionList?version='+title)
+})
+router.get('/pre/detail',aeromind,(req, res)=>{
+	const title = req.query.version
+	const platform = req.query.platform
+	const version = req.query.version
+	res.redirect('http://127.0.0.1:3005/updates/' + platform + '-' + version + '?version='+title)
 })
 //router.use	
 /**/
@@ -1105,7 +1125,17 @@ app.use('/admin', router)
 //预览
 const domain = 'https://work.gomeplus.com'
 app.get("/", function(req, res){
-	const title = req.query.version
+	let title = ''
+	if(req.query.version){
+		title = req.query.version
+		req.session.title = title
+	}else if(req.session.title){
+		title = req.session.title
+	}
+	if(!title){
+		return res.send({msg:'版本不存在'})
+	}
+	
 	VersionModel.findOne({title:title}).then((version)=>{
 		if(!version){
 			return res.send({msg:'版本不存在'})
@@ -1122,25 +1152,99 @@ app.get("/", function(req, res){
 })
 // 下载
 app.get("/downloads", (req, res)=>{
-	const title = req.query.version
+	let title = ''
+	if(req.query.version){
+		title = req.query.version
+		req.session.title = title
+	}else if(req.session.title){
+		title = req.session.title
+	}
+	console.log(title)
+	if(!title){
+		return res.send({msg:'版本不存在'})
+	}
 	VersionModel.findOne({title:title}).then((version)=>{
 		if(!version){
 			return res.send({msg:'版本不存在'})
 		}
 		res.render("page/main", {title : "下载", domain : domain, banner:{
 			windows: version.windows,
-			ios: version.iso,
+			ios: version.ios,
 			android: version.android,
 			mac: version.mac
 		}, ver: {
 			windows: version.windows.detail,
-			ios: version.iso.detail,
+			ios: version.ios.detail,
+			android: version.android.detail,
+			mac: version.mac.detail
+		}})
+	}).catch((err)=>{
+		console.log(err)
+		res.send({code:10500, msg:'system err'})
+	})
+})
+// 列表
+app.get("/versionList", function(req, res) {
+	let title = ''
+	if(req.query.version){
+		title = req.query.version
+		req.session.title = title
+	}else if(req.session.title){
+		title = req.session.title
+	}
+	console.log(title)
+	if(!title){
+		return res.send({msg:'版本不存在'})
+	}
+	VersionModel.findOne({title:title}).then((version)=>{
+		if(!version){
+			return res.send({msg:'版本不存在'})
+		}
+		res.render("versionList/versionList", {title : "Version update list", domain:domain, vers: {
+			windows: version.windows.detail,
+			ios: version.ios.detail,
 			android: version.android.detail,
 			mac: version.mac.detail
 		}})
 	}).catch((err)=>{
 		res.send({code:10500, msg:'system err'})
 	})
+})
+// 日志
+app.get("/updates/:ver", function(req, res) {
+	let title = ''
+	if(req.query.version){
+		title = req.query.version
+		req.session.title = title
+	}else if(req.session.title){
+		title = req.session.title
+	}
+	console.log(title)
+	if(!title){
+		return res.send({msg:'版本不存在'})
+	}
+	const ver = req.params.ver
+    const platform = ver.split('-')[0]
+    const activeVersion = ver.split('-')[1]
+    VersionModel.findOne({title:title}).then((version)=>{
+    	if(!version){
+    		return res.send({msg:'版本不存在'})
+    	}
+    	let detail = ''
+    	version[platform].detail.map((item)=>{
+    		if(item.version == activeVersion){
+    			detail = item
+    		}
+    	})
+    	if(detail){
+    		res.render('page/version', {title : "隐私政策", domain : domain, detail: detail})
+    	}else{
+    		res.send({code:10405,msg:'版本不存在'})
+    	}
+    }).catch((err)=>{
+    	console.log(err)
+    	res.send({code:10500,msg:'system errr'})
+    })
 })
 // 关于我们
 app.get("/aboutus", function(req, res) {
@@ -1161,30 +1265,6 @@ app.get("/terms", function(req, res) {
 // 隐私政策
 app.get("/pravites", function(req, res) {
     res.render("page/more", {title : "隐私政策", domain : domain, para: '2'})
-})
-// 列表
-app.get("/versionList", function(req, res) {
-	const title = req.query.version
-	VersionModel.findOne({title:title}).then((version)=>{
-		if(!version){
-			return res.send({msg:'版本不存在'})
-		}
-		res.render("versionList/versionList", {title : "Version update list", domain:domain, vers: {
-			windows: version.windows.detail,
-			ios: version.iso.detail,
-			android: version.android.detail,
-			mac: version.mac.detail
-		}})
-	}).catch((err)=>{
-		res.send({code:10500, msg:'system err'})
-	})
-})
-// 日志
-app.get("/updates/:ver", function(req, res) {
-	const ver = req.params.ver
-    const platform = ver.split('-')[0]
-    const version = ver.split('-')[1]
-	const title = req.query.version 
 })
 //h5模板
 app.get("/html5", function(req, res) {})
