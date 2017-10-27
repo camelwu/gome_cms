@@ -20,7 +20,7 @@
                 <span><%=detail.title%></span>
                 <p class="det-date">发布日期:<%=detail.time%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布版本：<%=detail.version%></p>
             </div>
-            <%if (detail.detail.length>0) { var list = detail.detail,len = list.length %>
+            <%if (detail.list.length>0) { var list = detail.list,len = list.length %>
                 <% for(var i=0;i<len;i++) { %>
             <div class="det-actual clearfix">
                 <span><%=i+1%>.<%=list[i].title%></span>

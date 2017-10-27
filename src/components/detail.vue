@@ -1,5 +1,15 @@
 <template>
   <div class="form-box">
+  <div class="nav">
+    <div>
+      <el-button type="primary" @click="toMain">
+        首页
+      </el-button>
+      <el-button type="primary" @click="toDownload">
+        下载页
+      </el-button>
+    </div>
+  </div>
 	 <el-form label-width="140px" class="button-line" v-for="(item , index) in list" :key="index">
         <el-form-item class="item" label="标题">
          <el-input v-model="item.title"></el-input>
@@ -131,6 +141,12 @@ export default {
    },
    delImg(num){
 
+   },
+   toMain(){
+
+   },
+   toDownload(){
+    
    }
   }
 }
