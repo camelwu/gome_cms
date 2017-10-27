@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=yes" name="format-detection" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Aeromind--APP下载</title>
+    <link rel="stylesheet" type="text/css" href="css/download.css"/>
+	<script type="text/javascript">
+        //解决浏览器缓存
+        var url = 'js/download.js';
+        function timestamp(url){
+            //  var getTimestamp=Math.random();
+            var getTimestamp=new Date().getTime();
+            if(url.indexOf("?")>-1){
+                url=url+"&timestamp="+getTimestamp
+            }else{
+                url=url+"?timestamp="+getTimestamp
+            }
+            return url;
+        }
+        var uri = timestamp(url);
+        var head= document.getElementsByTagName('head')[0];
+        var script= document.createElement('script');
+        script.type= 'text/javascript';
+        script.src= uri;
+        head.appendChild(script);
+	</script>
+</head>
+<body>
+
+	<div class="download">
+		<div class="download_box">
+			<div class="logo"></div>
+			<div class="download_buttons">
+				<a class="download-ios" id="dl-ios"  href="javascript:;">iOS版本下载</a>
+				<!--<p class="ios-tip">Aeromind ios 苹果商店审核中，目前下载仍为美办。</p>-->
+				<a class="download-android" id="dl-android" href="javascript:;">Android版本下载</a>
+			</div>
+		</div>
+
+		<div class="footer"></div>
+		<div class="cloud1"></div>
+		<div class="cloud2"></div>
+		<div class="cloud3"></div>
+		<div class="cloud4"></div>
+		<div class="cloud5"></div>
+		<div class="mountain1"></div>
+		<div class="mountain2"></div>
+		<div class="mountain3"></div>
+		<div class="mountain4"></div>
+		<div id="mask" class="shadow hide"></div>
+		<div class="prompt-modalr hide" id="sys-tip">
+			<!--<div class="title">温馨提示</div>-->
+			<div class="tip content"></div>
+			<div class="close"><a href="javascript:;">知道了</a></div>
+		</div>
+		<div class="prompt-modal hide" id="prompt-modal">
+			<div class="content">点击安装后，系统会自动执行安装操作，请避免重复下载</div>
+			<div class=""><a href="javascript:;" id="makeSure">知道了</a></div>
+		</div>
+	</div>
+
+	<div class="wechat_guide j_wechat_guide">
+		<div class="shadow"></div>
+		<div class="guide"></div>
+	</div>
+	<!--<script language="JavaScript" type="text/javascript" src=url></script>-->
+</body>
+</html>
+

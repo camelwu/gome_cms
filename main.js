@@ -13,7 +13,6 @@ app.use('/css', express.static('views/css'))
 app.use('/versionList', express.static('views/versionList'))
 app.use('/js', express.static('views/js'))
 app.use('/page', express.static('views/page'))
-app.use('/h5',express.static('views/h5'))
 
 const lobj = {
 	windows: 'windows',
@@ -21,23 +20,23 @@ const lobj = {
 	and: '安卓',
 	ios: '苹果'
 }
-const ajax = axios.create({
-  baseURL: 'http://localhost',
-  timeout:1000*3,
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    'X-Requested-with':'XMLHttpRequest'
+// const ajax = axios.create({
+//   baseURL: 'http://localhost',
+//   timeout:1000*3,
+//   headers: {
+//     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+//     'X-Requested-with':'XMLHttpRequest'
 
-  },
-  proxy:{
-    host:"127.0.0.1",
-    port:3005,
-    auth:{
-      username:'cdd',
-      password:'123456'
-    }
-  }
-})
+//   },
+//   proxy:{
+//     host:"127.0.0.1",
+//     port:3005,
+//     auth:{
+//       username:'cdd',
+//       password:'123456'
+//     }
+//   }
+// })
 
 
 // 首页
@@ -320,6 +319,23 @@ app.get("/html5", function(req, res) {
     }
     let number = result.data
     res.render("page/h5", {title : "h5模板", domain : domain, number: number})
+})
+// answer和question模板
+app.get("/answer01",function(req, res){
+    res.render("page/answer_01", {title : "新用户如何激活帐号？", domain : domain})
+})
+app.get("/answer02",function(req, res){
+    res.render("page/answer_02", {title : "忘记密码了怎么办？", domain : domain})
+})
+app.get("/answer03",function(req, res){
+    res.render("page/answer_03", {title : "如何快速找人？", domain : domain})
+})
+app.get("/question",function(req, res){
+    res.render("page/question", {title : "帮助与反馈", domain : domain})
+})
+//h5下载页面
+app.get("/download",function(req, res){
+    res.render("page/download", {title : "Aeromind--APP下载", domain : domain})
 })
 var server = app.listen(3000, function () {
   var host = server.address().address
