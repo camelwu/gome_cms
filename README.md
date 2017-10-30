@@ -169,8 +169,7 @@ http://host/admin/getVersionList?platform=Windows
 			{
     			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
 				"time": "2017-10-10",
-				"version": "V1.1.1",
-				"platform":'',
+				"version": "V1.1.1"
 			},
 			....
 	    ],
@@ -178,8 +177,7 @@ http://host/admin/getVersionList?platform=Windows
 	    	{
     			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
 				"time": "2017-10-10",
-				"version": "V1.1.1",
-				"platform":'',
+				"version": "V1.1.1"
 			},
 			...
 	    ],
@@ -187,8 +185,7 @@ http://host/admin/getVersionList?platform=Windows
 			{
     			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
 				"time": "2017-10-10",
-				"version": "V1.1.1",
-				"platform":'',
+				"version": "V1.1.1"
 			},
 			...
     	],
@@ -196,8 +193,7 @@ http://host/admin/getVersionList?platform=Windows
 			{
     			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
 				"time": "2017-10-10",
-				"version": "V1.1.1",
-				"platform":'',
+				"version": "V1.1.1"
 			},
 			...
     	]

@@ -19,7 +19,10 @@ const VersionSchema = new mongoose.Schema({
     	type: Number,
     	default: +(new Date())
     },
-    "onlineTime":Number
+    "onlineTime":{
+    	type: Number,
+    	default: 0
+    }
 })
 /*
 

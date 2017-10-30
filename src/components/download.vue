@@ -1,5 +1,11 @@
 <template>
    <div class="form-box">
+     <div class="nav">
+      <div>
+        <el-button type="primary">首页</el-button>
+        <el-button type="primary">下载页</el-button>
+      </div>
+    </div>
       <el-tabs v-model="activeName" @tab-click="handleClick">
          <template v-if="platObj">
             <el-tab-pane :key="index" v-for="(item, index) in platObj" :label="index" :name="index">{{ index }}</el-tab-pane>

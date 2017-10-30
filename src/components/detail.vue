@@ -1,38 +1,40 @@
 <template>
-  <div class="form-box">
-  <div class="nav">
-    <div>
-      <el-button type="primary" @click="toMain">
-        首页
-      </el-button>
-      <el-button type="primary" @click="toDownload">
-        下载页
-      </el-button>
+  <div>
+    <div class="nav">
+      <div>
+        <el-button type="primary" @click="toMain">
+          首页
+        </el-button>
+        <el-button type="primary" @click="toDownload">
+          下载页
+        </el-button>
+      </div>
     </div>
-  </div>
-	 <el-form label-width="140px" class="button-line" v-for="(item , index) in list" :key="index">
-        <el-form-item class="item" label="标题">
-         <el-input v-model="item.title"></el-input>
-        <el-button type="primary" icon="minus" style="margin-left:20px;" @click="del(index)"></el-button>
-        <el-button type="primary" icon="plus" @click="add(index)"></el-button>
-        </el-form-item>
-        <el-form-item class="item" label="图片" v-for="(url, count) in item.imgs" :key="count">
-          <el-input v-model="item.imgs[count]" disabled></el-input>
-          <el-upload
-            class="upload"
-            name="pic"
-            action="/admin/super/uploadImg"
-            :show-file-list="false"
-            :on-success="uploadSuccess(index,count)">
-            <el-button type="primary" icon="edit"></el-button>
-          </el-upload>
-          <!-- <el-button type="primary" icon="minus" style="margin-right:20px;" @click="delImg(count)"></el-button> -->
-        </el-form-item>      
-    </el-form>
-    <div>
-		<el-button type="primary" @click="submitForm('banner')">保存</el-button>
-		<el-button type="primary" @click="preView">预览</el-button>
-    </div>      
+    <div class="form-box">
+     <el-form label-width="140px" class="button-line" v-for="(item , index) in list" :key="index">
+          <el-form-item class="item" label="标题">
+           <el-input v-model="item.title"></el-input>
+          <el-button type="primary" icon="minus" style="margin-left:20px;" @click="del(index)"></el-button>
+          <el-button type="primary" icon="plus" @click="add(index)"></el-button>
+          </el-form-item>
+          <el-form-item class="item" label="图片" v-for="(url, count) in item.imgs" :key="count">
+            <el-input v-model="item.imgs[count]" disabled></el-input>
+            <el-upload
+              class="upload"
+              name="pic"
+              action="/admin/super/uploadImg"
+              :show-file-list="false"
+              :on-success="uploadSuccess(index,count)">
+              <el-button type="primary" icon="edit"></el-button>
+            </el-upload>
+            <!-- <el-button type="primary" icon="minus" style="margin-right:20px;" @click="delImg(count)"></el-button> -->
+          </el-form-item>      
+      </el-form>
+      <div>
+      <el-button type="primary" @click="submitForm('banner')">保存</el-button>
+      <el-button type="primary" @click="preView">预览</el-button>
+      </div>      
+    </div>
   </div>
 </template>
 
@@ -143,7 +145,7 @@ export default {
 
    },
    toMain(){
-
+    
    },
    toDownload(){
     
@@ -153,6 +155,9 @@ export default {
 </script>
 
 <style scoped>
+.nav{
+  margin-bottom: 50px;
+}
  a {
   color: #42b983;
 }

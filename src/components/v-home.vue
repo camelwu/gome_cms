@@ -1,17 +1,37 @@
 <template>
-  <div>
-    <el-card class="card" :body-style="{ padding: '0px'}" >
-      <div style="padding: 14px;" v-if="!version">
-        <span>暂无可上线内容</span>
-      </div>
-      <div v-if="version"  style="padding: 14px;">
-        <span>{{version.title}}</span>
-        <div class="bottom clearfix">
-          <el-button type="text" class="button">预览</el-button>
-          <el-button type="text" class="button" @click="toOnline(version.title)">发布</el-button>
-        </div>
-      </div>
-    </el-card>
+  <div class="list">
+    <el-table
+      :data="tableList"
+      style="width:650px;margin:0 auto;"
+      border>
+      <el-table-column
+        type="index"
+        width="50">
+      </el-table-column>
+      <el-table-column
+        prop="title"
+        label="版本"
+        width="100">
+      </el-table-column>
+      <el-table-column
+        prop="state"
+        label="状态"
+        width="100">
+      </el-table-column>
+      <el-table-column
+        prop="time"
+        label="上线时间"
+        width="200">
+      </el-table-column>
+      <el-table-column
+        label="操作">
+        <template  slot-scope="scope">
+          <el-button type="text" v-if="scope.row.active == 2" @click="agree(scope.row.title)">通过</el-button>
+          <el-button type="text" v-if="scope.row.active == 2" @click="refuse(scope.row.title)">拒绝</el-button>
+          <a class="pre" target="_blank" :href="'/admin/pre?version='+scope.row.title">预览</a>
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -20,42 +40,78 @@ import axios from '../router/axios'
 export default {
   data () {
     return {
-      version: {
-        title:'',
-        active: ''
-      }
+      versions: []
+    }
+  },
+  computed:{
+    tableList(){
+      return this.versions.map((item)=>{
+        let state = '待提交'
+        if(item.active == 2){
+          state = '已提交'
+        }else if(item.active == 3){
+          state = '已发布'
+        }else if(item.active == 4){
+          state = '未通过'
+        }
+        let date = ''
+        if(item.time > 0){
+          const oDate = new Date(item.time)
+          date = oDate.getFullYear() + '-' + (oDate.getMonth() + 1) + '-' + oDate.getDate()
+        }
+        return {
+          time: date,
+          state: state,
+          active: item.active,
+          title: item.title
+        }
+      })
     }
   },
   created(){
-   this.getList()
+    this.getList()
   },
   methods:{
     getList(){
-      axios.get('/admin/super/v-getCreateVersion').then((res)=>{
+      axios.get('/admin/super/getCreateVersion').then((res)=>{
         console.log(res)
         const data = res.data
-        this.version = data.version
+        this.versions = data.versions
       })
     },
-    toOnline(title){
-      axios.post('/admin/super/v-releaseVersion',{title:title}).then((res)=>{
-        const data = res.data
-        if(data.code != 0){
-          return alert(data.msg)
-        }
-        alert("发布成功")
-      }).catch((err)=>{
-        console.log(err)
-      })
+    agree(title){
+      this.$confirm('确定上线此版本吗？','提示',{
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(() => {
+        axios.post('/admin/super/v-agree',{title:title}).then((res)=>{
+          this.getList()
+        }).catch((err)=>{
+          alert('上线失败')
+          console.log(err)
+        })
+      }).catch(()=>{})
+    },
+    refuse(title){
+      this.$confirm('拒绝此版本上线吗？','提示',{
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(() => {
+         axios.post('/admin/super/v-refuse',{title:title}).then((res)=>{
+          this.getList()
+        }).catch((err)=>{
+          alert('上线失败')
+          console.log(err)
+        })
+      }).catch(()=>{})
     }
   }
 }
 </script>
 
 <style scoped>
-  .card{
-    float:left;
-    margin:20px;
+  .list{
+    text-align: center;
   }
   .add{
     width:82px; 
@@ -64,5 +120,11 @@ export default {
     line-height: 82px;
     color: #20a0ff;
     cursor: pointer;
+  }
+  .pre{
+    font-size: 14px;
+    color: #20a0ff;
+    text-decoration: none;
+    margin-left:10px;
   }
 </style>
