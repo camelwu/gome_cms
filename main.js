@@ -63,7 +63,7 @@ app.get("/", function(req, res) {
                 "subTitle": "",
                 "list": [
                     {
-                        "pic" : "/img/T1SRKTBQAv1RCvBVdK.png",
+                        "pic" : "/img/website/people.png",
                         "title": "支持万人企业通讯录",
                         "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
                     }
