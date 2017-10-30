@@ -43,14 +43,18 @@
 <div class="main" id="_main">
     <%if (cover.introduction.length>0) {var list = cover.introduction,len=list.length %>
     <% for(var i=0;i<len;i++){ %>
+    <%if (i%2==0){ %>
     <div class="backround-indtrod clearfix">
+    <% }else if(i%2==1){ %>
+    <div class="backround-indtrod clearfix odd">
+    <% } %>
         <div class="indtrod-content">
             <div class="indtrod-box">
                 <p class="indtrod-text"><%=list[i].title%></p>
                 <p class="indtrod-tex"><%=list[i].summary%>
                 </p>
             </div>
-            <img src="/css<%=list[i].pic%>" alt="" class="indtrod-img">
+            <img src="/css/uploadImg/<%=list[i].pic%>" alt="" class="indtrod-img">
         </div>
     </div>
     <% } %>
@@ -69,7 +73,7 @@
                 <% }else{ %>
                 <li class="back-li one">
                 <% }%>
-                    <img src="./css/img/website/people.png" class="li-img">
+                    <img src="/css/uploadImg/<%=list[i].pic%>" class="li-img">
                     <div class="li-text">
                         <p class="li-text-one"><%=list[i].title%></p>
                         <p class="li-text-two"><%=list[i].summary%></p>
@@ -94,8 +98,8 @@
             <div class="link-box link" id="win-download">
             <% } %>
                 <div class="link-img-win">
-                    <span class="win-logo-img index-download-normal-icon" style="background: url(/css<%=list[i].pic1%>) no-repeat;background-size: contain;"></span>
-                    <span class="down-img index-download-hover-icon" style="background: url(/css<%=list[i].pic2%>) no-repeat;background-size: contain;"></span>
+                    <span class="win-logo-img index-download-normal-icon" style="background: url(/css/uploadImg/<%=list[i].pic1%>) no-repeat;background-size: contain;"></span>
+                    <span class="down-img index-download-hover-icon" style="background: url(/css/uploadImg/<%=list[i].pic2%>) no-repeat;background-size: contain;"></span>
                 </div>
                 <span class="link-span-title">Windows</span>
                 <span class="link-down-desc">点击下载</span>
