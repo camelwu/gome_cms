@@ -14,14 +14,13 @@
 <div class="update_article">
   <h2 class="update_caption"><%=number.title%></h2>
   <ul class="update_info">
-    <%if (number.detail.length>0) { var list = number.detail,len = list.length %>
+    <%if (number.list.length>0) { var list = number.list, len = list.length %>
         <% for(var i=0;i<len;i++) { %>
     <li>
       <div class="title"><%=i+1%>.<%=list[i].title%></div>
        <% for(var j=0;j<list[i].imgs.length;j++) { %>
             <img src="/css/uploadImg/<%=list[i].imgs[j]%>" alt="">
         <% } %>
-      <p><%=list[i].introduction%></p>
      <% } %>
     <% } %>
   </ul>

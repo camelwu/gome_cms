@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const ejs = require('ejs')
 const fs = require('fs')
-//const axios = require('axios')
+const axios = require('axios')
 const app = express()
 const domain = 'https://local/'
 
@@ -41,7 +41,13 @@ const lobj = {
 
 // 首页
 app.get("/", function(req, res) {
-	let home = {
+    axios.get('http://127.0.0.1:3005/admin/getMainPage').then((r)=>{
+        const cover = r.data
+        res.render("index", {title : "首页", domain : domain, cover: cover})
+    }).catch((err)=>{
+        console.log(err)
+    })
+	/*let home = {
         "code": 0,
         "msg": "OK",
         "data": {
@@ -86,13 +92,27 @@ app.get("/", function(req, res) {
                 ]
             }
         }
-    }
-    let cover = home.data
-    res.render("index", {title : "首页", domain : domain, cover: cover})
+    }*/
 })
 // 下载
 app.get("/downloads", function(req, res) {
-    let result = {
+    axios.get('http://127.0.0.1:3005/admin/getDownload').then((r)=>{
+        console.log(r.data)
+        const banner = r.data.data
+        if(!banner){
+            return res.send({code:404})
+        }
+        const ver= {
+            windows:banner.windows.detail,
+            ios:banner.ios.detail,
+            android:banner.android.detail,
+            mac:banner.mac.detail
+        }
+        res.render("page/main", {title : "下载", domain : domain, banner: banner, ver: ver})
+    }).catch((err)=>{
+        console.log(err)
+    })
+    /*let result = {
         "code": 0,
         "msg": "OK",
         "data": {
@@ -193,7 +213,7 @@ app.get("/downloads", function(req, res) {
         }
     }
     let ver= versionList.data
-    res.render("page/main", {title : "下载", domain : domain, banner: banner, ver: ver})
+    res.render("page/main", {title : "下载", domain : domain, banner: banner, ver: ver})*/
 })
 // 关于我们
 app.get("/aboutus", function(req, res) {
@@ -217,7 +237,15 @@ app.get("/pravites", function(req, res) {
 })
 // 列表
 app.get("/versionList", function(req, res) {
-    let version = {
+    axios.get('/admin/getVersionList').then((r)=>{
+        const vers = r.data.data
+        res.render("versionList/versionList", {title : "Version update list", domain:domain, vers: vers })
+    }).catch((err)=>{
+        console.log(err)
+        res.send({code:404})
+    })
+
+   /* let version = {
         "code": 0,
         "msg": "OK",
         "data": {
@@ -256,22 +284,22 @@ app.get("/versionList", function(req, res) {
             ]
         }
     }
-    let vers = version.data
-    res.render("versionList/versionList", {title : "Version update list", domain, vers: vers })
+    res.render("versionList/versionList", {title : "Version update list", domain, vers: vers })*/
 })
 // 日志
 app.get("/updates/:ver", function(req, res) {
-    let ver = req.params.ver.toLowerCase()
-    let ary = ver.split('-')
-    // if(ary[0] in [windows,mac,ios,android]){
-    //     let v = ver.substring("-").test(v(/\d).(\d).(\d)/))
-    // }
-    /*
-ary[o] in [windows,mac,ios,android]
-1.1.1
-v(\d).(\d).(\d)
-    */
-    if (true) {
+    const ver = req.params.ver
+    const platform = ver.split('-')[0]
+    const activeVersion = ver.split('-')[1]
+    
+    axios.get('/admin/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
+        const detail = r.data.data
+        res.render('page/version', {title : "隐私政策", domain : domain, detail: detail})
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+    /*if (true) {
         let result = {
             "code": 0,
             "msg": "OK",
@@ -294,7 +322,7 @@ v(\d).(\d).(\d)
         res.render('page/version', {title : "隐私政策", domain : domain, 'ver': req.params.ver, detail: detail})
     } else {
         res.redirect('/')
-    }
+    }*/
 })
 //h5模板
 app.get("/html5", function(req, res) {

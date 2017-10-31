@@ -56,7 +56,7 @@ const router = express.Router()
 //主页信息*
 router.get('/getMainPage',(req, res)=>{
 	const title = req.query.title
-	if( !title){
+	if(!title){
 		VersionModel.findOne({active:10}).then((version)=>{
 			if(!version){
 				return res.send({
@@ -198,101 +198,96 @@ router.get('/getMainPage',(req, res)=>{
 //下载banner部分
 router.get('/getDownload',(req, res) => {
 	let title = req.query.title
-	if(!title) {
-		return res.send({ code: "10405", msg: "params[version] is not exist" })
-	}
 	let platform = req.query.platform
-	VersionModel.findOne({ title: title }).then((version) => {
-		if(!version) {
-			return res.send({ code: "10405", msg: "version is not exist" })
-		}
-		if(platform) {
-			let data = version[platform]
-			delete data.detail
-			return res.send({ code: "200", msg: "ok", "data": data})
-		}
-		let plats = ['windows', 'mac', 'ios', 'android']
-		let result = {}
-		plats.map((plat) => {
-			result[plat] = version[plat]
-			//delete result[plat].detail
+	if(!title){
+		VersionModel.findOne({ active: 10 }).then((version) => {
+			if(!version) {
+				return res.send({ code: "10403", msg: "version is not exist" })
+			}
+			if(platform) {
+				let data = version[platform]
+				delete data.detail
+				return res.send({ code: 0, msg: "ok", "data": data})
+			}
+			let plats = ['windows', 'mac', 'ios', 'android']
+			let result = {}
+			plats.map((plat) => {
+				result[plat] = version[plat]
+				//delete result[plat].detail
+			})
+			return res.send({ code: 0, msg: "ok", "data": result})
+		}).catch((err)=>{
+			res.send({ code: 10500, msg: "system err" })
 		})
-		return res.send({ code: "200", msg: "ok", "data": result})
-	}).catch((err)=>{
-		res.send({ code: 10500, msg: "system err" })
-	})
+	}else{
+		VersionModel.findOne({ title: title }).then((version) => {
+			if(!version) {
+				return res.send({ code: "10405", msg: "version is not exist" })
+			}
+			if(platform) {
+				let data = version[platform]
+				delete data.detail
+				return res.send({ code: 0, msg: "ok", "data": data})
+			}
+			let plats = ['windows', 'mac', 'ios', 'android']
+			let result = {}
+			plats.map((plat) => {
+				result[plat] = version[plat]
+				//delete result[plat].detail
+			})
+			return res.send({ code: 0, msg: "ok", "data": result})
+		}).catch((err)=>{
+			res.send({ code: 10500, msg: "system err" })
+		})
+	}
 })
 
 //版本列表
 router.get('/getVersionList', (req, res) => {
-	VersionModel.findOne({ active: 10 }).then((version) => {
-		if(!version) {
-			return res.send({ code: 10405,msg: '查询的版本不存在' })
-		}
-		let plats = ['windows', 'mac', 'ios', 'android']
-		let result = {}
-		plats.map((plat) => {
-			let temp = version[plat].detail
-			let details = []
-			temp.map((detail) => {
-				delete detail.list
-				details.push(detail)
+	const title = req.query.title
+	if(!title){
+		VersionModel.findOne({ active: 10 }).then((version) => {
+			if(!version) {
+				return res.send({ code: 10405,msg: '查询的版本不存在' })
+			}
+			let plats = ['windows', 'mac', 'ios', 'android']
+			let result = {}
+			plats.map((plat) => {
+				let temp = version[plat].detail
+				let details = []
+				temp.map((detail) => {
+					delete detail.list
+					details.push(detail)
+				})
+				result[plat] = details
 			})
-			result[plat] = details
+			res.send({ code: 0, msg: result })
+		}).catch((err) => {
+			console.log(err)
+			res.send({ code: 10500, msg: 'system err' })
 		})
-		res.send({ code: 200, msg: result })
-	}).catch((err) => {
-		console.log(err)
-		res.send({ code: 10500, msg: 'system err' })
-	})
-	/*
-	res.send({
-	    "code": 0,
-	    "msg": "OK",
-	    "data": {
-	    	"version":'V2.0.0',
-	    	"platform": [
-				{
-				 	"platform": "Windows",
-				 	"lists": [
-						{
-		        			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-							"time": "2017-10-10",
-							"version": "V1.1.1"
-						}
-				 	]
-		        },{
-		        	"platform": "Mac",
-				 	"lists": [
-						{
-		        			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-							"time": "2017-10-10",
-							"version": "V1.1.1"
-						}
-				 	]
-		        },{
-		        	"platform": "Android",
-				 	"lists": [
-						{
-		        			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-							"time": "2017-10-10",
-							"version": "V1.1.1"
-						}
-				 	]
-		        },{
-		        	"platform": "iOS",
-				 	"lists": [
-						{
-		        			"title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-							"time": "2017-10-10",
-							"version": "V1.1.1"
-						}
-				 	]
-		        }
-	    	]
-	    }
-	})
-	*/
+	}else{
+		VersionModel.findOne({ title: title }).then((version) => {
+			if(!version) {
+				return res.send({ code: 10405,msg: '查询的版本不存在' })
+			}
+			let plats = ['windows', 'mac', 'ios', 'android']
+			let result = {}
+			plats.map((plat) => {
+				let temp = version[plat].detail
+				let details = []
+				temp.map((detail) => {
+					delete detail.list
+					details.push(detail)
+				})
+				result[plat] = details
+			})
+			res.send({ code: 0, msg: result })
+		}).catch((err) => {
+			console.log(err)
+			res.send({ code: 10500, msg: 'system err' })
+		})
+	}
 })
 
 //版本详情
@@ -1267,4 +1262,63 @@ app.get("/pravites", function(req, res) {
     res.render("page/more", {title : "隐私政策", domain : domain, para: '2'})
 })
 //h5模板
-app.get("/html5", function(req, res) {})
+app.get("/html5", function(req, res) {
+	let title = ''
+	if(req.query.version){
+		title = req.query.version
+		req.session.title = title
+	}else if(req.session.title){
+		title = req.session.title
+	}
+	console.log(title)
+	if(!title){
+		return res.send({msg:'版本不存在'})
+	}
+	const platform = req.query.platform
+    const activeVersion = req.query.version
+	axios.get('/getVersionDetail?title=' + title + '&version=' + activeVersion +'&platform=' + platform).then((r)=>{
+		const data = r.data
+		const number = data.data
+    	res.render("page/h5", {title : "h5模板", domain : domain, number: number})
+	}).catch((err)=>{
+		console.log(err)
+	})
+	/*let result = {
+        "code": 0,
+        "msg": "OK",
+        "data": {
+            "version":'V2.0.0',
+            "title": 'Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！',
+            "time": "2017-10-10",
+            "list": [
+                {
+                    "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
+                    "imgs": [
+                        "/img/download/WechatIMG9.png",
+                        "/img/download/WechatIMG9.png"
+                    ]
+                }
+            ]
+         }
+    }
+    let number = result.data
+    res.render("page/h5", {title : "h5模板", domain : domain, number: number})*/
+})
+
+app.get("/answer01",function(req, res){
+    res.render("page/answer_01", {title : "新用户如何激活帐号？", domain : domain})
+})
+app.get("/answer02",function(req, res){
+    res.render("page/answer_02", {title : "忘记密码了怎么办？", domain : domain})
+})
+app.get("/answer03",function(req, res){
+    res.render("page/answer_03", {title : "如何快速找人？", domain : domain})
+})
+app.get("/question",function(req, res){
+    res.render("page/question", {title : "帮助与反馈", domain : domain})
+})
+
+//h5下载页面
+app.get("/download",function(req, res){
+    res.render("page/download", {title : "Aeromind--APP下载", domain : domain})
+})
