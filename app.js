@@ -1046,6 +1046,14 @@ router.get('/super/signup',(req, res)=>{
 	const username = req.query.u
 	const password = req.query.p
 	const isSuper = req.query.s
+	/*console.log('u ' + username)
+	console.log(JSON.stringify(username))
+	console.log('p ' + password)
+	console.log(JSON.stringify(password))
+	console.log('s ' + isSuper)
+	console.log(typeof isSuper)
+	console.log(JSON.stringify(isSuper))
+	return */
 	if(isSuper){
 		UserModel.findOne({isSuper:true}).then((user)=>{
 			if(user){
