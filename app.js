@@ -43,7 +43,6 @@ app.engine('html', ejs.renderFile)
 app.set('views', path.join(__dirname, './views'))
 app.set('view engine', 'html')
 
-
 app.use('/css', express.static('views/css'))
 app.use('/versionList', express.static('views/versionList'))
 app.use('/js', express.static('views/js'))
@@ -558,6 +557,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"list":[
 									{
 										"title":'',
+										"summary":"",
 										"imgs":[]
 									}
 								]
@@ -580,6 +580,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"list":[
 									{
 										"title":'',
+										"summary":"",
 										"imgs":[]
 									}
 								]
@@ -603,6 +604,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"list":[
 									{
 										"title":'',
+										"summary":"",
 										"imgs":[]
 									}
 								]
@@ -625,6 +627,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"list":[
 									{
 										"title":'',
+										"summary":"",
 										"imgs":[]
 									}
 								]

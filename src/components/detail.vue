@@ -17,6 +17,9 @@
           <el-button type="primary" icon="minus" style="margin-left:20px;" @click="del(index)"></el-button>
           <el-button type="primary" icon="plus" @click="add(index)"></el-button>
           </el-form-item>
+          <el-form-item class="item" label="描述">
+           <el-input v-model="item.summary"></el-input>
+          </el-form-item>
           <el-form-item class="item" label="图片" v-for="(url, count) in item.imgs" :key="count">
             <el-input v-model="item.imgs[count]" disabled></el-input>
             <el-upload
@@ -49,6 +52,7 @@ export default {
       list:[
       	{
       		title:'',
+          summary:'',
       		imgs:[]
       	}
       ]
@@ -101,14 +105,15 @@ export default {
    submitForm(){
    	 const list = this.list.map((item)=>{
    	 	const imgs = []
-   	 	item.imgs.map((item)=>{
- 			if(item){
- 				imgs.push(item)
- 			}
- 			return item
- 		})
+     	 	item.imgs.map((item)=>{
+   			if(item){
+   				imgs.push(item)
+   			}
+   			return item
+   		})
    	 	return {
    	 		title: item.title,
+        summary: item.summary,
    	 		imgs: imgs
    	 	}
    	 })
@@ -132,6 +137,7 @@ export default {
    add(num){
    		this.list.splice(num+1,0,{
 	      	title:'',
+          summary:'',
 	      	imgs:[""]
    		})
    },
