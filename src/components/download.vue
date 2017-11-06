@@ -75,7 +75,7 @@
 
             <el-form-item>
                <el-button type="primary" @click="submitForm">保存</el-button>
-               <a :href="'http://127.0.0.1:3005/downloads?version=' + $route.params.title" target="_blank">
+               <a :href="'/admin/pre/download?version=' + $route.params.title" target="_blank">
                   <el-button type="button" @click="preview">预览</el-button>
                </a>
             </el-form-item>

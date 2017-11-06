@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 src/assets/
 views/css/uploadImg/*.jpg
+views/css/uploadImg/*.jpeg
 views/css/uploadImg/*.png
 
 # Editor directories and files

@@ -74,7 +74,7 @@ export default {
 		    platform: platform,
 		    version: version 
     	}
-	}).then((res)=>{
+    }).then((res)=>{
     	const data = res.data
     	console.log(data)
 
@@ -82,7 +82,7 @@ export default {
     		item.imgs.push("")
     		return item
     	})
-		this.list = list
+		  this.list = list
     	
     }).catch((err)=>{
     	console.log(err)

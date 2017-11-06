@@ -1107,24 +1107,24 @@ router.get('/super/signup',(req, res)=>{
 // 主页预览*
 router.get('/pre',aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.hostname  + ':' + port + '?version='+title)
+	res.redirect('http://'+ req.ip  + ':' + port + '?version='+title)
 })
 //download预览*
 router.get('/pre/download',aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.hostname  + ':' + port + '/downloads?version='+title)
+	res.redirect('http://'+ req.ip  + ':' + port + '/downloads?version='+title)
 })
 // versionList预览*
 router.get('/pre/versionList',aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.hostname  + ':' + port + '/versionList?version='+title)
+	res.redirect('http://'+ req.ip  + ':' + port + '/versionList?version='+title)
 })
 // detail预览*
 router.get('/pre/detail',aeromind,(req, res)=>{
 	const title = req.query.version
 	const platform = req.query.platform
 	const version = req.query.version
-	res.redirect('http://'+ req.hostname  + ':' + port + '/updates/' + platform + '-' + version + '?version='+title)
+	res.redirect('http://'+ req.ip  + ':' + port + '/updates/' + platform + '-' + version + '?version='+title)
 })
 
 app.use('/admin', router)
