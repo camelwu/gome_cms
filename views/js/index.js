@@ -41,9 +41,9 @@ var elem = document.getElementById('_banner_bg');
 // 为了看到效果加个延时
 setTimeout(function(){
 // 若图片URL失效请自行替换
-var imgUrl = './css/img/website/sky.png';
+var imgUrl = ele.getAttribute('data-img');
 var imgObject = new Image();
-var imgPath = './css/img/website/banner2x.png';
+var imgPath = elem.getAttribute('data-img');
 var imgObj = new Image();
 
 imgObject.src = imgUrl;

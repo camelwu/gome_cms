@@ -13,7 +13,7 @@
 <div class="header-box " id="nav">
     <div class="header">
         <div class="fl clearfix">
-            <a class="fl title top-title" href="/"></a>
+            <a class="fl title top-title" href="/"  style="background-image: url('./css/uploadImg/<%= cover.cover.opacityLogo %>');"></a>
         </div>
         <div class="fr">
             <a href="/" class="fl header-btn top-header-btn top-active">首页</a>
@@ -26,7 +26,7 @@
 <div class="header-box another-header" id="navshow">
     <div class="header">
         <div class="fl clearfix">
-            <a class="fl title" href="/"></a>
+            <a class="fl title" href="/" style="background-image: url('./css/uploadImg/<%= cover.cover.logo %>');"></a>
         </div>
         <div class="fr">
             <a href="/" class="fl header-btn top-active">首页</a>
@@ -36,8 +36,8 @@
         </div>
     </div>
 </div>
-<div id="_index_bg" class="big-background clearfix">
-    <div id="_banner_bg" class="backround-icon clearfix"></div>
+<div id="_index_bg" class="big-background clearfix" style='background-image: url("./css/uploadImg/<%= cover.cover.blurBackgroundPic %>");' data-img="./css/uploadImg/<%= cover.cover.backgroundPic %>">
+    <div id="_banner_bg" class="backround-icon clearfix" style='background-image: url("./css/uploadImg/<%= cover.cover.blurSmallPic %>");' data-img="./css/uploadImg/<%= cover.cover.smallPic %>"></div>
     <a href="/downloads" class="backround-text">免费下载</a>
 </div>
 <div class="main" id="_main">
