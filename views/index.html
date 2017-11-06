@@ -46,23 +46,23 @@
     <%if (i%2==0){ %>
     <div class="backround-indtrod clearfix">
         <div class="indtrod-content">
-            <img src="/css/uploadImg/<%=list[i].pic%>" alt="" class="indtrod-img">
             <div class="indtrod-box">
                 <p class="indtrod-text"><%=list[i].title%></p>
                 <p class="indtrod-tex"><%=list[i].summary%>
                 </p>
             </div>
+            <img src="/css/uploadImg/<%=list[i].pic%>" alt="" class="indtrod-img">
         </div>
     </div>
     <% }else if(i%2==1){ %>
     <div class="backround-indtrod clearfix odd">
         <div class="indtrod-content">
+            <img src="/css/uploadImg/<%=list[i].pic%>" alt="" class="indtrod-img">
             <div class="indtrod-box">
                 <p class="indtrod-text"><%=list[i].title%></p>
                 <p class="indtrod-tex"><%=list[i].summary%>
                 </p>
             </div>
-            <img src="/css/uploadImg/<%=list[i].pic%>" alt="" class="indtrod-img">
         </div>
     </div>
     <% } %>
