@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 //预览
-const domain = 'https://work.gomeplus.com'
+const domain = 'https://work.gomeplus.com' 
 
 const port = 3005
 const app = express()
@@ -837,7 +837,7 @@ router.post('/super/setList',aeromind, (req, res)=>{
 	})
 })
 //详情录入
-router.post('/super/setDetail',aeromind, (req, res)=>{
+router.post('/super/setDetail', aeromind, (req, res)=>{
 	const title = req.body.title
 	const platform = req.body.platform
 	const version = req.body.version
@@ -847,37 +847,84 @@ router.post('/super/setDetail',aeromind, (req, res)=>{
 		return res.send({code:10405, msg: 'version 不能为空'})
 	}
 
-	VersionModel.findOne({title:title}).then((version)=>{
-		if(!version){
+	VersionModel.findOne({title:title}).then((versionE)=>{
+		if(!versionE){
 			return res.send({code:10405, msg: 'version 不存在'})
 		}
 
-		version.active = 1
+		versionE.active = 1
 		let hasVersion = false
-		if( platform && version){
-			version[platform].detail = version[platform].detail.map((item)=>{
+		let resDetail = ''
+		if( platform && version && versionE[platform]){
+			/*resDetail = versionE[platform].detail.map((item)=>{
 				if(item.version == version){
 					item.list = list
-					console.log("hasVersion",hasVersion)
 					hasVersion = true
 				}
 				return item
-			})
+			})*/
+
+			for(let i =0; i<versionE[platform].detail.length; i++){
+				if(versionE[platform].detail[i].version == version){
+					versionE[platform].detail[i].list = list
+					hasVersion = true
+				}
+			}
+
+			console.log(JSON.stringify(resDetail))
+			/*versionE[platform] = {
+				"title": versionE[platform].title,
+		        "summary": versionE[platform].summary,
+		        "size": versionE[platform].size,
+		        "version": versionE[platform].version,
+		        "system": versionE[platform].system,
+				"time": versionE[platform].time,
+				"url": versionE[platform].url,
+				"backgroundPic": versionE[platform].backgroundPic,
+				"detail": resDetail
+			}*/
 		}else{
 			return res.send({code:10405, msg: '参数不正确'})
 		}
 		
 		if(hasVersion){
-			version.save().then((version)=>{
-				res.send({code:0, msg:"ok"})
+			console.log(JSON.stringify(versionE))
+			VersionModel.update({title:title},{$set:{
+				windows:versionE.windows,
+				ios:versionE.ios,
+				mac:versionE.mac,
+				android:versionE.android
+			}},function(err,result){
+				if(err){
+					return res.send({code:"10500", msg:"system err"})
+				}
+				res.send({code:0, msg:"ok",v:result})
+			})
+			/*versionE.save().then((version)=>{
+				res.send({code:0, msg:"ok",v:version})
 			}).catch((err)=>{
 				res.send({code:"10500", msg:"system err"})
-			})
+			})*/
 		}else{
 			res.send({code:"10405", msg:"没有此版本"})
 		}
 	}).catch((err)=>{
 		res.send({code:"10500", msg:"system err"})
+	})
+})
+//整体储存
+router.post('/super/all', superman,(req, res)=>{
+	const data = req.body.data
+	VersionModel.findOne({title:data.title}).then((v)=>{
+		if(v){
+			return res.send({code:"10405",msg:"版本已存在"})
+		}
+		new VersionModel(date).save((err, version)=>{
+			if(err){
+				return res.send({code:"10500", msg:"system err"})
+			}
+			res.send({code:"0",msg:"ok",data:{title: title, active: 1}})
+		})
 	})
 })
 //超级管理员获取 要上线的版本
@@ -1107,24 +1154,24 @@ router.get('/super/signup',(req, res)=>{
 // 主页预览*
 router.get('/pre',aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.ip  + ':' + port + '?version='+title)
+	res.redirect('http://'+ req.hostname  + ':' + port + '?version='+title)
 })
 //download预览*
 router.get('/pre/download',aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.ip  + ':' + port + '/downloads?version='+title)
+	res.redirect('http://'+ req.hostname  + ':' + port + '/downloads?version='+title)
 })
 // versionList预览*
 router.get('/pre/versionList',aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.ip  + ':' + port + '/versionList?version='+title)
+	res.redirect('http://'+ req.hostname  + ':' + port + '/versionList?version='+title)
 })
 // detail预览*
 router.get('/pre/detail',aeromind,(req, res)=>{
 	const title = req.query.version
 	const platform = req.query.platform
 	const version = req.query.version
-	res.redirect('http://'+ req.ip  + ':' + port + '/updates/' + platform + '-' + version + '?version='+title)
+	res.redirect('http://'+ req.hostname  + ':' + port + '/updates/' + platform + '-' + version + '?version='+title)
 })
 
 app.use('/admin', router)

@@ -35,7 +35,7 @@
       </el-form>
       <div>
       <el-button type="primary" @click="submitForm('banner')">保存</el-button>
-      <el-button type="primary" @click="preView">预览</el-button>
+      <el-button type="primary">预览</el-button>
       </div>      
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
       	{
       		title:'',
           summary:'',
-      		imgs:[]
+      		imgs:[""]
       	}
       ]
     }
@@ -74,15 +74,15 @@ export default {
 		    platform: platform,
 		    version: version 
     	}
-    }).then((res)=>{
+	}).then((res)=>{
     	const data = res.data
     	console.log(data)
 
-    	const list = data.data.map((item)=>{
+    	const list = data.data.list.map((item)=>{
     		item.imgs.push("")
     		return item
     	})
-		  this.list = list
+		this.list = list
     	
     }).catch((err)=>{
     	console.log(err)
@@ -117,6 +117,7 @@ export default {
    	 		imgs: imgs
    	 	}
    	 })
+     console.log(list)
    	 axios.post('/admin/super/setDetail',{
    	 	title: this.title,
    	 	list: list,
@@ -151,10 +152,14 @@ export default {
 
    },
    toMain(){
-    
+    let title = this.$route.params.title
+    this.$router.push({path:'/editor/main/'+ title})
    },
    toDownload(){
-    
+    this.$router.push({ name: 'download', params: {
+        title: this.$route.params.title
+      }
+    })
    }
   }
 }

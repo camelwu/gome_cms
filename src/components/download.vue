@@ -2,7 +2,7 @@
    <div class="form-box">
      <div class="nav">
       <div>
-        <el-button type="primary">首页</el-button>
+        <el-button type="primary" @click="toMain">首页</el-button>
         <el-button type="primary">下载页</el-button>
       </div>
     </div>
@@ -76,7 +76,7 @@
             <el-form-item>
                <el-button type="primary" @click="submitForm">保存</el-button>
                <a :href="'/admin/pre/download?version=' + $route.params.title" target="_blank">
-                  <el-button type="button" @click="preview">预览</el-button>
+                  <el-button type="button">预览</el-button>
                </a>
             </el-form-item>
          </el-form>
@@ -110,8 +110,9 @@
       }
     },
     methods: {
-      preview () {
-
+      toMain(){
+        let title = this.$route.params.title
+        this.$router.push({path:'/editor/main/'+ title})
       },
       addLog (index) {
          let detail = this.platObj[this.activeName].detail

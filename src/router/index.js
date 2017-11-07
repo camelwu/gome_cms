@@ -6,6 +6,7 @@ import VHome from '@/components/v-home'
 import Main from '@/components/main'
 import Download from '@/components/download'
 import Detail from '@/components/detail'
+import All from '@/components/all'
 
 Vue.use(Router)
 
@@ -32,6 +33,9 @@ export default new Router({
 		},{
 			path: "/editor/detail/:title/:platform/:version",
 			component: Detail
+		},{
+			path: '/all',
+			component: All
 		}
 	]
 })
