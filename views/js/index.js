@@ -60,10 +60,12 @@ imgObj.onload = function () {
 }
 }, 500);
 document.getElementById('win-download').onclick = function () {
-window.location.href = 'https://download.meixincdn.com/mxoffice/gomeplus/pc/windows/Aeromind_1_3_0.exe';
+    var url =this.getAttribute('data-url');
+    window.location.href = url;
 };
 document.getElementById('mac-download').onclick = function () {
-window.location.href = 'https://download.meixincdn.com/mxoffice/gomeplus/pc/mac/Aeromind_1_2_0.dmg';
+    var url =this.getAttribute('data-url');
+    window.location.href = url;
 };
 document.getElementById('a-download').onclick = function () {
 window.location.href = '/downloads#a';

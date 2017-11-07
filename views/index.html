@@ -102,16 +102,31 @@
             <%if (cover.download.list.length>0) {var list = cover.download.list,len=list.length %>
             <% for(var i=0;i<len;i++){ %>
             <%if (i==0) {%>
-            <div class="link-box" id="win-download">
-            <% }else{ %>
-            <div class="link-box link" id="win-download">
+            <div class="link-box" id="win-download" data-url="<%=list[i].url%>">
+            <% }else if(i==1){ %>
+            <div class="link-box link" id="mac-download" data-url="<%=list[i].url%>">
+            <% }else if(i==2){ %>
+            <div class="link-box link" id="a-download" data-url="<%=list[i].url%>">
+            <% }else if(i==3){ %>
+            <div class="link-box link" id="i-download" data-url="<%=list[i].url%>">
             <% } %>
                 <div class="link-img-win">
                     <span class="win-logo-img index-download-normal-icon" style="background: url(/css/uploadImg/<%=list[i].pic1%>) no-repeat;background-size: contain;"></span>
                     <span class="down-img index-download-hover-icon" style="background: url(/css/uploadImg/<%=list[i].pic2%>) no-repeat;background-size: contain;"></span>
                 </div>
+                <%if (i==0) {%>
                 <span class="link-span-title">Windows</span>
                 <span class="link-down-desc">点击下载</span>
+                <% }else if(i==1){ %>
+                <span class="link-span-title">macOS</span>
+                <span class="link-down-desc">点击下载</span>
+                <% }else if(i==2){ %>
+                <span class="link-span-title">Android</span>
+                <span class="link-down-desc">扫描二维码下载</span>
+                <% }else if(i==3){ %>
+                <span class="link-span-title">iOS</span>
+                <span class="link-down-desc">扫描二维码下载</span>
+                <% } %>
             </div>
             <% } %>
             <% } %>
