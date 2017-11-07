@@ -70,8 +70,8 @@
     <% } %>
     <div class="backround-indtrod clearfix odd">
         <div class="back-text">
-            <p class="back-te">Aeromind 产品特色</p>
-            <p class="back-tex">对企业成员进行智能管理，对沟通信息、协作信息进行精细处理及整合</p>
+            <p class="back-te"><%=cover.feature.title%></p>
+            <p class="back-tex"><%=cover.feature.subTitle%></p>
         </div>
         <div class="ul-box">
             <%if (cover.feature.list.length>0) {var list = cover.feature.list,len=list.length %>
@@ -95,8 +95,8 @@
     </div>
     <div class="backround-indtrod clearfix">
         <div class="back-text clearfix">
-            <p class="back-te">多平台支持</p>
-            <p class="back-tex">包括 Windows、macOS、Android、iOS 平台的客户端已经开发就绪，可以选择任何一个下载使用</p>
+            <p class="back-te"><%=cover.download.title%></p>
+            <p class="back-tex"><%=cover.download.subTitle%></p>
         </div>
         <div class="back-link clearfix">
             <%if (cover.download.list.length>0) {var list = cover.download.list,len=list.length %>
