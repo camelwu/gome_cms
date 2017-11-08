@@ -84,7 +84,7 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
       }).then(() => {
-        axios.post('/admin/super/v-agree',{title:title}).then((res)=>{
+        axios.post('/admin/super/vagree',{title:title}).then((res)=>{
           this.getList()
         }).catch((err)=>{
           alert('上线失败')
@@ -97,7 +97,7 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
       }).then(() => {
-         axios.post('/admin/super/v-refuse',{title:title}).then((res)=>{
+         axios.post('/admin/super/vrefuse',{title:title}).then((res)=>{
           this.getList()
         }).catch((err)=>{
           alert('拒绝失败')
