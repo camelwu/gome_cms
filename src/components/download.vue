@@ -96,7 +96,77 @@
     async created () {
       let title = this.$route.params.title
       let { data } = await axios.get('/admin/getDownload', { params: { 'title': title } })
+
+      if(data.data.windows.detail.length==0){
+        data.data.windows.detail = [
+          {
+            "title": "",
+            "time": "",
+            "version":"",
+            "list":[
+              {
+                "title":'',
+                "summary":"",
+                "imgs":[]
+              }
+            ]
+          }
+        ]
+      }
+
+      if(data.data.ios.detail.length==0){
+        data.data.ios.detail = [
+          {
+            "title": "",
+            "time": "",
+            "version":"",
+            "list":[
+              {
+                "title":'',
+                "summary":"",
+                "imgs":[]
+              }
+            ]
+          }
+        ]
+      }
+
+      if(data.data.android.detail.length==0){
+        data.data.android.detail = [
+          {
+            "title": "",
+            "time": "",
+            "version":"",
+            "list":[
+              {
+                "title":'',
+                "summary":"",
+                "imgs":[]
+              }
+            ]
+          }
+        ]
+      }
+      if(data.data.mac.detail.length==0){
+        data.data.mac.detail = [
+          {
+            "title": "",
+            "time": "",
+            "version":"",
+            "list":[
+              {
+                "title":'',
+                "summary":"",
+                "imgs":[]
+              }
+            ]
+          }
+        ]
+      }
       this.platObj = data.data
+
+
+
       this.activeName = Object.keys(this.platObj)[0]
     },
     watch: {
@@ -169,6 +239,7 @@
             data: obj
          })
          if(data.code === 200) {
+            this.isEdit = false
             alert('保存成功')
          } else {
             alert(data.msg)

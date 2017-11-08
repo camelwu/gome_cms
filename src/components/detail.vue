@@ -35,7 +35,7 @@
       </el-form>
       <div>
       <el-button type="primary" @click="submitForm('banner')">保存</el-button>
-      <el-button type="primary">预览</el-button>
+      <a :href="'/admin/pre/detail?version=' + $route.params.title +'&versions=' +  $route.params.version + '&platform=' +$route.params.platform " target="_blank"><el-button type="primary">预览</el-button></a>
       </div>      
     </div>
   </div>

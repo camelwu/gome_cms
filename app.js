@@ -1170,7 +1170,7 @@ router.get('/pre/versionList',aeromind,(req, res)=>{
 router.get('/pre/detail',aeromind,(req, res)=>{
 	const title = req.query.version
 	const platform = req.query.platform
-	const version = req.query.version
+	const version = req.query.versions
 	res.redirect('http://'+ req.hostname  + ':' + port + '/updates/' + platform + '-' + version + '?version='+title)
 })
 
@@ -1211,7 +1211,6 @@ app.get("/downloads", (req, res)=>{
 	}else if(req.session.title){
 		title = req.session.title
 	}
-	console.log(title)
 	if(!title){
 		return res.send({msg:'版本不存在'})
 	}
@@ -1219,6 +1218,72 @@ app.get("/downloads", (req, res)=>{
 		if(!version){
 			return res.send({msg:'版本不存在'})
 		}
+		let time = ''
+		let str = ''
+		let i = 0
+		if(version.windows.time){
+			time = new Date(version.windows.time)
+			str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+			version.windows.time = str
+		}
+
+		if(version.ios.time){
+			time = new Date(version.ios.time)
+			str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+			version.ios.time = str
+		}
+
+		if(version.android.time){
+			time = new Date(version.android.time)
+			str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+			version.android.time = str
+		}
+		if(version.mac.time){
+			time = new Date(version.mac.time)
+			str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+			version.mac.time = str
+		}
+
+		for(i =0; i<version.windows.detail.length; i++){
+			if(version.windows.detail[i].time){
+				time = new Date(version.windows.detail[i].time)
+				str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+				version.windows.detail[i].time = str
+			}
+		}
+
+		for(i =0; i<version.ios.detail.length; i++){
+			if(version.ios.detail[i].time){
+				time = new Date(version.ios.detail[i].time)
+				str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+				version.ios.detail[i].time = str
+			}
+		}		
+		
+		for(i =0; i<version.android.detail.length; i++){
+			if(version.android.detail[i].time){
+				time = new Date(version.android.detail[i].time)
+				str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+				version.android.detail[i].time = str
+			}
+		}	
+
+		for(i =0; i<version.mac.detail.length; i++){
+			if(version.mac.detail[i].time){
+				time = new Date(version.mac.detail[i].time)
+				str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+				version.mac.detail[i].time = str
+			}
+		}
+
 		res.render("page/main", {title : "下载", domain : domain, banner:{
 			windows: version.windows,
 			ios: version.ios,
@@ -1252,6 +1317,47 @@ app.get("/versionList", function(req, res) {
 		if(!version){
 			return res.send({msg:'版本不存在'})
 		}
+
+		let time = ''
+		let str = ''
+		let i = 0
+
+		for(i =0; i<version.windows.detail.length; i++){
+			if(version.windows.detail[i].time){
+				time = new Date(version.windows.detail[i].time)
+				str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+				version.windows.detail[i].time = str
+			}
+		}
+
+		for(i =0; i<version.ios.detail.length; i++){
+			if(version.ios.detail[i].time){
+				time = new Date(version.ios.detail[i].time)
+				str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+				version.ios.detail[i].time = str
+			}
+		}		
+		
+		for(i =0; i<version.android.detail.length; i++){
+			if(version.android.detail[i].time){
+				time = new Date(version.android.detail[i].time)
+				str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+				version.android.detail[i].time = str
+			}
+		}	
+
+		for(i =0; i<version.mac.detail.length; i++){
+			if(version.mac.detail[i].time){
+				time = new Date(version.mac.detail[i].time)
+				str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+
+				version.mac.detail[i].time = str
+			}
+		}
+
 		res.render("versionList/versionList", {title : "Version update list", domain:domain, vers: {
 			windows: version.windows.detail,
 			ios: version.ios.detail,
@@ -1285,6 +1391,14 @@ app.get("/updates/:ver", function(req, res) {
     	let detail = ''
     	version[platform].detail.map((item)=>{
     		if(item.version == activeVersion){
+    			let time = ''
+				let str = ''
+				let i = 0
+    			if(item.time){
+    				time = new Date(item.time)
+					str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
+					item.time = str
+    			}
     			detail = item
     		}
     	})
