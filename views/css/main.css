@@ -236,6 +236,7 @@ body{
 /* windows */
 .windows-content{
 	background: url(../css/img/download/windowsBanner.png) no-repeat center top;
+  background-size: 100% auto;
 }
 .windows-content .download>p{
 	margin-left: 52px;
@@ -250,6 +251,7 @@ body{
 /* mac */
 .mac-content{
 	background: url(../css/img/download/macbanner.png) no-repeat center top;
+  background-size: 100% auto;
 }
 .mac-content .download>p{
 	margin-left: 52px;
