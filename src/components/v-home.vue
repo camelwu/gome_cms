@@ -100,7 +100,7 @@ export default {
          axios.post('/admin/super/v-refuse',{title:title}).then((res)=>{
           this.getList()
         }).catch((err)=>{
-          alert('上线失败')
+          alert('拒绝失败')
           console.log(err)
         })
       }).catch(()=>{})

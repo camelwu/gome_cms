@@ -14,7 +14,7 @@ export default {
 	},
 	methods:{
 		submit(){
-			const json = JSON.stringify(this.j)
+			const json = JSON.parse(this.j)
 			console.log(json)
 
 			axios.post('/admin/super/all',{

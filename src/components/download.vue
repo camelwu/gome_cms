@@ -210,16 +210,7 @@
          let version = detail.version
          let platform = this.activeName
          let title = this.$route.params.title
-         if(!this.isEdit) {
-            return this.$router.push({ 'path': `/editor/detail/${title}/${platform}/${version}` })
-         }
-         this.$confirm('有数据未保存, 确定直接离开?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-         }).then(() => {
-            this.$router.push({ 'path': `/editor/detail/${title}/${platform}/${version}` })
-         }).catch(() => {})
+          this.$router.push({ 'path': `/editor/detail/${title}/${platform}/${version}` })
       },
       uploadSuccess (res) {
          this.platObj[this.activeName].backgroundPic = res.src
@@ -238,7 +229,7 @@
             plat: this.activeName,
             data: obj
          })
-         if(data.code === 200) {
+         if(data.code === 0) {
             this.isEdit = false
             alert('保存成功')
          } else {

@@ -545,8 +545,8 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 				        "size": "",
 				        "version": "",
 				        "system": "",
-						"time": '',
-						"url": '',
+						"time": "",
+						"url": "",
 						"backgroundPic": "",
 						"detail":[
 							{
@@ -555,7 +555,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"version":"",
 								"list":[
 									{
-										"title":'',
+										"title":"",
 										"summary":"",
 										"imgs":[]
 									}
@@ -569,7 +569,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 				        "size": "",
 				        "version": "",
 				        "system": "",
-						"time": '',
+						"time": "",
 						"backgroundPic": "",
 						"detail":[
 							{
@@ -578,7 +578,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"version":"",
 								"list":[
 									{
-										"title":'',
+										"title":"",
 										"summary":"",
 										"imgs":[]
 									}
@@ -592,8 +592,8 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 			            "size": "",
 			            "version": "",
 			            "system": "",
-						"time": '',
-						"url": '',
+						"time": "",
+						"url": "",
 						"backgroundPic": "",
 						"detail":[
 							{
@@ -602,7 +602,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"version":"",
 								"list":[
 									{
-										"title":'',
+										"title":"",
 										"summary":"",
 										"imgs":[]
 									}
@@ -616,7 +616,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 			            "size": "",
 			            "version": "",
 			            "system": "",
-						"time": '',
+						"time": "",
 						"backgroundPic": "",
 						"detail":[
 							{
@@ -625,7 +625,7 @@ router.post('/super/createVersion',aeromind,(req, res)=>{
 								"version":"",
 								"list":[
 									{
-										"title":'',
+										"title":"",
 										"summary":"",
 										"imgs":[]
 									}
@@ -915,15 +915,16 @@ router.post('/super/setDetail', aeromind, (req, res)=>{
 //整体储存
 router.post('/super/all', superman,(req, res)=>{
 	const data = req.body.data
+	console.log(data)
 	VersionModel.findOne({title:data.title}).then((v)=>{
 		if(v){
 			return res.send({code:"10405",msg:"版本已存在"})
 		}
-		new VersionModel(date).save((err, version)=>{
+		new VersionModel(data).save((err, version)=>{
 			if(err){
 				return res.send({code:"10500", msg:"system err"})
 			}
-			res.send({code:"0",msg:"ok",data:{title: title, active: 1}})
+			res.send({code:"0",msg:"ok",data:{title: data.title, active: 1}})
 		})
 	})
 })
@@ -936,7 +937,7 @@ router.post('/super/all', superman,(req, res)=>{
 //active:3 审核通过版本 (已发布，线上版本)
 //active:4 审核未通过  (审核不通过)
 //通过审核*
-router.post('/super/v-agree',superman, (req, res)=>{
+router.post('/super/vagree',superman, (req, res)=>{
 	const title = req.body.title
 	VersionModel.findOne({title:title}).then((version)=>{
 		if(!version){
@@ -1064,7 +1065,7 @@ router.post('/super/v-agree',superman, (req, res)=>{
 	})
 })
 //拒绝审核*
-router.post('/super/v-refuse',superman, (req, res)=>{
+router.post('/super/vrefuse',superman, (req, res)=>{
 	const title = req.body.title
 	VersionModel.findOne({title:title}).then((version)=>{
 		if(!version){
