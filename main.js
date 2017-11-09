@@ -42,7 +42,7 @@ const lobj = {
 // 首页
 app.get("/", function(req, res) {
     axios.get('http://'+ req.hostname +':3005/admin/getMainPage').then((r)=>{
-        const cover = r.data
+        const cover = r.data.data
         res.render("index", {title : "首页", domain : domain, cover: cover})
     }).catch((err)=>{
         console.log(err)
@@ -97,7 +97,6 @@ app.get("/", function(req, res) {
 // 下载
 app.get("/downloads", function(req, res) {
     axios.get('http://'+ req.hostname +':3005/admin/getDownload').then((r)=>{
-        console.log(r.data)
         const banner = r.data.data
         if(!banner){
             return res.send({code:404})
