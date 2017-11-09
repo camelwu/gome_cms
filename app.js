@@ -677,6 +677,16 @@ router.post('/super/deleteVersion',aeromind, (req,res)=>{
 		res.send({code:"10500", msg:"system err"})
 	})
 })
+//彻底删除版本
+router.get('/super/rVersion', superman, (req,res)=>{
+	const title = req.query.title
+	VersionModel.remove({title:title},(err)=>{
+		if(err){
+			return res.send({code:"10500", msg:"删除失败"})
+		}
+		res.send({code:0, msg:"删除成功"})
+	})
+})
 //提交版本*
 router.post('/super/releaseVersion',aeromind, (req, res)=>{
 	const title = req.body.title.trim()
