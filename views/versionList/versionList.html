@@ -14,11 +14,11 @@
     <div class="ver-bottom clearfix">
         <div class="ver-bottom-box clearfix">
             <h3>Aeromind更新日志</h3>
-            <div class="first-li">
-                    <a href="javascript:;">iOS平台<span></span></a>
-            </div>
             <%if (vers.ios.length>0) { var list = vers.ios,len = list.length %>
             <ul class="ver-ul selected clearfix" id="Ios">
+                <li class="first-li">
+                    <a href="javascript:;">iOS平台<span></span></a>
+                </li>
                 <% for(var i=0;i<len;i++) { %>
                 <%if (i==len-1) {%>
                 <li class="ver-li last-li">
@@ -40,11 +40,11 @@
             </ul>
             <% } %>
 
-            <div class="first-li">
-                    <a href="javascript:;">Android平台<span></span></a>
-            </div>
             <%if (vers.android.length>0) { var list = vers.android,len = list.length %>
             <ul class="ver-ul  clearfix" id="Android">
+                <li class="first-li">
+                    <a href="javascript:;">Android平台<span></span></a>
+                </li>
                <% for(var i=0;i<len;i++) { %>
                 <%if (i==len-1) {%>
                 <li class="ver-li last-li">
@@ -66,11 +66,11 @@
             </ul>
             <% } %>
 
-            <div class="first-li">
-                    <a href="javascript:;">Mac平台<span></span></a>
-            </div>
             <%if (vers.android.length>0) { var list = vers.android,len = list.length %>
             <ul class="ver-ul  clearfix" id="Mac">
+                <li class="first-li">
+                    <a href="javascript:;">Mac平台<span></span></a>
+                </li>
                 <% for(var i=0;i<len;i++) { %>
                 <%if (i==len-1) {%>
                 <li class="ver-li last-li">
@@ -92,11 +92,11 @@
             </ul>
             <% } %>
 
-            <div class="first-li">
-                    <a href="javascript:;">Windows平台<span></span></a>
-            </div>
             <%if (vers.windows.length>0) { var list = vers.windows,len = list.length %>
             <ul class="ver-ul  clearfix" id="Windows">
+                <li class="first-li">
+                    <a href="javascript:;">Windows平台<span></span></a>
+                </li>
                <% for(var i=0;i<len;i++) { %>
                <%if (i==len-1) {%>
                 <li class="ver-li last-li">
