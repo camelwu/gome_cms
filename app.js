@@ -963,17 +963,17 @@ router.post('/super/vagree',superman, (req, res)=>{
 						version.save().then((onlineVersion)=>{
 							VersionModel.findOne({active:10}).then((oVersion)=>{
 								if(oVersion){
-									oVersion.cover = version.cover
-									oVersion.introduction = version.introduction
-									oVersion.feature =version.feature
-									oVersion.downloadEnter = version.downloadEnter
-									oVersion.windows = version.windows
-									oVersion.ios = version.ios
-									oVersion.mac = version.mac
-									oVersion.android = version.android
+									oVersion.cover = onlineVersion.cover
+									oVersion.introduction = onlineVersion.introduction
+									oVersion.feature =onlineVersion.feature
+									oVersion.downloadEnter = onlineVersion.downloadEnter
+									oVersion.windows = onlineVersion.windows
+									oVersion.ios = onlineVersion.ios
+									oVersion.mac = onlineVersion.mac
+									oVersion.android = onlineVersion.android
 									oVersion.onlineTime = +(new Date())
 
-									activeVersion.save().then((version)=>{
+									oVersion.save().then((version)=>{
 										res.send({code: 0, msg:"此版本上线成功"})
 									}).catch((err)=>{
 										res.send({code:10500, msg:"system err"})
@@ -982,14 +982,14 @@ router.post('/super/vagree',superman, (req, res)=>{
 									new VersionModel({
 										"title": '_online',
 										"active": 10,
-									    "cover": version.cover,
-									    "introduction": version.introduction,
-									    "feature":version.feature,
-									    "downloadEnter": version.downloadEnter,
-									    "windows": version.windows,
-									    "ios": version.ios,
-									    "mac": version.mac,
-									    "android": version.android,
+									    "cover": onlineVersion.cover,
+									    "introduction": onlineVersion.introduction,
+									    "feature":onlineVersion.feature,
+									    "downloadEnter": onlineVersion.downloadEnter,
+									    "windows": onlineVersion.windows,
+									    "ios": onlineVersion.ios,
+									    "mac": onlineVersion.mac,
+									    "android": onlineVersion.android,
 									    "onlineTime": +(new Date())
 									}).save((err, version)=>{
 										if(err){
@@ -1013,17 +1013,17 @@ router.post('/super/vagree',superman, (req, res)=>{
 					version.save().then((onlineVersion)=>{
 						VersionModel.findOne({active:10}).then((oVersion)=>{
 							if(oVersion){
-								oVersion.cover = version.cover
-								oVersion.introduction = version.introduction
-								oVersion.feature =version.feature
-								oVersion.downloadEnter = version.downloadEnter
-								oVersion.windows = version.windows
-								oVersion.ios = version.ios
-								oVersion.mac = version.mac
-								oVersion.android = version.android
+								oVersion.cover = onlineVersion.cover
+								oVersion.introduction = onlineVersion.introduction
+								oVersion.feature =onlineVersion.feature
+								oVersion.downloadEnter = onlineVersion.downloadEnter
+								oVersion.windows = onlineVersion.windows
+								oVersion.ios = onlineVersion.ios
+								oVersion.mac = onlineVersion.mac
+								oVersion.android = onlineVersion.android
 								oVersion.onlineTime = +(new Date())
 
-								activeVersion.save().then((version)=>{
+								oVersion.save().then((version)=>{
 									res.send({code: 0, msg:"此版本上线成功"})
 								}).catch((err)=>{
 									res.send({code:10500, msg:"system err"})
@@ -1032,14 +1032,14 @@ router.post('/super/vagree',superman, (req, res)=>{
 								new VersionModel({
 									"title": '_online',
 									"active": 10,
-								    "cover": version.cover,
-								    "introduction": version.introduction,
-								    "feature":version.feature,
-								    "downloadEnter": version.downloadEnter,
-								    "windows": version.windows,
-								    "ios": version.ios,
-								    "mac": version.mac,
-								    "android": version.android,
+								    "cover": onlineVersion.cover,
+								    "introduction": onlineVersion.introduction,
+								    "feature":onlineVersion.feature,
+								    "downloadEnter": onlineVersion.downloadEnter,
+								    "windows": onlineVersion.windows,
+								    "ios": onlineVersion.ios,
+								    "mac": onlineVersion.mac,
+								    "android": onlineVersion.android,
 								    "onlineTime": +(new Date())
 								}).save((err, version)=>{
 									if(err){
