@@ -1,26 +1,68 @@
 var nav = document.getElementById('nav');
+var navBtns = nav.getElementsByTagName('span');
 var contentBox = document.getElementById('contentBox');
-var navs = nav.children;
-var contents = contentBox.children;
-
-    // click change tag
-
-    for(var i=0;i<navs.length;i++){
-        navs[i].index = i;
-        navs[i].onclick=function(){
-
-            for (var i = 0; i < navs.length; i++) {
-
-                navs[i].classList.remove('active');
-            }
-            this.classList.add('active');
-
-            for (var j = 0; j < contents.length; j++) {
-
-                contents[j].classList.remove('show');
-                contents[j].classList.add('hide');
-            }
-            contents[this.index].classList.remove('hide');
-            contents[this.index].classList.add('show');
+var platform = window.location.href.split('#')[1];
+if(platform){
+    if(platform == "w"){
+        for (var j = 0; j < contentBox.children.length; j++) {
+            ecui.dom.removeClass(contentBox.children[j],'show');
+            ecui.dom.removeClass(contentBox.children[j],'hide');
+            ecui.dom.addClass(contentBox.children[j],'hide');
         }
+        for (var q = 0; q < navBtns.length; q++) {
+            ecui.dom.removeClass(navBtns[q],'active');
+        }
+        ecui.dom.addClass(contentBox.children[0],'show');
+        ecui.dom.addClass(navBtns[0],'active');
+    }else if(platform == "m"){
+        for (var j = 0; j < contentBox.children.length; j++) {
+            ecui.dom.removeClass(contentBox.children[j],'show');
+            ecui.dom.removeClass(contentBox.children[j],'hide');
+            ecui.dom.addClass(contentBox.children[j],'hide');
+        }
+        for (var q = 0; q < navBtns.length; q++) {
+            ecui.dom.removeClass(navBtns[q],'active');
+        }
+        ecui.dom.addClass(contentBox.children[1],'show');
+        ecui.dom.addClass(navBtns[1],'active');
+    }else if(platform == "a"){
+        for (var j = 0; j < contentBox.children.length; j++) {
+            ecui.dom.removeClass(contentBox.children[j],'show');
+            ecui.dom.removeClass(contentBox.children[j],'hide');
+            ecui.dom.addClass(contentBox.children[j],'hide');
+        }
+        for (var q = 0; q < navBtns.length; q++) {
+            ecui.dom.removeClass(navBtns[q],'active');
+        }
+        ecui.dom.addClass(contentBox.children[2],'show');
+        ecui.dom.addClass(navBtns[2],'active');
+    }else if(platform == "i"){
+        for (var j = 0; j < contentBox.children.length; j++) {
+            ecui.dom.removeClass(contentBox.children[j],'show');
+            ecui.dom.removeClass(contentBox.children[j],'hide');
+            ecui.dom.addClass(contentBox.children[j],'hide');
+        }
+        for (var q = 0; q < navBtns.length; q++) {
+            ecui.dom.removeClass(navBtns[q],'active');
+        }
+        ecui.dom.addClass(contentBox.children[3],'show');
+        ecui.dom.addClass(navBtns[3],'active');
     }
+}else{
+    for (var i = 0; i < navBtns.length; i++) {
+        (function(i){
+            navBtns[i].onclick = function(){
+                for (var j = 0; j < contentBox.children.length; j++) {
+                    ecui.dom.removeClass(contentBox.children[j],'show');
+                    ecui.dom.removeClass(contentBox.children[j],'hide');
+                    ecui.dom.addClass(contentBox.children[j],'hide');
+                }
+                for (var q = 0; q < navBtns.length; q++) {
+                    ecui.dom.removeClass(navBtns[q],'active');
+                }
+                ecui.dom.addClass(contentBox.children[i],'show');
+                ecui.dom.addClass(this,'active');
+            }
+        })(i)
+    }
+}

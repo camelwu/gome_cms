@@ -1260,7 +1260,7 @@ app.get("/downloads", (req, res)=>{
 		}
 
 		version.windows.detail.sort(function(n1,n2){
-			return n1.time - n2.time;
+			return n2.time - n1.time;
 		})
 		for(i =0; i<version.windows.detail.length; i++){
 			if(version.windows.detail[i].time){
@@ -1272,7 +1272,7 @@ app.get("/downloads", (req, res)=>{
 		}
 
 		version.ios.detail.sort(function(n1,n2){
-			return n1.time - n2.time;
+			return n2.time - n1.time;
 		})
 		for(i =0; i<version.ios.detail.length; i++){
 			if(version.ios.detail[i].time){
@@ -1284,7 +1284,7 @@ app.get("/downloads", (req, res)=>{
 		}		
 		
 		version.android.detail.sort(function(n1,n2){
-			return n1.time - n2.time;
+			return n2.time - n1.time;
 		})
 		for(i =0; i<version.android.detail.length; i++){
 			if(version.android.detail[i].time){
@@ -1295,7 +1295,7 @@ app.get("/downloads", (req, res)=>{
 			}
 		}	
 		version.mac.detail.sort(function(n1,n2){
-			return n1.time - n2.time;
+			return n2.time - n1.time;
 		})
 		for(i =0; i<version.mac.detail.length; i++){
 			if(version.mac.detail[i].time){
@@ -1345,7 +1345,7 @@ app.get("/versionList", function(req, res) {
 		let i = 0
 		
 		version.windows.detail.sort(function(n1,n2){
-			return n1.time - n2.time;
+			return n2.time - n1.time;
 		})
 		for(i =0; i<version.windows.detail.length; i++){
 			if(version.windows.detail[i].time){
@@ -1356,7 +1356,7 @@ app.get("/versionList", function(req, res) {
 			}
 		}
 		version.ios.detail.sort(function(n1,n2){
-			return n1.time - n2.time;
+			return n2.time - n1.time;
 		})
 		for(i =0; i<version.ios.detail.length; i++){
 			if(version.ios.detail[i].time){
@@ -1367,7 +1367,7 @@ app.get("/versionList", function(req, res) {
 			}
 		}		
 		version.android.detail.sort(function(n1,n2){
-			return n1.time - n2.time;
+			return n2.time - n1.time;
 		})
 		for(i =0; i<version.android.detail.length; i++){
 			if(version.android.detail[i].time){
@@ -1379,7 +1379,7 @@ app.get("/versionList", function(req, res) {
 		}	
 
 		version.mac.detail.sort(function(n1,n2){
-			return n1.time - n2.time;
+			return n2.time - n1.time;
 		})
 		for(i =0; i<version.mac.detail.length; i++){
 			if(version.mac.detail[i].time){

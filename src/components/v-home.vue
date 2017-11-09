@@ -46,25 +46,34 @@ export default {
   computed:{
     tableList(){
       return this.versions.map((item)=>{
-        let state = '待提交'
+        let state = '已提交'
+        let date = ''
         if(item.active == 2){
           state = '已提交'
+          if(item.time > 0){
+            const oDate = new Date(item.time)
+            date = oDate.getFullYear() + '-' + (oDate.getMonth() + 1) + '-' + oDate.getDate()
+          }
+          return {
+            time: date,
+            state: state,
+            active: item.active,
+            title: item.title
+          }
         }else if(item.active == 3){
           state = '已发布'
-        }else if(item.active == 4){
-          state = '未通过'
+          if(item.time > 0){
+            const oDate = new Date(item.time)
+            date = oDate.getFullYear() + '-' + (oDate.getMonth() + 1) + '-' + oDate.getDate()
+          }
+          return {
+            time: date,
+            state: state,
+            active: item.active,
+            title: item.title
+          }
         }
-        let date = ''
-        if(item.time > 0){
-          const oDate = new Date(item.time)
-          date = oDate.getFullYear() + '-' + (oDate.getMonth() + 1) + '-' + oDate.getDate()
-        }
-        return {
-          time: date,
-          state: state,
-          active: item.active,
-          title: item.title
-        }
+        
       })
     }
   },

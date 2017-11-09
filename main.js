@@ -163,7 +163,7 @@ app.get("/downloads", function(req, res) {
         let io = ver.ios
         let and = ver.android
         win.sort(function(n1,n2){
-            return n1.time - n2.time;
+            return n2.time - n1.time;
         })
         for(var i=0;i<win.length;i++){
             if(win[i].time){
@@ -174,7 +174,7 @@ app.get("/downloads", function(req, res) {
         }
 
         ma.sort(function(n1,n2){
-            return n1.time - n2.time;
+            return n2.time - n1.time;
         })
         for(var i=0;i<ma.length;i++){
             if(ma[i].time){
@@ -184,7 +184,7 @@ app.get("/downloads", function(req, res) {
             }
         }
         io.sort(function(n1,n2){
-            return n1.time - n2.time;
+            return n2.time - n1.time;
         })
         for(var i=0;i<io.length;i++){
             if(io[i].time){
@@ -194,7 +194,7 @@ app.get("/downloads", function(req, res) {
             }
         }
         and.sort(function(n1,n2){
-            return n1.time - n2.time;
+            return n2.time - n1.time;
         })
         for(var i=0;i<and.length;i++){
             if(and[i].time){
@@ -333,7 +333,7 @@ app.get("/pravites", function(req, res) {
 })
 // 列表
 app.get("/versionList", function(req, res) {
-    axios.get('http://'+ req.hostname +'/admin/getVersionList').then((r)=>{
+    axios.get('http://'+ req.hostname +':3005/admin/getVersionList').then((r)=>{
         const vers = r.data.data
 
         let time = ''
@@ -344,7 +344,7 @@ app.get("/versionList", function(req, res) {
         let and = vers.android
 
         win.sort(function(n1,n2){
-            return n1.time - n2.time;
+            return n2.time - n1.time;
         })
         for(var i=0;i<win.length;i++){
             if(win[i].time){
@@ -355,7 +355,7 @@ app.get("/versionList", function(req, res) {
         }
 
         ma.sort(function(n1,n2){
-            return n1.time - n2.time;
+            return n2.time - n1.time;
         })
         for(var i=0;i<ma.length;i++){
             if(ma[i].time){
@@ -365,7 +365,7 @@ app.get("/versionList", function(req, res) {
             }
         }
         io.sort(function(n1,n2){
-            return n1.time - n2.time;
+            return n2.time - n1.time;
         })
         for(var i=0;i<io.length;i++){
             if(io[i].time){
@@ -375,7 +375,7 @@ app.get("/versionList", function(req, res) {
             }
         }
         and.sort(function(n1,n2){
-            return n1.time - n2.time;
+            return n2.time - n1.time;
         })
         for(var i=0;i<and.length;i++){
             if(and[i].time){
@@ -437,7 +437,7 @@ app.get("/updates/:ver", function(req, res) {
     const platform = ver.split('-')[0]
     const activeVersion = ver.split('-')[1]
 
-    axios.get('/admin/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
+    axios.get('http://'+ req.hostname +':3005/admin/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
         const detail = r.data.data
         res.render('page/version', {title : "隐私政策", domain : domain, detail: detail})
     }).catch((err)=>{
