@@ -471,27 +471,33 @@ app.get("/updates/:ver", function(req, res) {
 })
 //h5模板
 app.get("/html5", function(req, res) {
-    let result = {
-        "code": 0,
-        "msg": "OK",
-        "data": {
-            "version":'V2.0.0',
-            "title": 'Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！',
-            "time": "2017-10-10",
-            "detail": [
-                {
-                    "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-                    "introduction":"大家期盼已久的文件传输功能终于上线！经产品汪们反复调研实践，将文件传输上限定为500M，并将文件格式扩展，现能支持更多",
-                    "imgs": [
-                        "/img/download/WechatIMG9.png",
-                        "/img/download/WechatIMG9.png"
-                    ]
-                }
-            ]
-         }
-    }
-    let number = result.data
-    res.render("page/h5", {title : "h5模板", domain : domain, number: number})
+    axios.get('http://'+ req.hostname +':3005/admin/getMainPage').then((r)=>{
+        const number = r.data.data
+        res.render("page/h5", {title : "h5模板", domain : domain, number: number})
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+    // let result = {
+    //     "code": 0,
+    //     "msg": "OK",
+    //     "data": {
+    //         "version":'V2.0.0',
+    //         "title": 'Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！',
+    //         "time": "2017-10-10",
+    //         "detail": [
+    //             {
+    //                 "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
+    //                 "introduction":"大家期盼已久的文件传输功能终于上线！经产品汪们反复调研实践，将文件传输上限定为500M，并将文件格式扩展，现能支持更多",
+    //                 "imgs": [
+    //                     "/img/download/WechatIMG9.png",
+    //                     "/img/download/WechatIMG9.png"
+    //                 ]
+    //             }
+    //         ]
+    //      }
+    // }
+    // let number = result.data
 })
 // answer和question模板
 app.get("/answer01",function(req, res){
