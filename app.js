@@ -26,8 +26,8 @@ const app = express()
 app.listen(port,()=>{
 	console.log('server is working')
 })
-//mongoose.connect('mongodb://127.0.0.1/gomeCMS', {useMongoClient: true})
-mongoose.connect('mongodb://dev_meiprou:oEsqPIH6KrFa@10.115.1.161:25027/meipro', {useMongoClient: true})
+mongoose.connect('mongodb://127.0.0.1/gomeCMS', {useMongoClient: true})
+//mongoose.connect('mongodb://dev_meiprou:oEsqPIH6KrFa@10.115.1.161:25027/meipro', {useMongoClient: true})
 app.use(session({ 
 	secret: 'aeromind', 
 	cookie: { maxAge: 72000000 },

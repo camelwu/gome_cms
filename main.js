@@ -334,7 +334,7 @@ app.get("/pravites", function(req, res) {
 // 列表
 app.get("/versionList", function(req, res) {
     axios.get('http://'+ req.hostname +':3005/admin/getVersionList').then((r)=>{
-        const vers = r.data.data
+        const vers = r.data.msg
 
         let time = ''
         let str = ''
@@ -485,10 +485,10 @@ app.get("/html5/:ver", function(req, res) {
     const ver = req.params.ver
 
     axios.get('http://'+ req.hostname +':3005/admin/getVersionDetail',
-        params{
+        {params:{
             version: ver,
             platform: 'ios'
-        }).then((r)=>{
+        }}).then((r)=>{
 
         const number = r.data.data
         res.render("page/h5", {title : "h5模板", domain : domain, number: number})
