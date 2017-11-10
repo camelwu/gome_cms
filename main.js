@@ -439,6 +439,16 @@ app.get("/updates/:ver", function(req, res) {
 
     axios.get('http://'+ req.hostname +':3005/admin/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
         const detail = r.data.data
+        let str = ''
+        let time = ''
+        if(detail.time){
+            time = new Date(detail.time)
+
+            str = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate()
+
+            detail.time = str
+        }
+
         res.render('page/version', {title : "隐私政策", domain : domain, detail: detail})
     }).catch((err)=>{
         console.log(err)
@@ -470,8 +480,16 @@ app.get("/updates/:ver", function(req, res) {
     }*/
 })
 //h5模板
-app.get("/html5", function(req, res) {
-    axios.get('http://'+ req.hostname +':3005/admin/getMainPage').then((r)=>{
+///html5/V1.3.0
+app.get("/html5/:ver", function(req, res) {
+    const ver = req.params.ver
+
+    axios.get('http://'+ req.hostname +':3005/admin/getVersionDetail',
+        params{
+            version: ver,
+            platform: 'ios'
+        }).then((r)=>{
+
         const number = r.data.data
         res.render("page/h5", {title : "h5模板", domain : domain, number: number})
 
