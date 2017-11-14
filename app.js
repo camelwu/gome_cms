@@ -946,6 +946,7 @@ router.post('/super/all', superman,(req, res)=>{
 //active:2 提交版本 (已提交，待审核)
 //active:3 审核通过版本 (已发布，线上版本)
 //active:4 审核未通过  (审核不通过)
+//active:5 历史版本
 //通过审核*
 router.post('/super/vagree',superman, (req, res)=>{
 	const title = req.body.title
@@ -1165,24 +1166,24 @@ router.get('/super/signup',(req, res)=>{
 // 主页预览*
 router.get('/pre',aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.hostname  + ':' + port + '?version='+title)
+	res.redirect('http://'+ req.ip  + ':' + port + '?version='+title)
 })
 //download预览*
 router.get('/pre/download',aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.hostname  + ':' + port + '/downloads?version='+title)
+	res.redirect('http://'+ req.ip  + ':' + port + '/downloads?version='+title)
 })
 // versionList预览*
 router.get('/pre/versionList',aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.hostname  + ':' + port + '/versionList?version='+title)
+	res.redirect('http://'+ req.ip  + ':' + port + '/versionList?version='+title)
 })
 // detail预览*
 router.get('/pre/detail',aeromind,(req, res)=>{
 	const title = req.query.version
 	const platform = req.query.platform
 	const version = req.query.versions
-	res.redirect('http://'+ req.hostname  + ':' + port + '/updates/' + platform + '-' + version + '?version='+title)
+	res.redirect('http://'+ req.ip  + ':' + port + '/updates/' + platform + '-' + version + '?version='+title)
 })
 
 app.use('/admin', router)
