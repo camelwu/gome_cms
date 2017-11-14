@@ -876,7 +876,12 @@ router.post('/super/setDetail', aeromind, (req, res)=>{
 
 			for(let i =0; i<versionE[platform].detail.length; i++){
 				if(versionE[platform].detail[i].version == version){
-					versionE[platform].detail[i].list = list
+					if(platform == 'ios'){
+						versionE.ios.detail[i].list = list
+						versionE.android.detail[i].list = list
+					}else{
+						versionE[platform].detail[i].list = list
+					}
 					hasVersion = true
 				}
 			}
