@@ -1171,8 +1171,7 @@ router.get('/super/signup',(req, res)=>{
 // 主页预览*
 router.get('/pre', aeromind,(req, res)=>{
 	const title = req.query.version
-	//console.log(req.hostname)
-	res.redirect('http://'+ req.hostname  + ':' + port + '?version='+title)
+	res.redirect('http://'+ req.ip  + ':' + port + '?version='+title)
 })
 //download预览*
 router.get('/pre/download', aeromind,(req, res)=>{
@@ -1481,7 +1480,6 @@ app.get("/html5", function(req, res) {
 	}else if(req.session.title){
 		title = req.session.title
 	}
-	console.log(title)
 	if(!title){
 		return res.send({msg:'版本不存在'})
 	}
