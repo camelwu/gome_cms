@@ -21,7 +21,9 @@
            <% for(var j=0;j<list[i].imgs.length;j++) { %>
                 <img class="pic" src="/css/uploadImg/<%=list[i].imgs[j]%>" alt="">
             <% } %>
-            <p><%= number.summary %></p>
+            <% if (number.summary) { %>
+            <p><%=number.summary%></p>
+            <% } %>
         </li>
       <% } %>
     <% } %>
