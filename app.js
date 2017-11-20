@@ -1491,9 +1491,8 @@ app.get("/html5", function(req, res) {
 
 		let titleArr = number.title.split(' ')
         for (let i = 0; i < titleArr.length; i++) {
-            titleArr[i]
             if(titleArr[i].toLowerCase() == 'ios'){
-                number.title = titleArr[index+1]
+                number.title = titleArr[i+1]
                 break;
             }
         }
