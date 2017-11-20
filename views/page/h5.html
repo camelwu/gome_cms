@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="format-detection" content="telephone=no" />
-    <title<%=version%>版本功能介绍</title>
+    <title><%= version %>版本功能介绍</title>
     <link rel="stylesheet" type="text/css" href="/css/version.css"/>
 </head>
 <body>
 
 <div class="update_article">
-  <h2 class="update_caption"><%=number.title%></h2>
+  <h2 class="update_caption"><%= number.title %></h2>
   <ul class="update_info">
     <%if (number.list.length>0) { var list = number.list, len = list.length %>
       <% for(var i=0;i<len;i++) { %>
