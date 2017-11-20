@@ -41,7 +41,7 @@ const lobj = {
 
 // 首页
 app.get("/", function(req, res) {
-    axios.get('http://'+ req.hostname +':3005/admin/getMainPage').then((r)=>{
+    axios.get('http://'+ req.ip +':3005/admin/getMainPage').then((r)=>{
         const cover = r.data.data
         res.render("index", {title : "首页", domain : domain, cover: cover})
     }).catch((err)=>{
@@ -96,7 +96,7 @@ app.get("/", function(req, res) {
 })
 // 下载
 app.get("/downloads", function(req, res) {
-    axios.get('http://'+ req.hostname +':3005/admin/getDownload').then((r)=>{
+    axios.get('http://'+ req.ip +':3005/admin/getDownload').then((r)=>{
         const banner = r.data.data
         if(!banner){
             return res.send({code:404})
@@ -333,7 +333,7 @@ app.get("/pravites", function(req, res) {
 })
 // 列表
 app.get("/versionList", function(req, res) {
-    axios.get('http://'+ req.hostname +':3005/admin/getVersionList').then((r)=>{
+    axios.get('http://'+ req.ip +':3005/admin/getVersionList').then((r)=>{
         const vers = r.data.msg
 
         let time = ''
@@ -437,7 +437,7 @@ app.get("/updates/:ver", function(req, res) {
     const platform = ver.split('-')[0]
     const activeVersion = ver.split('-')[1]
 
-    axios.get('http://'+ req.hostname +':3005/admin/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
+    axios.get('http://'+ req.ip +':3005/admin/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
         const detail = r.data.data
         let str = ''
         let time = ''
@@ -484,14 +484,23 @@ app.get("/updates/:ver", function(req, res) {
 app.get("/html5/:ver", function(req, res) {
     const ver = req.params.ver
 
-    axios.get('http://'+ req.hostname +':3005/admin/getVersionDetail',
+    axios.get('http://'+ req.ip +':3005/admin/getVersionDetail',
         {params:{
             version: ver,
             platform: 'ios'
         }}).then((r)=>{
 
         const number = r.data.data
-        res.render("page/h5", {title : "h5模板", domain : domain, number: number})
+        let titleArr = number.title.split(' ')
+        for (let i = 0; i < titleArr.length; i++) {
+            titleArr[i]
+            if(titleArr[i].toLowerCase() == 'ios'){
+                number.title = titleArr[index+1]
+                break;
+            }
+        }
+        
+        res.render("page/h5", {title : "h5模板", domain : domain, number: number, version:ver})
 
     }).catch((err)=>{
         console.log(err)

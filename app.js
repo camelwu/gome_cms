@@ -1488,7 +1488,16 @@ app.get("/html5", function(req, res) {
 	axios.get('/getVersionDetail?title=' + title + '&version=' + activeVersion +'&platform=' + platform).then((r)=>{
 		const data = r.data
 		const number = data.data
-    	res.render("page/h5", {title : "h5模板", domain : domain, number: number})
+
+		let titleArr = number.title.split(' ')
+        for (let i = 0; i < titleArr.length; i++) {
+            titleArr[i]
+            if(titleArr[i].toLowerCase() == 'ios'){
+                number.title = titleArr[index+1]
+                break;
+            }
+        }
+    	res.render("page/h5", {title : "h5模板", domain : domain, number: number,version:activeVersion})
 	}).catch((err)=>{
 		console.log(err)
 	})
