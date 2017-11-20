@@ -498,7 +498,6 @@ app.get("/html5/:ver", function(req, res) {
                 break;
             }
         }
-        console.log(number)
         res.render("page/h5", {title : "h5模板", domain : domain, number: number, version:ver})
 
     }).catch((err)=>{
