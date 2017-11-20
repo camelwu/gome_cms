@@ -1169,22 +1169,23 @@ router.get('/super/signup',(req, res)=>{
 
 //预览
 // 主页预览*
-router.get('/pre',aeromind,(req, res)=>{
+router.get('/pre', aeromind,(req, res)=>{
 	const title = req.query.version
-	res.redirect('http://'+ req.ip  + ':' + port + '?version='+title)
+	//console.log(req.hostname)
+	res.redirect('http://'+ req.hostname  + ':' + port + '?version='+title)
 })
 //download预览*
-router.get('/pre/download',aeromind,(req, res)=>{
+router.get('/pre/download', aeromind,(req, res)=>{
 	const title = req.query.version
 	res.redirect('http://'+ req.ip  + ':' + port + '/downloads?version='+title)
 })
 // versionList预览*
-router.get('/pre/versionList',aeromind,(req, res)=>{
+router.get('/pre/versionList', aeromind,(req, res)=>{
 	const title = req.query.version
 	res.redirect('http://'+ req.ip  + ':' + port + '/versionList?version='+title)
 })
 // detail预览*
-router.get('/pre/detail',aeromind,(req, res)=>{
+router.get('/pre/detail', aeromind,(req, res)=>{
 	const title = req.query.version
 	const platform = req.query.platform
 	const version = req.query.versions
@@ -1437,6 +1438,7 @@ app.get("/updates/:ver", function(req, res) {
 					str = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
 					item.time = str
     			}
+    			console.log(item)
     			detail = item
     		}
     	})
