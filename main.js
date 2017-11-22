@@ -4,7 +4,6 @@ const ejs = require('ejs')
 const fs = require('fs')
 const axios = require('axios')
 const app = express()
-const domain = 'https://local/'
 
 app.engine('html', ejs.renderFile)
 app.set('views', path.join(__dirname, './views'))
@@ -37,62 +36,18 @@ const lobj = {
 //     }
 //   }
 // })
-
+function getdomain(req){
+    return req.protocol +'://'+req.hostname
+}
 
 // 首页
 app.get("/", function(req, res) {
     axios.get('http://'+ req.hostname +':3005/admin/getMainPage').then((r)=>{
         const cover = r.data.data
-        res.render("index", {title : "首页", domain : domain, cover: cover})
+        res.render("index", {title : "首页", domain : getdomain(req), cover: cover})
     }).catch((err)=>{
         console.log(err)
     })
-	/*let home = {
-        "code": 0,
-        "msg": "OK",
-        "data": {
-            "cover": {
-                "opacityLogo": "/img/T1SRKTBQAv1RCvBVdK.png",
-                "logo": "/img/T1SRKTBQAv1RCvBVdK.png",
-                "backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png",
-                "sPic": "/img/T1SRKTBQAv1RCvBVdK.png"
-            },
-            "introduction": [
-                {
-                    "pic": "/img/website/talk.png",
-                    "title": "支持万人企业通讯录",
-                    "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-                }
-            ],
-            "feature": {
-                "title": "",
-                "subTitle": "",
-                "list": [
-                    {
-                        "pic" : "/img/website/people.png",
-                        "title": "支持万人企业通讯录",
-                        "summary": "企业通讯录支持一人多职务、多团队、多级组织架构，隐藏指定高管手机号。"
-                    }
-                ]
-            },
-            "download": {
-                "title": "",
-                "subTitle": "",
-                "list": [
-                    {
-                        "pic1": "/img/website/win-2x.png",
-                        "pic2": "/img/website/xiazai.png",
-                        "url" : ""
-                    },
-                    {
-                        "pic1": "/img/website/win-2x.png",
-                        "pic2": "/img/website/xiazai.png",
-                        "url" : ""
-                    }
-                ]
-            }
-        }
-    }*/
 })
 // 下载
 app.get("/downloads", function(req, res) {
@@ -204,7 +159,7 @@ app.get("/downloads", function(req, res) {
             }
         }
 
-        res.render("page/main", {title : "下载", domain : domain, banner: banner, ver: ver})
+        res.render("page/main", {title : "下载", domain : getdomain(req), banner: banner, ver: ver})
     }).catch((err)=>{
         console.log(err)
     })
@@ -309,27 +264,27 @@ app.get("/downloads", function(req, res) {
     //     }
     // }
     // let ver= versionList.data
-    // res.render("page/main", {title : "下载", domain : domain, banner: banner, ver: ver})
+    // res.render("page/main", {title : "下载", domain : getdomain(req), banner: banner, ver: ver})
 })
 // 关于我们
 app.get("/aboutus", function(req, res) {
-    res.render("page/about", {title : "公司介绍", domain : domain, para: '0'})
+    res.render("page/about", {title : "公司介绍", domain : getdomain(req), para: '0'})
 })
 // 联系我们
 app.get("/contractus", function(req, res) {
-    res.render("page/about", {title : "联系我们", domain : domain, para: '1'})
+    res.render("page/about", {title : "联系我们", domain : getdomain(req), para: '1'})
 })
 // 常见问题
 app.get("/faq", function(req, res) {
-    res.render("page/more", {title : "常见问题", domain : domain, para: '0'})
+    res.render("page/more", {title : "常见问题", domain : getdomain(req), para: '0'})
 })
 // 服务协议
 app.get("/terms", function(req, res) {
-    res.render("page/more", {title : "服务协议", domain : domain, para: '1'})
+    res.render("page/more", {title : "服务协议", domain : getdomain(req), para: '1'})
 })
 // 隐私政策
 app.get("/pravites", function(req, res) {
-    res.render("page/more", {title : "隐私政策", domain : domain, para: '2'})
+    res.render("page/more", {title : "隐私政策", domain : getdomain(req), para: '2'})
 })
 // 列表
 app.get("/versionList", function(req, res) {
@@ -449,7 +404,7 @@ app.get("/updates/:ver", function(req, res) {
             detail.time = str
         }
 
-        res.render('page/version', {title : "隐私政策", domain : domain, detail: detail})
+        res.render('page/version', {title : "隐私政策", domain : getdomain(req), detail: detail})
     }).catch((err)=>{
         console.log(err)
     })
@@ -474,7 +429,7 @@ app.get("/updates/:ver", function(req, res) {
             }
         }
         let detail = result.data
-        res.render('page/version', {title : "隐私政策", domain : domain, 'ver': req.params.ver, detail: detail})
+        res.render('page/version', {title : "隐私政策", domain : getdomain(req), 'ver': req.params.ver, detail: detail})
     } else {
         res.redirect('/')
     }*/
@@ -498,7 +453,7 @@ app.get("/html5/:ver", function(req, res) {
                 break;
             }
         }
-        res.render("page/h5", {title : "h5模板", domain : domain, number: number, version:ver})
+        res.render("page/h5", {title : "h5模板", domain : getdomain(req), number: number, version:ver})
 
     }).catch((err)=>{
         console.log(err)
@@ -526,20 +481,20 @@ app.get("/html5/:ver", function(req, res) {
 })
 // answer和question模板
 app.get("/answer01",function(req, res){
-    res.render("page/answer_01", {title : "新用户如何激活帐号？", domain : domain})
+    res.render("page/answer_01", {title : "新用户如何激活帐号？", domain : getdomain(req)})
 })
 app.get("/answer02",function(req, res){
-    res.render("page/answer_02", {title : "忘记密码了怎么办？", domain : domain})
+    res.render("page/answer_02", {title : "忘记密码了怎么办？", domain : getdomain(req)})
 })
 app.get("/answer03",function(req, res){
-    res.render("page/answer_03", {title : "如何快速找人？", domain : domain})
+    res.render("page/answer_03", {title : "如何快速找人？", domain : getdomain(req)})
 })
 app.get("/question",function(req, res){
-    res.render("page/question", {title : "帮助与反馈", domain : domain})
+    res.render("page/question", {title : "帮助与反馈", domain : getdomain(req)})
 })
 //h5下载页面
 app.get("/download",function(req, res){
-    res.render("page/download", {title : "Aeromind--APP下载", domain : domain})
+    res.render("page/download", {title : "Aeromind--APP下载", domain : getdomain(req)})
 })
 var server = app.listen(3000, function () {
   var host = server.address().address
