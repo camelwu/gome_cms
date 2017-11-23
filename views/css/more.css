@@ -273,6 +273,10 @@ body{
     border-radius: 0px;
     color: #257AED !important;
 }
+.active>a{
+    border-radius: 0px;
+    color: #257AED !important;
+}
 .show{
     display: block;
 }
