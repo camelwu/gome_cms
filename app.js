@@ -1396,7 +1396,7 @@ app.get("/versionList", function(req, res) {
 			}
 		}
 
-		res.render("versionList/versionList", {title : "Version update list", domain:domain, vers: {
+		res.render("page/versionList", {title : "Version update list", domain:domain, vers: {
 			windows: version.windows.detail,
 			ios: version.ios.detail,
 			android: version.android.detail,
@@ -1468,7 +1468,7 @@ app.get("/terms", function(req, res) {
     res.render("page/more", {title : "服务协议", domain : domain, para: '1'})
 })
 // 隐私政策
-app.get("/pravites", function(req, res) {
+app.get("/privacy", function(req, res) {
     res.render("page/more", {title : "隐私政策", domain : domain, para: '2'})
 })
 //h5模板

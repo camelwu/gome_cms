@@ -28,7 +28,7 @@
                 </ul>
             </div>
             <a id="two" class="h3 menu-img" href="/terms">Aeromind用户服务协议</a>
-            <a id="three" class="h3 imgthree" href="/pravites">隐私政策</a>
+            <a id="three" class="h3 imgthree" href="/privacy">隐私政策</a>
         </div>
         <div class="content" id="content">
             <div class="menu1 menu_tab" id="menu1">
@@ -414,7 +414,7 @@
     /*获取第一菜单三个容器*/
     var menu2 = document.getElementById('menu2');
     var menu3 = document.getElementById('menu3');
-    var lis = ulmenu.getElementsByTagName('a');
+    var lis = ulmenu.getElementsByTagName('li');
     var divs = menu1.children;
     var onebox = document.getElementById('onebox');
     var one = document.getElementById('one');
@@ -467,16 +467,16 @@
             divs[this.index].style.display = 'block';
         }
     }
-    onebox.onclick = function(){
-        if (this.classList.contains('active')) {
-                this.style.height = "50px";
+    one.onclick = function(){
+        if (onebox.classList.contains('active')) {
+                onebox.style.height = "50px";
                 one.classList.add('arrow');
-                this.classList.remove('active');
+                onebox.classList.remove('active');
 
             } else {
-               this.style.height = "auto";
+               onebox.style.height = "auto";
                 one.classList.remove('arrow');
-                this.classList.add('active');
+                onebox.classList.add('active');
 
             }
     }

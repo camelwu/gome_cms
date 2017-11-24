@@ -391,7 +391,8 @@ body{
     color:  #50576F;
     line-height: 25px;
 }
-.footer-a:hover{
+
+.footer-p:hover,.footer-a:hover{
     color: #8C8F99;
 }
 .last{
@@ -401,7 +402,7 @@ body{
 	cursor: text;
 }
 .last .footer-a:hover{
-	color: #50576F;
+	color: #8C8F99;
 }
 .footer-mar{
     margin-left: 100px;
@@ -425,12 +426,4 @@ body{
 }
 .header .login-btn:hover{
     background: #257AED;
-}
-.footer-mail{
-	color:  #50576F;
-}
-.footer-mail:hover{
-	color: #8C8F99;
-	cursor: pointer;
-	text-decoration: underline;
 }

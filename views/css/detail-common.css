@@ -257,6 +257,9 @@ input{
     color:  #50576F;
     line-height: 25px;
 }
+.footer-a .footer-mail{
+  color:  #50576F;
+}
 .footer-p:hover,.footer-a:hover{
     color: #8C8F99;
 }

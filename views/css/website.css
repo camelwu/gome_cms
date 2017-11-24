@@ -408,12 +408,12 @@ body{
 .footer-box{
     float: left;
     height: 140px;
-    width:100px;
+    width:125px;
     margin-top: 40px;
 }
 .footer-p{
     font-size: 14px;
-    color:  #50576F;
+    color:  #8C8F99;
     margin-bottom: 10px;
 }
 .footer-a{
@@ -422,6 +422,9 @@ body{
     color:  #50576F;
     line-height: 25px;
 }
+.footer-a a{
+    color:  #50576F;
+}
 .footer-p:hover,.footer-a:hover{
     color: #8C8F99;
 }
@@ -429,7 +432,7 @@ body{
     width: 230px;
 }
 .footer-mar{
-    margin-left: 140px;
+    margin-left: 100px;
 }
 .footer-bottom{
     width: 1213px;

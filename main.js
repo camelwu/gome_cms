@@ -163,108 +163,7 @@ app.get("/downloads", function(req, res) {
     }).catch((err)=>{
         console.log(err)
     })
-    // let result = {
-    //     "code": 0,
-    //     "msg": "OK",
-    //     "data": {
-    //         "version":'V2.0.0',
-    //         "windows":{
-    //             "title": "Aeromind windows版",
-    //             "summary": "便捷、高效、迅速",
-    //             "size": "30.2 M",
-    //             "version": "V2.0.0",
-    //             "system": "Android4.0及以上",
-    //             "time": "2017-10-10",
-    //             "url": 'http://.....',
-    //             "backgroundPic": "/img/download/windowsBanner.png"
-    //         },
-    //         "mac":{
-    //             "title": "Aeromind Mac版",
-    //             "summary": "便捷、高效、迅速",
-    //             "size": "30.2 M",
-    //             "version": "V2.0.0",
-    //             "system": "Android4.0及以上",
-    //             "time": "2017-10-10",
-    //             "url": 'http://.....',
-    //             "backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
-    //         },
-    //         "android":{
-    //             "title": "Aeromind Android版",
-    //             "summary": "便捷、高效、迅速",
-    //             "size": "30.2 M",
-    //             "version": "V2.0.0",
-    //             "system": "Android4.0及以上",
-    //             "time": "2017-10-10",
-    //             "backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
-    //         },
-    //         "ios":{
-    //             "title": "Aeromind ios版",
-    //             "summary": "便捷、高效、迅速",
-    //             "size": "30.2 M",
-    //             "version": "V2.0.0",
-    //             "system": "Android4.0及以上",
-    //             "time": "2017-10-10",
-    //             "backgroundPic": "/img/T1SRKTBQAv1RCvBVdK.png"
-    //         }
-    //     }
-    // }
-    // let banner = result.data
-    // let versionList = {
-    //     "code": 0,
-    //     "msg": "OK",
-    //     "data": {
-    //         "windows": [
-    //             {
-    //                 "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-    //                 "time": 1510070400000,
-    //                 "version": "V1.1.1"
-    //             },
-    //             {
-    //                 "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-    //                 "time": "2017-10-10",
-    //                 "version": "V1.1.0"
-    //             },
-    //             {
-    //                 "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-    //                 "time": "2017-10-10",
-    //                 "version": "V1.0.9"
-    //             }
-    //         ],
-    //         "mac": [
-    //             {
-    //                 "title": "Aeromind1.3.0 for Mac 我们正式更名为“Aeromind”啦！",
-    //                 "time": 1510070400000,
-    //                 "version": "V1.1.1"
-    //             },
-    //             {
-    //                 "title": "Aeromind1.3.0 for Mac 我们正式更名为“Aeromind”啦！",
-    //                 "time": "2017-10-10",
-    //                 "version": "V1.1.0"
-    //             },
-    //             {
-    //                 "title": "Aeromind1.3.0 for Mac 我们正式更名为“Aeromind”啦！",
-    //                 "time": "2017-10-10",
-    //                 "version": "V1.0.9"
-    //             }
-    //         ],
-    //         "android": [
-    //             {
-    //                 "title": "Aeromind1.3.0 for Android 我们正式更名为“Aeromind”啦！",
-    //                 "time": 1510070400000,
-    //                 "version": "V1.1.1"
-    //             }
-    //         ],
-    //         "ios": [
-    //             {
-    //                 "title": "Aeromind1.3.0 for Ios 我们正式更名为“Aeromind”啦！",
-    //                 "time": 1510070400000,
-    //                 "version": "V1.1.1"
-    //             }
-    //         ]
-    //     }
-    // }
-    // let ver= versionList.data
-    // res.render("page/main", {title : "下载", domain : getdomain(req), banner: banner, ver: ver})
+    
 })
 // 关于我们
 app.get("/aboutus", function(req, res) {
@@ -283,7 +182,7 @@ app.get("/terms", function(req, res) {
     res.render("page/more", {title : "服务协议", domain : getdomain(req), para: '1'})
 })
 // 隐私政策
-app.get("/pravites", function(req, res) {
+app.get("/privacy", function(req, res) {
     res.render("page/more", {title : "隐私政策", domain : getdomain(req), para: '2'})
 })
 // 列表
@@ -319,6 +218,7 @@ app.get("/versionList", function(req, res) {
                 ma[i].time = str
             }
         }
+
         io.sort(function(n1,n2){
             return n2.time - n1.time;
         })
@@ -339,52 +239,11 @@ app.get("/versionList", function(req, res) {
                 and[i].time = str
             }
         }
-
-        res.render("versionList/versionList", {title : "Version update list", domain:domain, vers: vers })
+        res.render("page/versionList", {title : "Version update list", domain:getdomain(req), vers: vers })
     }).catch((err)=>{
         console.log(err)
         res.send({code:404})
     })
-    /*let version = {
-        "code": 0,
-        "msg": "OK",
-        "data": {
-            "windows": [
-                {
-                    "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-                    "time": 1510070400000,
-                    "version": "V1.1.1"
-                },
-            ],
-            "mac": [
-                {
-                    "title": "Aeromind1.3.0 for mac 我们正式更名为“Aeromind”啦！",
-                    "time": 1510070400000,
-                    "version": "V1.1.1"
-                },
-            ],
-            "android": [
-                {
-                    "title": "Aeromind1.3.0 for android 我们正式更名为“Aeromind”啦！",
-                    "time":1510070400000,
-                    "version": "V1.1.1"
-                },
-            ],
-            "ios":[
-                {
-                    "title": "Aeromind1.3.0 for ios 我们正式更名为“Aeromind”啦！",
-                    "time": 1510070400000,
-                    "version": "V1.3.0"
-                },
-                {
-                    "title": "Aeromind1.3.0 for ios 我们正式更名为啦！",
-                    "time": 1510070400000,
-                    "version": "V1.3.0"
-                }
-            ]
-        }
-    }
-    res.render("versionList/versionList", {title : "Version update list", domain, vers: vers })*/
 })
 // 日志
 app.get("/updates/:ver", function(req, res) {
