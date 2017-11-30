@@ -53,11 +53,10 @@ function getdomain(req){
 }
 function get_api(req){
     let hn = req.hostname
-    if (hn.indexOf('.')>-1||hn==='localhost'){
-        console.log('ip访问？')
-        return 'http://'+req.hostname+':3005/cms_api'
-    }else{
+    if (hn.indexOf('.cn')>-1 || hn.indexOf('.com')>-1 || hn.indexOf('.org')>-1) {
         return 'http://'+req.hostname+'/cms_api'
+    }else{
+        return 'http://'+req.hostname+'/cms_api'// :3005
     }
 }
 // 首页
