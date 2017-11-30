@@ -60,7 +60,7 @@ function get_api(req){
 }
 // 首页
 app.get("/", function(req, res) {
-    axios.get(get_api+'/getMainPage').then((r)=>{
+    axios.get(get_api(req)+'/getMainPage').then((r)=>{
         const cover = r.data.data
         res.render("index", {title : "首页", domain : getdomain(req), cover: cover})
     }).catch((err)=>{
@@ -69,7 +69,7 @@ app.get("/", function(req, res) {
 })
 // 下载
 app.get("/downloads", function(req, res) {
-    axios.get(get_api+'/getDownload').then((r)=>{
+    axios.get(get_api(req)+'/getDownload').then((r)=>{
         const banner = r.data.data
         if(!banner){
             return res.send({code:404})
@@ -205,7 +205,7 @@ app.get("/privacy", function(req, res) {
 })
 // 列表
 app.get("/versionList", function(req, res) {
-    axios.get(get_api+'/getVersionList').then((r)=>{
+    axios.get(get_api(req)+'/getVersionList').then((r)=>{
         const vers = r.data.msg
 
         let time = ''
@@ -269,7 +269,7 @@ app.get("/updates/:ver", function(req, res) {
     const platform = ver.split('-')[0]
     const activeVersion = ver.split('-')[1]
 
-    axios.get(get_api+'/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
+    axios.get(get_api(req)+'/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
         const detail = r.data.data
         let str = ''
         let time = ''
@@ -291,7 +291,7 @@ app.get("/updates/:ver", function(req, res) {
 app.get("/html5/:ver", function(req, res) {
     const ver = req.params.ver
 
-    axios.get(get_api+'/getVersionDetail',
+    axios.get(get_api(req)+'/getVersionDetail',
         {params:{
             version: ver,
             platform: 'ios'
