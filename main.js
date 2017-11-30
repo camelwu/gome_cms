@@ -14,11 +14,12 @@ app.use('/versionList', express.static('views/versionList'))
 app.use('/js', express.static('views/js'))
 app.use('/page', express.static('views/page'))
 // 后台api
+/*
 app.use("/cms_api",proxy({
     target: "http://localhost:3005",
     changeOrigin: true
 }))
-
+*/
 const lobj = {
 	windows: 'windows',
 	mac: '苹果Mac',
@@ -53,7 +54,8 @@ function getdomain(req){
 function get_api(req){
     let hn = req.hostname
     if (hn.indexOf('.')>-1||hn==='localhost'){
-        return 'http://'+req.hostname+':3000/cms_api'
+        console.log('ip访问？')
+        return 'http://'+req.hostname+':3005/cms_api'
     }else{
         return 'http://'+req.hostname+'/cms_api'
     }
