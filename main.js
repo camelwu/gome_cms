@@ -43,12 +43,24 @@ const lobj = {
 //   }
 // })
 function getdomain(req){
-    return req.protocol +'://'+req.hostname
+    let hn = req.hostname
+    if (hn.indexOf('gomeplus')>-1){
+        return req.protocol +'://'+req.hostname
+    }else{
+        return req.protocol +'://oa.aeromind.cn'
+    }
 }
-
+function get_api(req){
+    let hn = req.hostname
+    if (hn.indexOf('.')>-1||hn==='localhost'){
+        return 'http://'+req.hostname+':3000/cms_api'
+    }else{
+        return 'http://'+req.hostname+'/cms_api'
+    }
+}
 // 首页
 app.get("/", function(req, res) {
-    axios.get('http://'+ req.hostname +':3000/cms_api/getMainPage').then((r)=>{
+    axios.get(get_api+'/getMainPage').then((r)=>{
         const cover = r.data.data
         res.render("index", {title : "首页", domain : getdomain(req), cover: cover})
     }).catch((err)=>{
@@ -57,7 +69,7 @@ app.get("/", function(req, res) {
 })
 // 下载
 app.get("/downloads", function(req, res) {
-    axios.get('http://'+ req.hostname +':3000/cms_api/getDownload').then((r)=>{
+    axios.get(get_api+'/getDownload').then((r)=>{
         const banner = r.data.data
         if(!banner){
             return res.send({code:404})
@@ -193,7 +205,7 @@ app.get("/privacy", function(req, res) {
 })
 // 列表
 app.get("/versionList", function(req, res) {
-    axios.get('http://'+ req.hostname +':3000/cms_api/getVersionList').then((r)=>{
+    axios.get(get_api+'/getVersionList').then((r)=>{
         const vers = r.data.msg
 
         let time = ''
@@ -257,7 +269,7 @@ app.get("/updates/:ver", function(req, res) {
     const platform = ver.split('-')[0]
     const activeVersion = ver.split('-')[1]
 
-    axios.get('http://'+ req.hostname +':3000/cms_api/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
+    axios.get(get_api+'/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
         const detail = r.data.data
         let str = ''
         let time = ''
@@ -279,7 +291,7 @@ app.get("/updates/:ver", function(req, res) {
 app.get("/html5/:ver", function(req, res) {
     const ver = req.params.ver
 
-    axios.get('http://'+ req.hostname +':3000/cms_api/getVersionDetail',
+    axios.get(get_api+'/getVersionDetail',
         {params:{
             version: ver,
             platform: 'ios'
