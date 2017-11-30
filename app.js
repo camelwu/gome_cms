@@ -1500,26 +1500,6 @@ app.get("/html5", function(req, res) {
 	}).catch((err)=>{
 		console.log(err)
 	})
-	/*let result = {
-        "code": 0,
-        "msg": "OK",
-        "data": {
-            "version":'V2.0.0',
-            "title": 'Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！',
-            "time": "2017-10-10",
-            "list": [
-                {
-                    "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-                    "imgs": [
-                        "/img/download/WechatIMG9.png",
-                        "/img/download/WechatIMG9.png"
-                    ]
-                }
-            ]
-         }
-    }
-    let number = result.data
-    res.render("page/h5", {title : "h5模板", domain : domain, number: number})*/
 })
 
 app.get("/answer01",function(req, res){
@@ -1534,7 +1514,6 @@ app.get("/answer03",function(req, res){
 app.get("/question",function(req, res){
     res.render("page/question", {title : "帮助与反馈", domain : domain})
 })
-
 //h5下载页面
 app.get("/download",function(req, res){
     res.render("page/download", {title : "Aeromind--APP下载", domain : domain})

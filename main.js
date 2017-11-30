@@ -3,6 +3,7 @@ const path = require('path')
 const ejs = require('ejs')
 const fs = require('fs')
 const axios = require('axios')
+const proxy = require('http-proxy-middleware')
 const app = express()
 
 app.engine('html', ejs.renderFile)
@@ -12,6 +13,11 @@ app.use('/css', express.static('views/css'))
 app.use('/versionList', express.static('views/versionList'))
 app.use('/js', express.static('views/js'))
 app.use('/page', express.static('views/page'))
+// 后台api
+app.use("/cms_api",proxy({
+    target: "http://localhost:3005",
+    changeOrigin: true
+}))
 
 const lobj = {
 	windows: 'windows',
@@ -42,7 +48,7 @@ function getdomain(req){
 
 // 首页
 app.get("/", function(req, res) {
-    axios.get('http://'+ req.hostname +'/admin/getMainPage').then((r)=>{
+    axios.get('http://'+ req.hostname +':3000/cms_api/getMainPage').then((r)=>{
         const cover = r.data.data
         res.render("index", {title : "首页", domain : getdomain(req), cover: cover})
     }).catch((err)=>{
@@ -51,7 +57,7 @@ app.get("/", function(req, res) {
 })
 // 下载
 app.get("/downloads", function(req, res) {
-    axios.get('http://'+ req.hostname +'/admin/getDownload').then((r)=>{
+    axios.get('http://'+ req.hostname +':3000/cms_api/getDownload').then((r)=>{
         const banner = r.data.data
         if(!banner){
             return res.send({code:404})
@@ -187,7 +193,7 @@ app.get("/privacy", function(req, res) {
 })
 // 列表
 app.get("/versionList", function(req, res) {
-    axios.get('http://'+ req.hostname +'/admin/getVersionList').then((r)=>{
+    axios.get('http://'+ req.hostname +':3000/cms_api/getVersionList').then((r)=>{
         const vers = r.data.msg
 
         let time = ''
@@ -251,7 +257,7 @@ app.get("/updates/:ver", function(req, res) {
     const platform = ver.split('-')[0]
     const activeVersion = ver.split('-')[1]
 
-    axios.get('http://'+ req.hostname +'/admin/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
+    axios.get('http://'+ req.hostname +':3000/cms_api/getVersionDetail?version='+activeVersion+'&platform='+platform).then((r)=>{
         const detail = r.data.data
         let str = ''
         let time = ''
@@ -267,38 +273,13 @@ app.get("/updates/:ver", function(req, res) {
     }).catch((err)=>{
         console.log(err)
     })
-
-    /*if (true) {
-        let result = {
-            "code": 0,
-            "msg": "OK",
-            "data": {
-                "version":'V2.0.0',
-                "title": 'Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！',
-                "time": "2017-10-10",
-                "detail": [
-                    {
-                        "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-                        "imgs": [
-                            "/img/download/WechatIMG9.png",
-                            "/img/download/WechatIMG9.png"
-                        ]
-                    }
-                ]
-            }
-        }
-        let detail = result.data
-        res.render('page/version', {title : "隐私政策", domain : getdomain(req), 'ver': req.params.ver, detail: detail})
-    } else {
-        res.redirect('/')
-    }*/
 })
 //h5模板
 ///html5/V1.3.0
 app.get("/html5/:ver", function(req, res) {
     const ver = req.params.ver
 
-    axios.get('http://'+ req.hostname +'/admin/getVersionDetail',
+    axios.get('http://'+ req.hostname +':3000/cms_api/getVersionDetail',
         {params:{
             version: ver,
             platform: 'ios'
@@ -317,26 +298,6 @@ app.get("/html5/:ver", function(req, res) {
     }).catch((err)=>{
         console.log(err)
     })
-    // let result = {
-    //     "code": 0,
-    //     "msg": "OK",
-    //     "data": {
-    //         "version":'V2.0.0',
-    //         "title": 'Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！',
-    //         "time": "2017-10-10",
-    //         "detail": [
-    //             {
-    //                 "title": "Aeromind1.3.0 for Windows 我们正式更名为“Aeromind”啦！",
-    //                 "introduction":"大家期盼已久的文件传输功能终于上线！经产品汪们反复调研实践，将文件传输上限定为500M，并将文件格式扩展，现能支持更多",
-    //                 "imgs": [
-    //                     "/img/download/WechatIMG9.png",
-    //                     "/img/download/WechatIMG9.png"
-    //                 ]
-    //             }
-    //         ]
-    //      }
-    // }
-    // let number = result.data
 })
 // answer和question模板
 app.get("/answer01",function(req, res){
