@@ -53,6 +53,14 @@ function getdomain(req){
 }
 function get_api(req){
     return 'http://'+req.hostname+'/cms_api'
+/*
+    let hn = req.hostname
+    if (hn.indexOf('.cn')>-1 || hn.indexOf('.com')>-1|| hn.indexOf('.org')>-1){
+        return 'http://'+req.hostname+'/cms_api'
+    }else{
+        return 'http://localhost:3005/cms_api'
+    }
+*/
 }
 // 首页
 app.get("/", function(req, res) {
