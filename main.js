@@ -192,7 +192,7 @@ app.get("/aboutus", function(req, res) {
     res.render("page/about", {title : "公司介绍", domain : getdomain(req), para: '0'})
 })
 // 联系我们
-app.get("/contractus", function(req, res) {
+app.get("/contactus", function(req, res) {
     res.render("page/about", {title : "联系我们", domain : getdomain(req), para: '1'})
 })
 // 常见问题
