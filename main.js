@@ -13,19 +13,8 @@ app.use('/css', express.static('views/css'))
 app.use('/versionList', express.static('views/versionList'))
 app.use('/js', express.static('views/js'))
 app.use('/page', express.static('views/page'))
-// 后台api
-/*
-app.use("/cms_api",proxy({
-    target: "http://localhost:3005",
-    changeOrigin: true
-}))
-*/
-const lobj = {
-	windows: 'windows',
-	mac: '苹果Mac',
-	and: '安卓',
-	ios: '苹果'
-}
+
+
 // const ajax = axios.create({
 //   baseURL: 'http://localhost',
 //   timeout:1000*3,
@@ -46,21 +35,19 @@ const lobj = {
 function getdomain(req){
     let hn = req.hostname
     if (hn.indexOf('gomeplus')>-1){
-        return req.protocol +'://'+req.hostname
+        return 'https://'+req.hostname
     }else{
-        return req.protocol +'://oa.aeromind.cn'
+        return 'https://oa.aeromind.cn'
     }
 }
 function get_api(req){
-    return 'http://'+req.hostname+'/cms_api'
-/*
+    // return req.protocol+req.hostname+'/cms_api'
     let hn = req.hostname
-    if (hn.indexOf('.cn')>-1 || hn.indexOf('.com')>-1|| hn.indexOf('.org')>-1){
-        return 'http://'+req.hostname+'/cms_api'
+    if (hn.indexOf('.cn')>-1 || hn.indexOf('.com')>-1 || hn.indexOf('.org')>-1) {
+        return req.protocol+req.hostname+'/cms_api'
     }else{
-        return 'http://localhost:3005/cms_api'
+        return req.protocol+'localhost:3005/cms_api'
     }
-*/
 }
 // 首页
 app.get("/", function(req, res) {
