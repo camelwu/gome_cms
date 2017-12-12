@@ -41,12 +41,13 @@ function getdomain(req){
     }
 }
 function get_api(req){
-    // return req.protocol+req.hostname+'/cms_api'
+    // return 'https://'+req.hostname+'/cms_api'
+    let re = req.protocol+'://'+req.hostname
     let hn = req.hostname
     if (hn.indexOf('.cn')>-1 || hn.indexOf('.com')>-1 || hn.indexOf('.org')>-1) {
-        return req.protocol+req.hostname+'/cms_api'
+        return re+'/cms_api'
     }else{
-        return req.protocol+'localhost:3005/cms_api'
+        return re+':3005/cms_api'
     }
 }
 // 首页
