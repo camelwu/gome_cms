@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/css/img/website/favicon.ico" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/about.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <title>Aeromind官网——<%=title%></title>
+</head>
+<body>
+<%include ./header.html%>
+<div class="container">
+    <div class="container-box clearfix">
+        <div class="menu clearfix" id="menu">
+            <a class="h3 menu-img selected" id="titleOne" href="/aboutus">
+                <!-- <i class="menu-img positionIicon iconOne" id="imgone"></i> -->公司介绍</a>
+            <a class="h3 menu-im" id="titleTwo" href="/contactus"><!-- <i class="menu-im positionIicon " id="imgtwo"></i> -->联系我们</a>
+        </div>
+        <div class="content" id="content">
+            <div class=" menu_tab menu-two" id="first">
+                <p class="tt-title">公司介绍</p>
+                <p class="company-name">美信网络技术有限公司</p>
+                <p class="culture">公司简介：</p>
+                <p class="xie">美信网络技术有限公司(www.gomeplus.com)是国美集团旗下全资子公司。</p>
+                <p class="xie-four">
+                    国美控股集团由黄光裕先生创建，于1987年正式成立。经过近30年的发展，已成为一家运营稳健、资本雄厚、整合能力强、多元化发展的大型现代化集团型企业。2015年控股集团总资产达1278亿元，年营业收入1107亿元，同比增长5%；全年净利润20.7亿元，同比增长30%，纳税39亿元。
+                </p>
+                <p class="xie-four">2015年，国美控股集团围绕“打造全零售生态圈”战略目标，优化布局并构建了线下零售、互联网、智能家居制造、智能手机制造、金融投资、地产等六大业务板块。</p>
+                <p class="xie-four">国美集团早在13年就推出了全零售的策略——大力推行线上线下的交流，开始追求全渠道、新场景、强链接的全面开放。</p>
+                <p class="xie-four">
+                    2015年6月国美控股集团创立美信网络技术有限公司，简称“美信”，同时，隶属于国美控股集团旗下。美信以社群经济为方向，发力构建全新的消费生态圈，通过特有的商业模式让每一位消费者，都能享受互联网分享经济带来的红利。</p>
+                <p class="xie-four">美信成立伊始，即在方巍总、宋永柱总为核心的团队领导下，共同铸造了“勇气、务实、合作、卓越”的企业文化基石。</p>
+                <p class="culture">美信文化：</p>
+                <p class="xie-four">勇气：敢于创新、拥抱变化；务实：务真务本、实事求是；合作：团结共赢、合力共进；卓越：卓尔不群、越众而出。</p>
+                <p class="xie-four">美信现已完成国美电器、多边金都、国美酒窖、国美金融等国美旗下多板块的打通及店铺入驻，奠定了国美各版块之间新场景、强链接的基石。</p>
+                <p class="xie-four">
+                    自2013年，习近平主席提出“一带一路”构想，国美集团试图寻找新兴市场，发挥国美优势，这就要求国美在全球布局红利获取地区。美信将打破原有的国内外链接关系，建立全新的海内外链接。实现产品外销、海外直营、即时购买、即时链接等构想。满足国内外人际关系所需的各项需求。在美信全球化布局中，海外市场的拓展是重要的部分。美信平台希望能够重新改变国内和国外的现有的人际链接关系。</p>
+                <p class="xie-four">未来，美信将构建基于人际关系分享的良性生态圈。</p>
+                <p class="xie-four">更多了解，请点击<a style="color: #3688FF;" href="https://www.gomeplus.com/">https://www.gomeplus.com/ </a>
+                </p>
+            </div>
+            <div class=" menu_tab menu-two" id="second" name="second">
+                <p class="tt-title">联系我们</p>
+                <p class="company-name">美信网络技术有限公司</p>
+                <span id="container" class="map" tabindex="0"></span>
+                <p class="xie-three">公司地址：北京市朝阳区霄云路26号鹏润大厦A座32层</p>
+                <p class="xie-three">客服电话：010-57950555</p>
+            </div>
+        </div>
+    </div>
+</div>
+<%include ./footer.html %>
+</body>
+</html>
+<script type="text/javascript" src='https://webapi.amap.com/maps?v=1.3&key=56c0109c48915b757b465889b9b19c3d'></script>
+<!-- UI组件库 1.0 -->
+<script src="https://webapi.amap.com/ui/1.0/main.js"></script>
+<script type="text/javascript">
+
+    var menu = document.getElementById('menu');
+    var items = menu.getElementsByTagName("a");
+    var divs = document.getElementById('content').children;
+    var one = document.getElementById('titleOne');
+    var two = document.getElementById('titleTwo');
+    var first = document.getElementById('first');
+    var second = document.getElementById('second');
+    var sel = '<%=para%>';
+    var a = document.location.href;
+    if (sel != '0') {
+        document.getElementById("second").style.display = "block";
+        first.style.display = "none";
+        one.classList.remove('selected');
+        two.classList.add('selected');
+    }
+
+    //左边按钮遍历
+    // for (var i = 0; i < items.length; i++) {
+    //     items[i].index = i;
+    //     items[i].onclick = function () {
+    //         for (var i = 0; i < items.length; i++) {
+    //             items[i].classList.remove('selected');
+    //         }
+    //         this.classList.add('selected');
+    //         for (var j = 0; j < divs.length; j++) {
+    //             divs[j].style.display = "none";
+    //         }
+    //         divs[this.index].style.display = 'block';
+    //     }
+    // }
+
+
+    var marker, map = new AMap.Map('container', {
+        resizeEnable: true,
+        center: [116.466334, 39.959023],
+        zoom: 13
+    });
+
+    AMapUI.loadUI(['control/BasicControl'], function (BasicControl) {
+        //缩放控件
+        map.addControl(new BasicControl.Zoom({
+            position: 'lb', //left bottom，左下角
+            showZoomNum: false //显示zoom值
+        }));
+    });
+
+    function markerAndCircle(marker, lng, lat) {
+        map = new AMap.Map('container', {
+            zoom: 13
+        });
+        var circle = setCircle(lng, lat);
+        circle.setMap(map);
+        marker = new AMap.Marker();
+        marker.setPosition(marker.getPosition());
+        marker.setMap(map);
+    }
+
+    function setCircle(attendLng, attendLat) {
+        var circle = new AMap.Circle({
+            center: new AMap.LngLat(attendLng, attendLat),// 圆心位置
+            radius: 1000, //半径
+            strokeColor: "#4196ff", //线颜色
+            strokeOpacity: 1, //线透明度
+            strokeWeight: 1, //线粗细度
+            fillColor: "#4196ff", //填充颜色
+            fillOpacity: 0.2//填充透明度
+        });
+        map.setZoomAndCenter(13, [attendLng, attendLat]);
+        var circleArray = map.getAllOverlays('circle');
+        map.remove(circleArray);
+        return circle;
+    }
+    markerAndCircle(marker, 116.466334, 39.959023);
+</script>

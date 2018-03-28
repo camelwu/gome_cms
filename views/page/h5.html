@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=yes" name="format-detection" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <title><%= version %>版本功能介绍</title>
+    <link rel="stylesheet" type="text/css" href="/css/version.css"/>
+</head>
+<body>
+
+<div class="update_article">
+  <h2 class="update_caption"><%= number.title %></h2>
+  <ul class="update_info">
+    <%if (number.list.length>0) { var list = number.list, len = list.length %>
+      <% for(var i=0;i<len;i++) { %>
+        <li>
+          <div class="title"><%=i+1%>.<%=list[i].title%></div>
+           <% for(var j=0;j<list[i].imgs.length;j++) { %>
+                <img class="pic" src="/css/uploadImg/<%=list[i].imgs[j]%>" alt="">
+            <% } %>
+            <% if (list[i].summary) { %>
+            <p><%=list[i].summary%></p>
+            <% } %>
+        </li>
+      <% } %>
+    <% } %>
+  </ul>
+</div>
+</body>
+</html>

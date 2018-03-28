@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="author" content="下载"/>
+    <meta name="keywords" content="Aeromind下载,Aeromind官网下载,飞一般的感觉,给工作飞,国美Aeromind下载,智能办公下载,频道,无上限聊天">
+    <link rel="shortcut icon" type="image/x-icon" href="/css/img/website/favicon.ico" media="screen"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/css/favicon.ico" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <title>Aeromind下载——给工作飞一般的感觉！-<%=title%></title>
+</head>
+<body>
+<%include ./header.html%>
+<div class="nav" id="nav">
+    <span class="window-btn active">Windows</span>
+    <span class="mac-btn macx">Mac</span>
+    <span class="android-btn">Android</span>
+    <span class="ios-btn">iOS</span>
+</div>
+<div class="content-box" id="contentBox">
+    <%if (banner.windows) { var info = banner.windows; %>
+    <div class="windows-content show" style="background-image: url(/css/uploadImg/<%=info.backgroundPic%>);">
+        <div class="download">
+                <p class="title"><%=info.title%></p>
+                <p class="slogan"><%=info.summary%></p>
+                <p class="size-version"><span class="size">大小：<%=info.size%></span><span class="version">版本：<%=info.version%></span></p>
+                <p class="system-time"><span class="system">适应系统：<%=info.system%></span><span class="time">发布日期：<%=info.time%></span></p>
+                <a href="<%=info.url%>" class="download-btn"><span>Windows版</span></a>
+                <% }else{ %>
+                <p class="title">请添加Windows数据！</p>
+            <% } %>
+        </div>
+        <div class="version-list">
+            <p class="title">更新日志</p>
+            <%if (ver.windows.length>0) { var list = ver.windows,len = list.length>9?9:list.length; %>
+            <ul>
+                <% for(var i=0;i<len;i++) { %>
+                <li><a href="/updates/windows-<%=list[i].version%>"><%=list[i].title%>
+                        <%if (i==0){%>
+                        <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    <span class="time"><%=list[i].time%></span></a>
+                </li>
+                <% } %>
+            </ul>
+            <a class="more" href="/versionList#Windows">查看更多>></a>
+            <% } %>
+        </div>
+    </div>
+    <%if (banner.mac) { var info = banner.mac; %>
+    <div class="mac-content hide" style="background-image: url(/css/uploadImg/<%=info.backgroundPic%>);">
+       <div class="download">
+                <p class="title"><%=info.title%></p>
+                <p class="slogan"><%=info.summary%></p>
+                <p class="size-version"><span class="size">大小：<%=info.size%></span><span class="version">版本：<%=info.version%></span></p>
+                <p class="system-time"><span class="system">适应系统：<%=info.system%></span><span class="time">发布日期：<%=info.time%></span></p>
+                <a  href="<%=info.url%>" class="download-btn"><span>Mac版</span></a>
+                <% }else{ %>
+                <p class="title">请添加Windows数据！</p>
+            <% } %>
+        </div>
+        <div class="version-list">
+            <p class="title">更新日志</p>
+            <%if (ver.mac.length>0) { var list = ver.mac,len = list.length>9?9:list.length; %>
+            <ul>
+                <% for(var i=0;i<len;i++) { %>
+                <li><a href="/updates/mac-<%=list[i].version%>"><%=list[i].title%>
+                    <%if (i==0){%>
+                    <span class="new">New</span>
+                    <% }else{ %>
+                    <span></span>
+                    <% } %>
+                    <span class="time"><%=list[i].time%></span></a>
+                </li>
+                <% } %>
+            </ul>
+            <a class="more" href="/versionList#Mac">查看更多>></a>
+            <% } %>
+        </div>
+    </div>
+    <%if (banner.android) { var info = banner.android; %>
+    <div class="android-content hide" style="background-image: url(/css/uploadImg/<%=info.backgroundPic%>);">
+       <div class="download">
+                <p class="title"><%=info.title%></p>
+                <p class="slogan"><%=info.summary%></p>
+                <p class="size-version"><span class="size">大小：<%=info.size%></span><span class="version">版本：<%=info.version%></span></p>
+                <p class="system-time"><span class="system">适应系统：<%=info.system%></span><span class="time">发布日期：<%=info.time%></span></p>
+                <% }else{ %>
+                <p class="title">请添加Windows数据！</p>
+            <% } %>
+        </div>
+        <div class="version-list">
+            <p class="title">更新日志</p>
+            <%if (ver.android.length>0) { var list = ver.android,len = list.length>9?9:list.length; %>
+            <ul>
+                <% for(var i=0;i<len;i++) { %>
+                <li><a href="/updates/android-<%=list[i].version%>"><%=list[i].title%>
+                   <%if (i==0){%>
+                    <span class="new">New</span>
+                    <% }else{ %>
+                    <span></span>
+                    <% } %>
+                    <span class="time"><%=list[i].time%></span></a>
+                </li>
+                <% } %>
+            </ul>
+            <a class="more" href="/versionList#Android">查看更多>></a>
+            <% } %>
+        </div>
+    </div>
+    <%if (banner.ios) { var info = banner.ios; %>
+    <div class="ios-content hide" style="background-image: url(/css/uploadImg/<%=info.backgroundPic%>);">
+        <div class="download">
+                <p class="title"><%=info.title%></p>
+                <p class="slogan"><%=info.summary%></p>
+                <p class="size-version"><span class="size">大小：<%=info.size%></span><span class="version">版本：<%=info.version%></span></p>
+                <p class="system-time"><span class="system">适应系统：<%=info.system%></span><span class="time">发布日期：<%=info.time%></span></p>
+                <% }else{ %>
+                <p class="title">请添加Windows数据！</p>
+            <% } %>
+        </div>
+        <div class="version-list">
+            <p class="title">更新日志</p>
+            <%if (ver.ios.length>0) { var list = ver.ios,len = list.length>9?9:list.length; %>
+            <ul>
+                <% for(var i=0;i<len;i++) { %>
+                <li><a href="/updates/ios-<%=list[i].version%>"><%=list[i].title%>
+                    <%if (i==0){%>
+                    <span class="new">New</span>
+                    <% }else{ %>
+                    <span></span>
+                    <% } %>
+                    <span class="time"><%=list[i].time%></span></a>
+                </li>
+                <% } %>
+            </ul>
+            <a class="more" href="/versionList#Ios">查看更多>></a>
+            <% } %>
+        </div>
+    </div>
+</div>
+<!-- <div class="android-content hide">
+		<div class="download">
+			<p class="title">Aeromind1.1.2 Android</p>
+			<p class="slogan">优化语音播放模式，新增外部转发文件功能</p>
+			<p class="size-version"><span class="size">大小：31.5M</span><span class="version">版本：V1.1.2</span></p>
+			<p class="system-time"><span class="system">适应系统：Android4.0及以上</span><span class="time">发布日期： 2017-5-12</span></p>
+		</div>
+		<div class="version-list">
+			<p class="title">更新日志</p>
+			<ul>
+				<li><a href="/updates/android-v1.1.2">Aeromind1.1.2 for Android 优化语音播放模式，新增外部转发文件<span class="time">2017-5-12</span></a></li>
+				<li><a href="/updates/android-v1.1.1">Aeromind1.1.1 for Android 新增文件传输，新增音视频通讯<span class="time">2017-3-30</span></a></li>
+				<li><a href="/updates/android-v1.1.0">Aeromind1.1.0 for Android 新增群组聊天，方便沟通<span class="time">2017-1-19</span></a></li>
+				<li><a href="/updates/android-v1.0.3">Aeromind1.0.3 for Android 优化安全性能，保障用户信息安全<span class="time">2016-11-10</span></a></li>
+				<li><a href="/updates/android-v1.0.2">Aeromind1.0.2 for Android 移动端新增审批功能<span class="time">2016-10-26</span></a></li>
+				<li><a href="/updates/android-v1.0.1">Aeromind1.0.1 for Android 优化通讯录展示，优化员工管理<span class="time">2016-8-15</span></a></li>
+			</ul>
+			<a class="more" href="../versionList/versionList#Android">查看更多>></a>
+		</div>
+	</div>
+	<div class="ios-content hide">
+		<div class="download">
+			<p class="title">Aeromind1.1.2 iOS</p>
+			<p class="slogan">优化语音播放模式，新增外部转发图片功能</p>
+			<p class="size-version"><span class="size">大小：33.7M</span><span class="version">版本：V1.1.2</span></p>
+			<p class="system-time"><span class="system">适应系统：iOS8.0及以上</span><span class="time">发布日期：2017-5-12</span></p>
+		</div>
+		<div class="version-list">
+			<p class="title">更新日志</p>
+			<ul>
+				<li><a href="/updates/ios-v1.1.2">Aeromind1.1.2 for iOS 优化语音播放模式，新增外部转发图片功能<span class="time">2017-5-12</span></a></li>
+				<li><a href="/updates/ios-v1.1.1">Aeromind1.1.1 for iOS 新增文件传输，新增音视频通讯<span class="time">2017-3-30</span></a></li>
+				<li><a href="/updates/ios-v1.1.0">Aeromind1.1.0 for iOS 新增群组聊天，方便沟通<span class="time">2017-1-19</span></a></li>
+				<li><a href="/updates/ios-v1.0.3">Aeromind1.0.3 for iOS 优化安全性能，保障用户信息安全<span class="time">2016-11-10</span></a></li>
+				<li><a href="/updates/ios-v1.0.2">Aeromind1.0.2 for iOS 移动端新增审批功能<span class="time">2016-10-26</span></a></li>
+				<li><a href="/updates/ios-v1.0.1">Aeromind1.0.1 for iOS 优化通讯录展示，优化员工管理<span class="time">2016-8-15</span></a></li>
+			</ul>
+			<a class="more" href="../versionList/versionList#Ios">查看更多>></a>
+		</div>
+	</div>
+</div> -->
+<%include ./footer.html%>
+<script src="/js/main.js"></script>
+</body>
+</html>

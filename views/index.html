@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="author" content="EC-FE team"/>
+    <meta name="keywords" content="Aeromind,Aeromind官网,感觉,飞一般的感觉,给工作飞,国美Aeromind,智能办公,频道,无上限聊天频道">
+    <link rel="shortcut icon" type="image/x-icon" href="/css/favicon.ico" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/website.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <title>Aeromind官网——给工作飞一般的感觉！</title>
+</head>
+<body>
+<div class="header-box " id="nav">
+    <div class="header">
+        <div class="fl clearfix">
+            <a class="fl title top-title" href="/"  style="background-image: url('./css/uploadImg/<%= cover.cover.opacityLogo %>');"></a>
+        </div>
+        <div class="fr">
+            <a href="/" class="fl header-btn top-header-btn top-active">首页</a>
+            <a href="/downloads" class="fl header-btn top-header-btn">下载</a>
+            <a class="fl login-btn" href="<%=domain%>/login.html">登录企业</a>
+            <a class="fl create-company-btn" href="<%=domain%>/pages/createCompany/createCompany.html">注册企业</a>
+        </div>
+    </div>
+</div>
+<div class="header-box another-header" id="navshow">
+    <div class="header">
+        <div class="fl clearfix">
+            <a class="fl title" href="/" style="background-image: url('./css/uploadImg/<%= cover.cover.logo %>');"></a>
+        </div>
+        <div class="fr">
+            <a href="/" class="fl header-btn top-active">首页</a>
+            <a href="/downloads" class="fl header-btn">下载</a>
+            <a class="fl login-btn" href="<%=domain%>/login.html">登录企业</a>
+            <a class="fl create-company-btn" href="<%=domain%>/pages/createCompany/createCompany.html">注册企业</a>
+        </div>
+    </div>
+</div>
+<div id="_index_bg" class="big-background clearfix" style='background-image: url("./css/uploadImg/<%= cover.cover.blurBackgroundPic %>");' data-img="./css/uploadImg/<%= cover.cover.backgroundPic %>">
+    <div id="_banner_bg" class="backround-icon clearfix" style='background-image: url("./css/uploadImg/<%= cover.cover.blurSmallPic %>");' data-img="./css/uploadImg/<%= cover.cover.smallPic %>"></div>
+    <a href="/downloads" class="backround-text">免费下载</a>
+</div>
+<div class="main" id="_main">
+    <%if (cover.introduction.length>0) {var list = cover.introduction,len=list.length %>
+    <% for(var i=0;i<len;i++){ %>
+    <%if (i%2==0){ %>
+    <div class="backround-indtrod clearfix">
+        <div class="indtrod-content">
+            <div class="indtrod-box">
+                <p class="indtrod-text"><%=list[i].title%></p>
+                <p class="indtrod-tex"><%=list[i].summary%>
+                </p>
+            </div>
+            <img src="/css/uploadImg/<%=list[i].pic%>" alt="" class="indtrod-img">
+        </div>
+    </div>
+    <% }else if(i%2==1){ %>
+    <div class="backround-indtrod clearfix odd">
+        <div class="indtrod-content">
+            <img src="/css/uploadImg/<%=list[i].pic%>" alt="" class="indtrod-img">
+            <div class="indtrod-box">
+                <p class="indtrod-text"><%=list[i].title%></p>
+                <p class="indtrod-tex"><%=list[i].summary%>
+                </p>
+            </div>
+        </div>
+    </div>
+    <% } %>
+    <% } %>
+    <% } %>
+    <div class="backround-indtrod clearfix odd">
+        <div class="back-text">
+            <p class="back-te"><%=cover.feature.title%></p>
+            <p class="back-tex"><%=cover.feature.subTitle%></p>
+        </div>
+        <div class="ul-box">
+            <%if (cover.feature.list.length>0) {var list = cover.feature.list,len=list.length %>
+            <ul class="back-ul clearfix">
+                <% for(var i=0;i<len;i++){ %>
+                <%if (i==0 || i==4) {%>
+                <li class="back-li">
+                <% }else{ %>
+                <li class="back-li one">
+                <% }%>
+                    <img src="/css/uploadImg/<%=list[i].pic%>" class="li-img">
+                    <div class="li-text">
+                        <p class="li-text-one"><%=list[i].title%></p>
+                        <p class="li-text-two"><%=list[i].summary%></p>
+                    </div>
+                </li>
+                <% } %>
+            </ul>
+            <% } %>
+        </div>
+    </div>
+    <div class="backround-indtrod clearfix">
+        <div class="back-text clearfix">
+            <p class="back-te"><%=cover.download.title%></p>
+            <p class="back-tex"><%=cover.download.subTitle%></p>
+        </div>
+        <div class="back-link clearfix">
+            <%if (cover.download.list.length>0) {var list = cover.download.list,len=list.length %>
+            <% for(var i=0;i<len;i++){ %>
+            <%if (i==0) {%>
+            <div class="link-box" id="win-download" data-url="<%=list[i].url%>">
+            <% }else if(i==1){ %>
+            <div class="link-box link" id="mac-download" data-url="<%=list[i].url%>">
+            <% }else if(i==2){ %>
+            <div class="link-box link" id="a-download" data-url="<%=list[i].url%>">
+            <% }else if(i==3){ %>
+            <div class="link-box link" id="i-download" data-url="<%=list[i].url%>">
+            <% } %>
+                <div class="link-img-win">
+                    <span class="win-logo-img index-download-normal-icon" style="background: url(/css/uploadImg/<%=list[i].pic1%>) no-repeat;background-size: contain;"></span>
+                    <span class="down-img index-download-hover-icon" style="background: url(/css/uploadImg/<%=list[i].pic2%>) no-repeat;background-size: contain;"></span>
+                </div>
+                <%if (i==0) {%>
+                <span class="link-span-title">Windows</span>
+                <span class="link-down-desc">点击下载</span>
+                <% }else if(i==1){ %>
+                <span class="link-span-title">macOS</span>
+                <span class="link-down-desc">点击下载</span>
+                <% }else if(i==2){ %>
+                <span class="link-span-title">Android</span>
+                <span class="link-down-desc">扫描二维码下载</span>
+                <% }else if(i==3){ %>
+                <span class="link-span-title">iOS</span>
+                <span class="link-down-desc">扫描二维码下载</span>
+                <% } %>
+            </div>
+            <% } %>
+            <% } %>
+        </div>
+    </div>
+</div>
+<%include ./page/footer.html %>
+</body>
+</html>
+<script src="/js/index.js"></script>

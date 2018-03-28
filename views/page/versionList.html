@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Aeromind－－Version update list</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/css/img/website/favicon.ico" media="screen"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/versionList.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+</head>
+<body>
+<div class="main clearfix">
+    <%include ../page/header.html%>
+    <div class="ver-bottom clearfix">
+        <div class="ver-bottom-box clearfix">
+            <h3>Aeromind更新日志</h3>
+            <%if (vers.ios.length>0) { var list = vers.ios,len = list.length %>
+            <ul class="ver-ul selected clearfix" id="Ios">
+                <li class="first-li">
+                    <a href="javascript:;">iOS平台<span></span></a>
+                </li>
+                <% for(var i=0;i<len;i++) { %>
+                <%if (i==len-1) {%>
+                <li class="ver-li last-li">
+                <% }else{ %>
+                <li class="ver-li">
+                <% } %>
+                    <a href="/updates/ios-<%=list[i].version%>" class="ver-li-a">
+                        <%=list[i].title%>
+                        <span></span>
+                        <%if (i==0){%>
+                        <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </a>
+                    <p>发布日期：<%=list[i].time%></p>
+                </li>
+                <% } %>
+            </ul>
+            <% } %>
+
+            <%if (vers.android.length>0) { var list = vers.android,len = list.length %>
+            <ul class="ver-ul  clearfix" id="Android">
+                <li class="first-li">
+                    <a href="javascript:;">Android平台<span></span></a>
+                </li>
+               <% for(var i=0;i<len;i++) { %>
+                <%if (i==len-1) {%>
+                <li class="ver-li last-li">
+                <% }else{ %>
+                <li class="ver-li">
+                <% } %>
+                    <a href="/updates/android-<%=list[i].version%>" class="ver-li-a">
+                        <%=list[i].title%>
+                        <span></span>
+                        <%if (i==0){%>
+                        <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </a>
+                    <p>发布日期：<%=list[i].time%></p>
+                </li>
+                <% } %>
+            </ul>
+            <% } %>
+
+            <%if (vers.mac.length>0) { var list = vers.mac,len = list.length %>
+            <ul class="ver-ul  clearfix" id="Mac">
+                <li class="first-li">
+                    <a href="javascript:;">Mac平台<span></span></a>
+                </li>
+                <% for(var i=0;i<len;i++) { %>
+                <%if (i==len-1) {%>
+                <li class="ver-li last-li">
+                <% }else{ %>
+                <li class="ver-li">
+                <% } %>
+                    <a href="/updates/mac-<%=list[i].version%>" class="ver-li-a">
+                        <%=list[i].title%>
+                        <span></span>
+                        <%if (i==0){%>
+                        <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </a>
+                    <p>发布日期：<%=list[i].time%></p>
+                </li>
+                <% } %>
+            </ul>
+            <% } %>
+
+            <%if (vers.windows.length>0) { var list = vers.windows,len = list.length %>
+            <ul class="ver-ul  clearfix" id="Windows">
+                <li class="first-li">
+                    <a href="javascript:;">Windows平台<span></span></a>
+                </li>
+               <% for(var i=0;i<len;i++) { %>
+               <%if (i==len-1) {%>
+                <li class="ver-li last-li">
+                <% }else{ %>
+                <li class="ver-li">
+                <% } %>
+                    <a href="/updates/windows-<%=list[i].version%>" class="ver-li-a">
+                        <%=list[i].title%>
+                        <span></span>
+                       <%if (i==0){%>
+                        <span class="new">New</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </a>
+                    <p>发布日期：<%=list[i].time%></p>
+                </li>
+               <% } %>
+            </ul>
+            <% } %>
+        </div>
+    </div>
+    <%include ../page/footer.html%>
+</div>
+<script src="/js/versionList.js"></script>
+</body>
+</html>
+
