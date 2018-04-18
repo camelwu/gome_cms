@@ -28,7 +28,7 @@
         <template  slot-scope="scope">
           <el-button type="text" v-if="scope.row.title" @click="editorV(scope.$index)">编辑</el-button>
           <el-button type="text" v-if="scope.row.active !== 3 && scope.row.active" @click="toOnline(scope.row.title)">提交</el-button>
-          <a class="pre" target="_blank"  v-if="scope.row.title" :href="'/admin/pre?version='+scope.row.title">预览</a>
+          <a class="pre" target="_blank"  v-if="scope.row.title" :href="'/cms_api/pre?version='+scope.row.title">预览</a>
           <el-button class="add" type="text" v-if="scope.$index == 0" @click="setV">添加</el-button>
         </template>        
       </el-table-column>
@@ -82,7 +82,11 @@ export default {
   },
   methods:{
     getList(){
+<<<<<<< HEAD
       axios.get('/admin/super/getCreateVersion').then((res)=>{
+=======
+      axios.get('/cms_api/super/getCreateVersion').then((res)=>{
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
         console.log(res)
         const data = res.data
         this.versions = data.versions
@@ -95,7 +99,11 @@ export default {
         inputPattern: /^V\d{1,5}(\.\d{1,5}){2}$/,
         inputErrorMessage: '版本格式不正确，例： V1.2.3'
       }).then(({ value }) => {
+<<<<<<< HEAD
         axios.post('/admin/super/createVersion',{title:value}).then((res)=>{
+=======
+        axios.post('/cms_api/super/createVersion',{title:value}).then((res)=>{
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           const data = res.data
           if(data.code == 0){
             this.versions.unshift(data.data)
@@ -109,7 +117,11 @@ export default {
       }).catch(()=>{});
     },
     toOnline(title){
+<<<<<<< HEAD
       axios.post('/admin/super/releaseVersion',{title:title}).then((res)=>{
+=======
+      axios.post('/cms_api/super/releaseVersion',{title:title}).then((res)=>{
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
         const data = res.data
         if(data.code != 0){
           return alert(data.msg)

@@ -28,7 +28,7 @@
         <template  slot-scope="scope">
           <el-button type="text" v-if="scope.row.active == 2" @click="agree(scope.row.title)">通过</el-button>
           <el-button type="text" v-if="scope.row.active == 2" @click="refuse(scope.row.title)">拒绝</el-button>
-          <a class="pre" target="_blank" :href="'/admin/pre?version='+scope.row.title">预览</a>
+          <a class="pre" target="_blank" :href="'/cms_api/pre?version='+scope.row.title">预览</a>
         </template>
       </el-table-column>
     </el-table>
@@ -84,7 +84,11 @@ export default {
   },
   methods:{
     getList(){
+<<<<<<< HEAD
       axios.get('/admin/super/getCreateVersion').then((res)=>{
+=======
+      axios.get('/cms_api/super/getCreateVersion').then((res)=>{
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
         console.log(res)
         const data = res.data
         this.versions = data.versions
@@ -95,7 +99,11 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
       }).then(() => {
+<<<<<<< HEAD
         axios.post('/admin/super/vagree',{title:title}).then((res)=>{
+=======
+        axios.post('/cms_api/super/vagree',{title:title}).then((res)=>{
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           this.getList()
         }).catch((err)=>{
           alert('上线失败')
@@ -108,7 +116,11 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
       }).then(() => {
+<<<<<<< HEAD
          axios.post('/admin/super/vrefuse',{title:title}).then((res)=>{
+=======
+         axios.post('/cms_api/super/vrefuse',{title:title}).then((res)=>{
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           this.getList()
         }).catch((err)=>{
           alert('拒绝失败')

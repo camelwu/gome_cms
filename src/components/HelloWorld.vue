@@ -28,7 +28,7 @@ export default {
   },
   methods:{
     submitForm(){
-      axios.post('/admin/super/login',{username:this.username, password: this.password}).then((res)=>{
+      axios.post('/cms_api/super/login',{username:this.username, password: this.password}).then((res)=>{
         const data = res.data
         if(data.code != 0){
           return alert(data.msg)
@@ -40,7 +40,11 @@ export default {
       })
     },
     createVersion(){
+<<<<<<< HEAD
       axios.post('/admin/super/createVersion').then((res)=>{
+=======
+      axios.post('/cms_api/super/createVersion').then((res)=>{
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
         console.log(res)
       })
     }

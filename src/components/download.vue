@@ -43,7 +43,7 @@
                <el-upload
                   class="upload"
                   name="pic"
-                  action="/admin/super/uploadImg"
+                  action="/cms_api/super/uploadImg"
                   :show-file-list="false"
                   :on-success="uploadSuccess">
                   <el-button type="primary" icon="edit"></el-button>
@@ -75,7 +75,11 @@
 
             <el-form-item>
                <el-button type="primary" @click="submitForm">保存</el-button>
+<<<<<<< HEAD
                <a :href="'/admin/pre/download?version=' + $route.params.title" target="_blank">
+=======
+               <a :href="'/cms_api/pre/download?version=' + $route.params.title" target="_blank">
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
                   <el-button type="button">预览</el-button>
                </a>
             </el-form-item>
@@ -95,7 +99,11 @@
     },
     async created () {
       let title = this.$route.params.title
+<<<<<<< HEAD
       let { data } = await axios.get('/admin/getDownload', { params: { 'title': title } })
+=======
+      let { data } = await axios.get('/cms_api/getDownload', { params: { 'title': title } })
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
 
       if(data.data.windows.detail.length==0){
         data.data.windows.detail = [
@@ -224,7 +232,11 @@
          obj.detail.forEach((log) => {
             log.time = new Date(log.time).getTime()
          })
+<<<<<<< HEAD
          let { data } = await axios.post('/admin/super/releaseDownload', {
+=======
+         let { data } = await axios.post('/cms_api/super/releaseDownload', {
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
             title: this.$route.params.title,
             plat: this.activeName,
             data: obj

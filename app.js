@@ -1191,6 +1191,8 @@ router.get('/pre/detail', aeromind,(req, res)=>{
 	res.redirect('http://'+ req.ip  + ':' + port + '/updates/' + platform + '-' + version + '?version='+title)
 })
 
+
+//
 app.use('/cms_api', router)
 
 app.get("/", function(req, res){

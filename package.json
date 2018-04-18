@@ -15,7 +15,7 @@
     "axios": "^0.16.2",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
-    "ejs": "^1.0.0",
+    "ejs": "^2.0.0",
     "element-ui": "^1.4.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
@@ -37,9 +37,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "depd": "^1.1.1",
-    "ejs": "^1.0.0",
     "eventsource-polyfill": "^0.9.6",
-    "express": "^4.14.1",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
@@ -74,7 +72,7 @@
   "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "http://code.ds.gome.com.cn/gitlab/mengdehua/gome_cms.git"
+    "url": "https://github.com/camelwu/gome_cms.git"
   },
   "keywords": [
     "am",

@@ -17,7 +17,7 @@ export default {
 			const json = JSON.parse(this.j)
 			console.log(json)
 
-			axios.post('/admin/super/all',{
+			axios.post('/cms_api/super/all',{
 				data: json
 			}).then((res)=>{
 				const data = res.data

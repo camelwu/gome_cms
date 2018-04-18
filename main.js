@@ -13,35 +13,36 @@ app.use('/css', express.static('views/css'))
 app.use('/versionList', express.static('views/versionList'))
 app.use('/js', express.static('views/js'))
 app.use('/page', express.static('views/page'))
-
-
-// const ajax = axios.create({
-//   baseURL: 'http://localhost',
-//   timeout:1000*3,
-//   headers: {
-//     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-//     'X-Requested-with':'XMLHttpRequest'
-
-//   },
-//   proxy:{
-//     host:"127.0.0.1",
-//     port:3005,
-//     auth:{
-//       username:'cdd',
-//       password:'123456'
-//     }
-//   }
-// })
-function getdomain(req){
-    let hn = req.hostname
-    if (hn.indexOf('gomeplus')>-1){
-        return 'https://'+req.hostname
-    }else{
-        return 'https://oa.aeromind.cn'
+tries(fs)('./views/50x.html').then(function(){
+    console.log('exists!')
+},function(){
+    console.log('error')
+}).catch(function(e) {
+    console.log(e)
+})
+function tries(fn){
+    return function(str){
+        var p = new Promise(function(resolve, reject){
+            console.log('begin promise')
+            console.log(fn.existsSync(str))
+            fs.readFile(str, (err, data) => {
+                if (err) throw err;
+                console.log(data);
+            });
+            /*setTimeout(function(){
+                console.log('begin time')
+                resolve(data)
+            },1000)*/
+        })
+        return p
     }
 }
+function getdomain(req){
+    let hn = req.hostname
+    return req.protocol+'://'+req.hostname
+
+}
 function get_api(req){
-    // return 'https://'+req.hostname+'/cms_api'
     let re = req.protocol+'://'+req.hostname
     let hn = req.hostname
     if (hn.indexOf('.cn')>-1 || hn.indexOf('.com')>-1 || hn.indexOf('.org')>-1) {

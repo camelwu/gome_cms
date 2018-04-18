@@ -25,7 +25,7 @@
             <el-upload
               class="upload"
               name="pic"
-              action="/admin/super/uploadImg"
+              action="/cms_api/super/uploadImg"
               :show-file-list="false"
               :on-success="uploadSuccess(index,count)">
               <el-button type="primary" icon="edit"></el-button>
@@ -35,7 +35,11 @@
       </el-form>
       <div>
       <el-button type="primary" @click="submitForm('banner')">保存</el-button>
+<<<<<<< HEAD
       <a :href="'/admin/pre/detail?version=' + $route.params.title +'&versions=' +  $route.params.version + '&platform=' +$route.params.platform " target="_blank"><el-button type="primary">预览</el-button></a>
+=======
+      <a :href="'/cms_api/pre/detail?version=' + $route.params.title +'&versions=' +  $route.params.version + '&platform=' +$route.params.platform " target="_blank"><el-button type="primary">预览</el-button></a>
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
       </div>      
     </div>
   </div>
@@ -68,7 +72,11 @@ export default {
     this.version = version 
 
     console.log(title, platform, version) 
+<<<<<<< HEAD
     axios.get('/admin/getVersionDetail',{
+=======
+    axios.get('/cms_api/getVersionDetail',{
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
     	params:{
     		title: title, 
 		    platform: platform,
@@ -118,7 +126,11 @@ export default {
    	 	}
    	 })
      console.log(list)
+<<<<<<< HEAD
    	 axios.post('/admin/super/setDetail',{
+=======
+   	 axios.post('/cms_api/super/setDetail',{
+>>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
    	 	title: this.title,
    	 	list: list,
    	 	version: this.version,
