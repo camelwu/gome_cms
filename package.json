@@ -16,7 +16,7 @@
     "axios": "^0.16.2",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
-    "ejs": "^1.0.0",
+    "ejs": "^2.0.0",
     "element-ui": "^1.4.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",

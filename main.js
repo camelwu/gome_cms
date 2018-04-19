@@ -73,8 +73,8 @@ function tries(fn) {
 app.get("/", function (req, res) {
     /*axios.get(get_api(req)+'/getMainPage').then((r)=>{
         const cover = r.data.data
-        res.render("index", {title : "首页", domain : getdomain(req), cover: cover})
-    }).catch((err)=>{
+        res.render("index", { title: "首页", domain: getdomain(req), cover: cover })
+    }).catch((err) => {
         console.log(err)
     })*/
     res.render("page/index", { title: "首页", domain: getdomain(req), cover: {} })
