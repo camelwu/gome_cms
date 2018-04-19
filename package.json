@@ -9,6 +9,7 @@
     "debug": "pm2 start main.js",
     "start": "npm run dev",
     "app": "pm2 start app.js",
+    "main": "pm2 start main.js",
     "build": "node build/build.js"
   },
   "dependencies": {
