@@ -30,11 +30,7 @@
             <el-upload
               class="upload"
               name="pic"
-<<<<<<< HEAD
-              action="/admin/super/uploadImg"
-=======
               action="/cms_api/super/uploadImg"
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
               :show-file-list="false"
               :on-success="uploadSuccess('banner','opacityLogo')">
               <el-button type="primary" icon="edit"></el-button>
@@ -45,11 +41,7 @@
             <el-upload
               class="upload"
               name="pic"
-<<<<<<< HEAD
-              action="/admin/super/uploadImg"
-=======
               action="/cms_api/super/uploadImg"
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
               :show-file-list="false"
               :on-success="uploadSuccess('banner','backgroundPic')">
               <el-button type="primary" icon="edit"></el-button>
@@ -60,11 +52,7 @@
             <el-upload
               class="upload"
               name="pic"
-<<<<<<< HEAD
-              action="/admin/super/uploadImg"
-=======
               action="/cms_api/super/uploadImg"
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
               :show-file-list="false"
               :on-success="uploadSuccess('banner','blurBackgroundPic')">
               <el-button type="primary" icon="edit"></el-button>
@@ -75,11 +63,7 @@
             <el-upload
               class="upload"
               name="pic"
-<<<<<<< HEAD
-              action="/admin/super/uploadImg"
-=======
               action="/cms_api/super/uploadImg"
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
               :show-file-list="false"
               :on-success="uploadSuccess('banner','smallPic')">
               <el-button type="primary" icon="edit"></el-button>
@@ -90,11 +74,7 @@
             <el-upload
               class="upload"
               name="pic"
-<<<<<<< HEAD
-              action="/admin/super/uploadImg"
-=======
               action="/cms_api/super/uploadImg"
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
               :show-file-list="false"
               :on-success="uploadSuccess('banner','blurSmallPic')">
               <el-button type="primary" icon="edit"></el-button>
@@ -102,11 +82,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('banner')">保存</el-button>
-<<<<<<< HEAD
-            <a target="_blank" class="pre" :href='"/admin/pre?version="+ $route.params.title' @click="preView">预览</a>
-=======
             <a target="_blank" class="pre" :href='"/cms_api/pre?version="+ $route.params.title' @click="preView">预览</a>
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           </el-form-item>
         </el-form>
       </template>
@@ -120,11 +96,7 @@
               <el-upload
               class="upload"
               name="pic"
-<<<<<<< HEAD
-              action="/admin/super/uploadImg"
-=======
               action="/cms_api/super/uploadImg"
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
               :show-file-list="false"
               :on-success="uploadSuccess('introduction','pic', index)">
               <el-button type="primary" icon="edit"></el-button>
@@ -139,11 +111,7 @@
           </div>
           <el-form-item>
             <el-button type="primary" @click="submitForm('introduction')">保存</el-button>
-<<<<<<< HEAD
-            <a target="_blank" class="pre" :href='"/admin/pre?version="+ $route.params.title' @click="preView">预览</a>
-=======
             <a target="_blank" class="pre" :href='"/cms_api/pre?version="+ $route.params.title' @click="preView">预览</a>
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           </el-form-item>
         </el-form>
       </template>
@@ -163,11 +131,7 @@
               <el-upload
               class="upload"
               name="pic"
-<<<<<<< HEAD
-              action="/admin/super/uploadImg"
-=======
               action="/cms_api/super/uploadImg"
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
               :show-file-list="false"
               :on-success="uploadSuccess('feature','pic', index)">
               <el-button type="primary" icon="edit"></el-button>
@@ -182,11 +146,7 @@
           </div>
           <el-form-item>
             <el-button type="primary" @click="submitForm('feature')">保存</el-button>
-<<<<<<< HEAD
-            <a target="_blank" class="pre" :href='"/admin/pre?version="+ $route.params.title' @click="preView">预览</a>
-=======
             <a target="_blank" class="pre" :href='"/cms_api/pre?version="+ $route.params.title' @click="preView">预览</a>
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           </el-form-item>
         </el-form>
       </template>
@@ -206,11 +166,7 @@
               <el-upload
               class="upload"
               name="pic"
-<<<<<<< HEAD
-              action="/admin/super/uploadImg"
-=======
               action="/cms_api/super/uploadImg"
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
               :show-file-list="false"
               :on-success="uploadSuccess('download','pic1', index)">
               <el-button type="primary" icon="edit"></el-button>
@@ -221,11 +177,7 @@
               <el-upload
                 class="upload"
                 name="pic"
-<<<<<<< HEAD
-                action="/admin/super/uploadImg"
-=======
                 action="/cms_api/super/uploadImg"
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
                 :show-file-list="false"
                 :on-success="uploadSuccess('download','pic2', index)">
                 <el-button type="primary" icon="edit"></el-button>
@@ -237,11 +189,7 @@
           </div>
           <el-form-item>
             <el-button type="primary" @click="submitForm('download')">保存</el-button>
-<<<<<<< HEAD
-            <a target="_blank" class="pre" :href='"/admin/pre?version="+ $route.params.title' @click="preView">预览</a>
-=======
             <a target="_blank" class="pre" :href='"/cms_api/pre?version="+ $route.params.title' @click="preView">预览</a>
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           </el-form-item>
         </el-form>
       </template>
@@ -269,11 +217,7 @@ export default {
   },
   created(){
     this.version = this.$route.params.title
-<<<<<<< HEAD
-    axios.get('/admin/getMainPage',{params:{title:this.version}}).then((res)=>{
-=======
     axios.get('/cms_api/getMainPage',{params:{title:this.version}}).then((res)=>{
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
       const data = res.data 
       if(data.code == 0){
         this.banner = data.data.cover
@@ -329,11 +273,7 @@ export default {
         if(!this.introduction || this.introduction.length == 0){
           return alert('introduction 数据为空')
         }
-<<<<<<< HEAD
-        axios.post('/admin/super/setMain',{title:this.version, introduction: this.introduction}).then((res)=>{
-=======
         axios.post('/cms_api/super/setMain',{title:this.version, introduction: this.introduction}).then((res)=>{
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           const data = res.data
           if(data.code == 0){
             alert('保存成功')
@@ -348,11 +288,7 @@ export default {
         if(!this.feature){
           return alert('产品特色 数据为空')
         }
-<<<<<<< HEAD
-        axios.post('/admin/super/setMain',{title:this.version, feature:this.feature}).then((res)=>{
-=======
         axios.post('/cms_api/super/setMain',{title:this.version, feature:this.feature}).then((res)=>{
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           const data = res.data
           if(data.code == 0){
             alert('保存成功')
@@ -367,11 +303,7 @@ export default {
         if(!this.download){
           return alert('多平台支持 数据为空')
         }
-<<<<<<< HEAD
-        axios.post('/admin/super/setMain',{title:this.version, download:this.download}).then((res)=>{
-=======
         axios.post('/cms_api/super/setMain',{title:this.version, download:this.download}).then((res)=>{
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           const data = res.data
           if(data.code == 0){
             alert('保存成功')

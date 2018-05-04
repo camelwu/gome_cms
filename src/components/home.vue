@@ -82,11 +82,7 @@ export default {
   },
   methods:{
     getList(){
-<<<<<<< HEAD
-      axios.get('/admin/super/getCreateVersion').then((res)=>{
-=======
       axios.get('/cms_api/super/getCreateVersion').then((res)=>{
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
         console.log(res)
         const data = res.data
         this.versions = data.versions
@@ -99,11 +95,7 @@ export default {
         inputPattern: /^V\d{1,5}(\.\d{1,5}){2}$/,
         inputErrorMessage: '版本格式不正确，例： V1.2.3'
       }).then(({ value }) => {
-<<<<<<< HEAD
-        axios.post('/admin/super/createVersion',{title:value}).then((res)=>{
-=======
         axios.post('/cms_api/super/createVersion',{title:value}).then((res)=>{
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
           const data = res.data
           if(data.code == 0){
             this.versions.unshift(data.data)
@@ -117,11 +109,7 @@ export default {
       }).catch(()=>{});
     },
     toOnline(title){
-<<<<<<< HEAD
-      axios.post('/admin/super/releaseVersion',{title:title}).then((res)=>{
-=======
       axios.post('/cms_api/super/releaseVersion',{title:title}).then((res)=>{
->>>>>>> 485745a8d30d0fd78e8e154e6f546eab3dafd339
         const data = res.data
         if(data.code != 0){
           return alert(data.msg)

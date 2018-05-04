@@ -4,22 +4,6 @@
 <head>
   <meta charset="utf-8">
   <title>gome_cms</title>
-  <script>
-    var arr = [];
-    setTimeout(function () { arr.push(1) });//0
-    Promise.resolve().then(() => { arr.push(2) });
-    new Promise(() => { arr.push(7) });
-    async function a() { 
-      arr.push(3); 
-       b(); 
-      arr.push(4); }
-    async function b() { arr.push(5) }
-    a();
-    arr.push(6);
-    setTimeout(() => { console.log(arr.join("")) })
-
-    
-  </script>
 </head>
 
 <body>
